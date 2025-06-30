@@ -2,9 +2,11 @@
 
 PersonIdentity::PersonIdentity(QString newUsername, QString newPassword,
                                QString newFirstName, QString newLastName,
-                               QString newPhoneNumber, int newAge) : username(newUsername), password(newPassword),
-                                                                    firstName(newFirstName), lastName(newLastName),
-                                                                    phoneNumber(newPhoneNumber), age(newAge)
+                               QString newPhoneNumber, int newAge,
+                               Address newAddress) : username(newUsername), password(newPassword),
+                                                    firstName(newFirstName), lastName(newLastName),
+                                                    phoneNumber(newPhoneNumber), age(newAge),
+                                                    address(newAddress)
 {}
 
 QString PersonIdentity::getUsername()
@@ -66,3 +68,14 @@ void PersonIdentity::setAge(int newAge)
 {
     this->age = newAge;
 }
+
+Address PersonIdentity::getAddress()
+{
+    return address;
+}
+
+void PersonIdentity::setAddress(Address newAddress)
+{
+    this->address = newAddress;
+}
+

@@ -2,6 +2,7 @@
 #define PERSONIDENTITY_H
 
 #include <QString>
+#include "address.h"
 
 class PersonIdentity
 {
@@ -12,9 +13,10 @@ private:
     QString lastName;
     QString phoneNumber;
     int age;
+    Address address;
 
 public:
-    PersonIdentity(QString newUsername, QString newPassword, QString newFirstName, QString newLastName, QString newPhoneNumber, int newAge);
+    PersonIdentity(QString newUsername, QString newPassword, QString newFirstName, QString newLastName, QString newPhoneNumber, int newAge, Address newAddress);
     QString getUsername();
     void setUsername(QString newUsername);
     QString getPassword();
@@ -27,6 +29,8 @@ public:
     void setPhoneNumber(QString newPhoneNumber);
     int getAge();
     void setAge(int newAge);
+    Address getAddress();
+    void setAddress(Address newAddress);
 };
 
 #endif // PERSONIDENTITY_H
