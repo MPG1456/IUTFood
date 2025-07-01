@@ -1,19 +1,27 @@
-#include <QCoreApplication>
-
+#include <QGuiApplication>
+#include <QQmlApplicationEngine>
+#include <QtQuickControls2/QQuickStyle>
+#include"restaurantdb.h"
+#include"clientdb.h"
+#include"deliverydb.h"
 int main(int argc, char *argv[])
 {
-    QCoreApplication a(argc, argv);
-
-    // Set up code that uses the Qt event loop here.
-    // Call a.quit() or a.exit() to quit the application.
-    // A not very useful example would be including
-    // #include <QTimer>
-    // near the top of the file and calling
-    // QTimer::singleShot(5000, &a, &QCoreApplication::quit);
-    // which quits the application after 5 seconds.
-
-    // If you do not need a running Qt event loop, remove the call
-    // to a.exec() or use the Non-Qt Plain C++ Application template.
-
-    return a.exec();
+    QGuiApplication app(argc, argv);
+    QQuickStyle::setStyle("Material");
+    QQmlApplicationEngine engine;
+    const QUrl url(QStringLiteral("qrc:/IUTFood/main.qml"));
+    qmlRegisterType<restaurantdb>("restdb" ,  1,0, "Restaurantbatabse");
+    qmlRegisterType<clientdb>("clidb" ,  1,0, "Clientdatbase");
+    qmlRegisterType<deliverydb>("delivdb" ,  1,0, "Deliverydatbase");
+    QObject::connect(
+        &engine,
+        &QQmlApplicationEngine::objectCreated,
+        &app,
+        [url](QObject *obj, const QUrl &objUrl) {
+            if (!obj && url == objUrl)
+                QCoreApplication::exit(-1);
+        },
+        Qt::QueuedConnection);
+    engine.load(url);
+    return app.exec();
 }

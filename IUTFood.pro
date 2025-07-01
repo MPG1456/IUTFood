@@ -7,7 +7,6 @@ CONFIG += c++17 cmdline
 
 SOURCES += \
         address.cpp \
-        address.cpp \
         customer.cpp \
         dessert.cpp \
         drinks.cpp \
@@ -16,8 +15,8 @@ SOURCES += \
         iranifood.cpp \
         main.cpp \
         maindish.cpp \
+        menu.cpp \
         person.cpp \
-        personidentity.cpp \
         personidentity.cpp \
         salad.cpp \
         clientdb.cpp \
@@ -26,7 +25,6 @@ SOURCES += \
 
 resources.files = \
     main.qml \
-    adress.qml \
     restaurantsignup.qml \
     clientsignup.qml \
     restaurantsignin.qml \
@@ -52,6 +50,7 @@ HEADERS += \
     food.h \
     iranifood.h \
     maindish.h \
+    menu.h \
     person.h \
     personidentity.h \
     personidentity.h \
