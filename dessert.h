@@ -7,7 +7,7 @@ class Dessert : public Food
 {
 public:
     Dessert(QString name, QString ingredients, int capacity, double price);
-    void setName(QString newName = "NULL") override;
+    void setType(QString newType = "NULL") override;
 };
 
 #endif // DESSERT_H

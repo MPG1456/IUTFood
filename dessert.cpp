@@ -2,13 +2,13 @@
 
 Dessert::Dessert(QString name, QString ingredients, int capacity, double price) : Food(name, ingredients, capacity, price)
 {
-    this->setName();
+    this->setType();
 }
 
-void Dessert::setName(QString newName)
+void Dessert::setType(QString newType)
 {
-    if(newName == "NULL")
-        name = "Dessert";
+    if(newType == "NULL")
+        type = "Dessert";
     else
-        name = newName;
+        type = newType;
 }
