@@ -1,0 +1,13 @@
+<RCC>
+    <qresource prefix="/projimages">
+        <file>pexels-pixabay-260922.jpg</file>
+    </qresource>
+    <qresource prefix="/">
+        <file>adress.qml</file>
+        <file>restaurantsignup.qml</file>
+        <file>clientsignup.qml</file>
+        <file>restaurantsignin.qml</file>
+        <file>deliverysignin.qml</file>
+        <file>deliverysignup.qml</file>
+    </qresource>
+</RCC>
