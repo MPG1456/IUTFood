@@ -9,8 +9,7 @@ class Menu
 private:
     QSet<Food *> menu;
 public:
-    Menu();
-    // showMenu();
+    // void showMenu();
 };
 
 #endif // MENU_H
