@@ -6,12 +6,14 @@
 class Dessert;
 class Drinks;
 class Salad;
+class MainDish;
 
 class Food
 {
     friend class Dessert;
     friend class Salad;
     friend class Drinks;
+    friend class MainDish;
 
 private:
     QString name;
