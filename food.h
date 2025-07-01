@@ -4,10 +4,15 @@
 #include <QString>
 
 class Dessert;
+class Drinks;
+class Salad;
 
 class Food
 {
     friend class Dessert;
+    friend class Salad;
+    friend class Drinks;
+
 private:
     QString name;
     QString type;
