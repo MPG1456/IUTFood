@@ -7,7 +7,7 @@ class MainDish : public Food
 {
 public:
     MainDish(QString name, QString ingredients, int capacity, double price);
-    void setType(QString newType) override;
+    void setType(QString newType = "NULL") override;
     virtual void setDishType() = 0;
 };
 
