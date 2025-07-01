@@ -7,6 +7,6 @@ class IraniFood : public MainDish
 {
 public:
     IraniFood(QString name, QString ingredients, int capacity, double price);
-    void setDishType() override;
+    void setDishType(QString newDishType = "NULL") override;
 };
 #endif // IRANIFOOD_H
