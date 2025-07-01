@@ -3,14 +3,20 @@
 
 #include "food.h"
 
+class IraniFood;
+class FastFood;
+
 class MainDish : public Food
 {
+    friend IraniFood;
+    friend FastFood;
+
 private:
     QString dishType;
 public:
     MainDish(QString name, QString ingredients, int capacity, double price);
     void setType(QString newType = "NULL") override;
-    virtual void setDishType() = 0;
+    virtual void setDishType(QString newMainDish = "NULL") = 0;
 };
 
 #endif // MAINDISH_H
