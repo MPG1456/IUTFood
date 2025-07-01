@@ -1,10 +1,9 @@
 QT = core
+QT += quick
+QT += quickcontrols2
+QT += sql
 
 CONFIG += c++17 cmdline
-
-# You can make your code fail to compile if it uses deprecated APIs.
-# In order to do so, uncomment the following line.
-#DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
         address.cpp \
@@ -20,7 +19,23 @@ SOURCES += \
         person.cpp \
         personidentity.cpp \
         personidentity.cpp \
-        salad.cpp
+        salad.cpp \
+        clientdb.cpp \
+        restaurantdb.cpp \
+        deliverydb.cpp
+
+resources.files = \
+    main.qml \
+    adress.qml \
+    restaurantsignup.qml \
+    clientsignup.qml \
+    restaurantsignin.qml \
+    deliverysignin.qml \
+    deliverysignup.qml
+
+resources.prefix = /$${TARGET}
+RESOURCES += resources \
+    images.qrc
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -40,4 +55,8 @@ HEADERS += \
     person.h \
     personidentity.h \
     personidentity.h \
-    salad.h
+    salad.h \
+    clientdb.h \
+    restaurantdb.h \
+    deliverydb.h \
+
