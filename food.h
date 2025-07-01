@@ -3,8 +3,11 @@
 
 #include <QString>
 
+class Dessert;
+
 class Food
 {
+    friend class Dessert;
 private:
     QString name;
     QString type;
@@ -15,9 +18,9 @@ private:
 public:
     Food(QString newName, QString newIngredients, int newCapacity, double newPrice);
     QString getName();
-    virtual void setName(QString newName = "NULL") = 0;
+    void setName(QString newName);
     QString getType();
-    void setType(QString newType);
+    virtual void setType(QString newType = "NULL") = 0;
     QString getIngredients();
     void setIngredients(QString newIngredients);
     int getCapacity();
