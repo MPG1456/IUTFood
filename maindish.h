@@ -5,6 +5,8 @@
 
 class MainDish : public Food
 {
+private:
+    QString dishType;
 public:
     MainDish(QString name, QString ingredients, int capacity, double price);
     void setType(QString newType = "NULL") override;

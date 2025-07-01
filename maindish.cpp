@@ -1,6 +1,6 @@
 #include "maindish.h"
 
-MainDish::MainDish(QString name, QString ingredients, int capacity, double price) : Food(name, ingredients, capacity, price)
+MainDish::MainDish(QString name, QString ingredients, int capacity, double price) : Food(name, ingredients, capacity, price) , dishType("NULL")
 {
     this->setType();
 }
