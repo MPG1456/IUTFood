@@ -23,7 +23,8 @@ SOURCES += \
         clientdb.cpp \
         restaurantdb.cpp \
         deliverydb.cpp \
-        menufunctions.cpp
+        menufunctions.cpp \
+        score.cpp
 
 resources.files = \
     main.qml \
@@ -61,5 +62,6 @@ HEADERS += \
     clientdb.h \
     restaurantdb.h \
     deliverydb.h \
-    menufunctions.h
+    menufunctions.h \
+    score.h
 
