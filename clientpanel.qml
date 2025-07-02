@@ -22,6 +22,7 @@ ApplicationWindow{
         edge:Qt.RightEdge
         width:Math.min(win.width/2 ,500)
         height: parent.height
+
         // Rectangle
         // {
         //     height: menu.height
@@ -29,7 +30,56 @@ ApplicationWindow{
         //     color:"#2E2E2E"
         //     radius: 20
         // }
+        ListModel
+        {
+            id:menuelement
+            ListElement{name:"Home";pageaddress:"clientpanel.qml"}
+            ListElement{name:"Filter page";pageaddress:"restaurantfliter.qml"}
+            ListElement{name:"Order tracking";pageaddress:"Ordertracking.qml"}
+            ListElement{name:"Order history";pageaddress:"Orderhistory.qml"}
 
+        }
+        ListView
+        {
+            width: parent.width
+            height: win.height*5/6
+            model: menuelement
+            // spacing: 8
+            clip: true
+            delegate: Rectangle
+            {
+                id:rectfield
+                width:parent.width
+                height: 55
+                border.color:"#ccc"
+                color:"#f5f5f5"
+                Row
+                {
+                    anchors.fill: parent
+                    anchors.margins: 10
+                    spacing: 8
+                    Column
+                    {
+                        spacing: 20
+                        Text {
+                            text: name
+                            font.pixelSize: 13
+                            font.bold: true
+                        }
+                    }
+                }
+                MouseArea
+                {
+                    anchors.fill: parent
+                    onClicked:
+                    {
+                        menu.close()
+                        stackv.push(model.pageaddress)
+                        win.close()
+                    }
+                }
+            }
+        }
     }
     Rectangle
     {
@@ -68,7 +118,7 @@ ApplicationWindow{
                 anchors.leftMargin: 14
                 TextField
                 {
-                    id:homephone
+                    id:searchbar
                     placeholderText: "search..."
                     width: insiderect.width-30
                     font.pixelSize: 14
@@ -84,7 +134,7 @@ ApplicationWindow{
                 }
                 ListView
                 {
-                    width: parent.width
+                    width: searchbar.width
                     height: win.height*5/6
                     model: element
                     spacing: 8
@@ -95,6 +145,7 @@ ApplicationWindow{
                         height: 80
                         radius:10
                         border.color:"#ccc"
+                        color:"#f5f5f5"
                         Row
                         {
                             anchors.fill: parent
