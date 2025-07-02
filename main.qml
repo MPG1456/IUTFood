@@ -88,7 +88,7 @@ Window{
                         width: col.width/2
                         onClicked:
                         {
-                        stackv.push("clientpanel.qml")
+                        stackv.push("restaurantpanel.qml")
                         win.close()
                         }
                     }
@@ -176,7 +176,7 @@ Window{
 
                             onClicked:
                             {
-                                stackv.push("clientpanel.qml")
+                                stackv.push("deliverysignin.qml")
                                 win.close()
                             }
                         }

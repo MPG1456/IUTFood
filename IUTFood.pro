@@ -30,7 +30,8 @@ resources.files = \
     restaurantsignin.qml \
     deliverysignin.qml \
     deliverysignup.qml \
-    clientpanel.qml
+    clientpanel.qml \
+    restaurantpanel.qml
 
 resources.prefix = /$${TARGET}
 RESOURCES += resources \
