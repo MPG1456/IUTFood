@@ -16,6 +16,7 @@ SOURCES += \
         main.cpp \
         maindish.cpp \
         menu.cpp \
+        menufunctions.cpp \
         person.cpp \
         personidentity.cpp \
         salad.cpp \
@@ -51,6 +52,7 @@ HEADERS += \
     iranifood.h \
     maindish.h \
     menu.h \
+    menufunctions.h \
     person.h \
     personidentity.h \
     personidentity.h \
