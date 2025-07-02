@@ -9,12 +9,10 @@ clientdb::clientdb(QObject *parent)
     redb = QSqlDatabase::addDatabase("QSQLITE");
 
     QString dataLocation = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
-
-    // Create the directory if it doesn't exist.
     QDir dataDir(dataLocation);
     if(!dataDir.exists())
     {
-        dataDir.mkpath("."); // <- this one creates the path if it doesn't exist
+        dataDir.mkpath(".");
     }
 
     QString dbPath = dataDir.absoluteFilePath("clientdb2.db");
@@ -25,7 +23,7 @@ clientdb::clientdb(QObject *parent)
     if(!QFile::exists(dbPath))
     {
         qDebug() << "File doesn't exist in the chosen path. It will copy it from resources.";
-        QFile::copy("F:/Projects/AP/Final Term/IUTFood/clientdb2.db", dbPath); // ATTENITION: change this path to your directory
+        QFile::copy("C:/Users/Ravis/Desktop/IUTFood/clientdb2.db", dbPath); // ATTENITION: change this path to your directory
     }
 
 
@@ -55,7 +53,7 @@ bool clientdb::deleteuser(QString username)
     return query.exec();
 }
 
-bool clientdb::adduser(QString username , QString password , QString firstname ,QString lastname ,int age , QString country ,QString city ,long long int postalcode , QString homeaddress ,QString homephone ,QString phonenumber )
+bool clientdb::adduser(QString username , QString password , QString firstname ,QString lastname ,int age , QString country ,QString city ,QString postalcode , QString homeaddress ,QString homephone ,QString phonenumber )
 {
     if (usernameexist(username))
     {

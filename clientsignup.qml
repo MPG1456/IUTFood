@@ -168,7 +168,8 @@ Window{
                         {
                             db.adduser(username.text , password.text , firstname.text , lastname.text ,age.value, country.text , city.text , postalcode.text , homeadr.text ,homephone.text , phonenum.text);
                             // db.printAllUsers();
-
+                            stackv.push("clientpanel.qml")
+                            win.close()
                         }
                         else
                         {
