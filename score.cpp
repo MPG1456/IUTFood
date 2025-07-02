@@ -11,6 +11,9 @@ void Score::resetScore()
 
 void Score::addScore(float newScore)
 {
+    if(newScore > 5 && newScore < 0)
+        return;
+
     myScore *= counter;
     myScore += newScore;
     counter++;
@@ -24,6 +27,9 @@ float Score::getScore()
 
 void Score::setScore(float newScore)
 {
+    if(newScore > 5 && newScore < 0)
+        return;
+
     myScore = newScore;
 }
 
@@ -34,5 +40,8 @@ int Score::getCounter()
 
 void Score::setCounter(int newCounter)
 {
+    if(newCounter < 0)
+        return;
+
     counter = newCounter;
 }
