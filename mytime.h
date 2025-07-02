@@ -10,6 +10,7 @@ private:
     QString myTime;
 public:
     MyTime();
+    MyTime(const MyTime &copyTime);
     QString getTime();
     void setTime(QString newTime);
 };
