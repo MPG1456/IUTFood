@@ -16,107 +16,21 @@ ApplicationWindow{
         anchors.fill: parent
         initialItem: ""
     }
-    Drawer {
-        id: menu
-        edge: Qt.RightEdge
-        width: 280
+    Drawer
+    {
+        id:menu
+        edge:Qt.RightEdge
+        width:Math.min(win.width/2 ,500)
         height: parent.height
-        modal: true
+        // Rectangle
+        // {
+        //     height: menu.height
+        //     width: menu.width
+        //     color:"#2E2E2E"
+        //     radius: 20
+        // }
 
-        Rectangle {
-            anchors.fill: parent
-            color: "#2E2E2E"
-            radius: 10
-            border.color: "#444"
-            border.width: 1
-            // padding: 10
-
-            Flickable {
-                anchors.fill: parent
-                contentHeight: col.height
-
-                Column {
-                    id: col
-                    width: parent.width
-                    spacing: 20
-
-                    // بخش اول
-                    Rectangle {
-                        width: parent.width
-                        color: "#3A3A3A"
-                        radius: 8
-                        // padding: 10
-
-                        Column {
-                            spacing: 8
-                            anchors.fill: parent
-
-                            Text {
-                                text: "حساب کاربری"
-                                font.pixelSize: 16
-                                color: "white"
-                                font.bold: true
-                            }
-
-                            // آیتم های بخش حساب کاربری
-                            Repeater {
-                                model: ["پروفایل", "رمز عبور", "تغییر ایمیل"]
-                                delegate: Button {
-                                    text: modelData
-                                    background: Rectangle {
-                                        color: "#555"
-                                        radius: 5
-                                    }
-                                    font.pixelSize: 14
-                                    onClicked: {
-                                        console.log(text + " کلیک شد")
-                                        menu.close()
-                                    }
-                                }
-                            }
-                        }
-                    }
-
-                    // بخش دوم
-                    Rectangle {
-                        width: parent.width
-                        color: "#3A3A3A"
-                        radius: 8
-                        // padding: 10
-
-                        Column {
-                            spacing: 8
-                            anchors.fill: parent
-
-                            Text {
-                                text: "تنظیمات"
-                                font.pixelSize: 16
-                                color: "white"
-                                font.bold: true
-                            }
-
-                            Repeater {
-                                model: ["اعلان‌ها", "حریم خصوصی", "درباره ما"]
-                                delegate: Button {
-                                    text: modelData
-                                    background: Rectangle {
-                                        color: "#555"
-                                        radius: 5
-                                    }
-                                    font.pixelSize: 14
-                                    onClicked: {
-                                        console.log(text + " کلیک شد")
-                                        menu.close()
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
     }
-
     Rectangle
     {
         id:mainrect
@@ -130,9 +44,6 @@ ApplicationWindow{
             opacity: 0.5
             anchors.fill: parent
         }
-
-
-
         Rectangle
         {
         radius:15
@@ -146,6 +57,68 @@ ApplicationWindow{
             clip:true
             anchors.fill: parent
             contentHeight: col.height
+            Column
+            {
+                id:col
+                width: parent.width*0.9
+                spacing: 12
+                anchors.top:parent.top
+                anchors.topMargin: win.height/10
+                anchors.left: parent.left
+                anchors.leftMargin: 14
+                TextField
+                {
+                    id:homephone
+                    placeholderText: "search..."
+                    width: insiderect.width-30
+                    font.pixelSize: 14
+                }
+                ListModel
+                {
+                    id:element
+                    ListElement{name:"Tarkhoon";location:"isfahan soroosh"}
+                    ListElement{name:"Kentakihouse";location:"isfahan Ahmadabad"}
+                    ListElement{name:"Safa";location:"isfahan noorbaran"}
+                    ListElement{name:"golchin";location:"Tehran saadat abad"}
+
+                }
+                ListView
+                {
+                    width: parent.width
+                    height: 300
+                    model: element
+                    spacing: 8
+                    clip: true
+                    delegate: Rectangle
+                    {
+                        width:parent.width
+                        height: 80
+                        radius:10
+                        border.color:"#ccc"
+                        Row
+                        {
+                            anchors.fill: parent
+                            anchors.margins: 10
+                            spacing: 8
+                            Column
+                            {
+                                spacing: 20
+                                Text {
+                                    text: "restaurant name: " + name
+                                    font.pixelSize: 13
+                                    font.bold: true
+                                }
+                                Text {
+                                    text: "location: " + location
+                                    font.pixelSize: 11
+                                    color: "red"
+                                }
+                            }
+                        }
+                    }
+                }
+
+            }
         }
         Button{
         id:hamburger
@@ -155,7 +128,22 @@ ApplicationWindow{
         width:parent.width/5
         height:parent.height/7.5
         background: null
-        anchors.rightMargin: 10
+        anchors.rightMargin: 2
+        onClicked:
+        {
+            console.log("clickeddd")
+            menu.open();
+        }
+        }
+        Button{
+        id:cart
+        anchors.top: parent.top
+        anchors.left: parent.left
+        icon.source: "qrc:/projimages/cart.png"
+        width:parent.width/5
+        height:parent.height/7.5
+        background: null
+        anchors.rightMargin: 2
         onClicked:
         {
             console.log("clickeddd")
@@ -173,4 +161,3 @@ ApplicationWindow{
 
 
     }
-
