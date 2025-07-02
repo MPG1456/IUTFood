@@ -85,7 +85,7 @@ ApplicationWindow{
                 ListView
                 {
                     width: parent.width
-                    height: 300
+                    height: win.height*5/6
                     model: element
                     spacing: 8
                     clip: true
