@@ -20,6 +20,7 @@ SOURCES += \
         mytime.cpp \
         person.cpp \
         personidentity.cpp \
+        restaurantidentity.cpp \
         salad.cpp \
         clientdb.cpp \
         restaurantdb.cpp \
@@ -60,6 +61,7 @@ HEADERS += \
     person.h \
     personidentity.h \
     personidentity.h \
+    restaurantidentity.h \
     salad.h \
     clientdb.h \
     restaurantdb.h \

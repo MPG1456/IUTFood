@@ -4,7 +4,7 @@ MyTime::MyTime()
 {
     QTimeZone myZone("Asia/Tehran");
     QDateTime current = QDateTime::currentDateTime(myZone);
-    myTime = current.toString();
+    myTime = current.toString("yyyy-MM-dd hh:mm::ss");
 }
 
 QString MyTime::getTime()
