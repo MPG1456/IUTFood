@@ -141,7 +141,7 @@ Window{
                     {
                         if(!db.usernameexist(usernamefield.text))
                         {
-                            db.adduser(usernamefield.text , pass.text , namefield.text , resta.text , country.text , city.text , postalcode.text , homeadr.text ,homephone.text , bio.taxt);
+                            db.adduser(usernamefield.text , pass.text , namefield.text , resta.text , country.text , city.text , postalcode.text , homeadr.text ,homephone.text , bio.text);
                         }
                         else
                         {

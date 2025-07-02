@@ -4,10 +4,19 @@
 clientdb::clientdb(QObject *parent)
 {
     redb = QSqlDatabase::addDatabase("QSQLITE");
-    redb.setDatabaseName(QCoreApplication::applicationDirPath()+"/clientdb2.db");
+    redb.setDatabaseName(QCoreApplication::applicationDirPath()+"/clien.db");
     if(!redb.open())
     {
         qDebug()<<"failed to open";
+    }
+    if(redb.isOpen())
+    {
+        qDebug()<<"open";
+    }
+    else
+    {
+        qDebug()<<"close";
+
     }
 }
 bool clientdb::usernameexist(QString username)
@@ -35,7 +44,7 @@ bool clientdb::adduser(QString username , QString password , QString firstname ,
         return false;
     }
     QSqlQuery query;
-    query.prepare("INSERT INTO client (username , password , firstname , lastname ,age , country , city , postalcode , homeaddress , homephone , phonenumber) VALUES (? , ? ,? , ? ,? , ? ,? , ? ,? ,? , ?)");
+    query.prepare("INSERT INTO client ( username , password , firstname , lastname , age , country , city , postalcode , homeaddress , homephone , phonenumber) VALUES ( ? , ? , ? , ? ,? , ? , ? , ? , ? , ? , ? ) " );
     query.addBindValue(username);
     query.addBindValue(password);
     query.addBindValue(firstname);
