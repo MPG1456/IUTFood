@@ -86,7 +86,11 @@ Window{
                         id:submit
                         text: "submit"
                         width: col.width/2
-                        // onClicked:
+                        onClicked:
+                        {
+                        stackv.push("clientpanel.qml")
+                        win.close()
+                        }
                     }
 
                 }

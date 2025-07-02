@@ -1,6 +1,8 @@
 <RCC>
     <qresource prefix="/projimages">
         <file>pexels-pixabay-260922.jpg</file>
+        <file>hamburger.png</file>
+        <file>widget.png</file>
     </qresource>
     <qresource prefix="/">
         <file>restaurantsignup.qml</file>
