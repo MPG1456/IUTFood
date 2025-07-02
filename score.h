@@ -9,6 +9,7 @@ private:
 
 public:
     Score();
+    Score(const Score &copyScore);
     void resetScore();
     void addScore(float newScore);
     float getScore();

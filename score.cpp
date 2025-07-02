@@ -3,6 +3,12 @@
 Score::Score() : counter(0), myScore(-1)
 {}
 
+Score::Score(const Score &copyScore)
+{
+    this->counter = copyScore.counter;
+    this->myScore = copyScore.myScore;
+}
+
 void Score::resetScore()
 {
     myScore = -1;
