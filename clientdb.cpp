@@ -1,24 +1,40 @@
 #include "clientdb.h"
-#include<QCoreApplication>
-#include<QDebug>
+#include <QCoreApplication>
+#include <QDebug>
+#include <QStandardPaths>
+#include <QDir>
+
 clientdb::clientdb(QObject *parent)
 {
     redb = QSqlDatabase::addDatabase("QSQLITE");
-    redb.setDatabaseName(QCoreApplication::applicationDirPath()+"/clien.db");
+
+    QString dataLocation = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
+
+    // Create the directory if it doesn't exist.
+    QDir dataDir(dataLocation);
+    if(!dataDir.exists())
+    {
+        dataDir.mkpath("."); // <- this one creates the path if it doesn't exist
+    }
+
+    QString dbPath = dataDir.absoluteFilePath("clientdb2.db");
+    redb.setDatabaseName(dbPath);
+
+    qDebug() << "Attempting to open database file at: " << dbPath;
+
+    if(!QFile::exists(dbPath))
+    {
+        qDebug() << "File doesn't exist in the chosen path. It will copy it from resources.";
+        QFile::copy("F:/Projects/AP/Final Term/IUTFood/clientdb2.db", dbPath); // ATTENITION: change this path to your directory
+    }
+
+
     if(!redb.open())
     {
-        qDebug()<<"failed to open";
-    }
-    if(redb.isOpen())
-    {
-        qDebug()<<"open";
-    }
-    else
-    {
-        qDebug()<<"close";
-
+        qDebug()<<"Failed to open";
     }
 }
+
 bool clientdb::usernameexist(QString username)
 {
     QSqlQuery query;
@@ -30,6 +46,7 @@ bool clientdb::usernameexist(QString username)
     }
     return false;
 }
+
 bool clientdb::deleteuser(QString username)
 {
     QSqlQuery query;
@@ -37,12 +54,14 @@ bool clientdb::deleteuser(QString username)
     query.addBindValue(username);
     return query.exec();
 }
+
 bool clientdb::adduser(QString username , QString password , QString firstname ,QString lastname ,int age , QString country ,QString city ,long long int postalcode , QString homeaddress ,QString homephone ,QString phonenumber )
 {
     if (usernameexist(username))
     {
         return false;
     }
+
     QSqlQuery query;
     query.prepare("INSERT INTO client ( username , password , firstname , lastname , age , country , city , postalcode , homeaddress , homephone , phonenumber) VALUES ( ? , ? , ? , ? ,? , ? , ? , ? , ? , ? , ? ) " );
     query.addBindValue(username);
@@ -56,11 +75,7 @@ bool clientdb::adduser(QString username , QString password , QString firstname ,
     query.addBindValue(homeaddress);
     query.addBindValue(homephone);
     query.addBindValue(phonenumber);
-    qDebug()<<"you're not brave!men are brave";
-    if (!query.exec()) {
-        qDebug() << "Add user failed:" << query.lastError().text();
-        return false;
-    }
-    return true;
+
+    return query.exec();
 }
 

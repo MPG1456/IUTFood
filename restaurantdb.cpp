@@ -1,10 +1,33 @@
 #include "restaurantdb.h"
-#include<QCoreApplication>
-#include<QDebug>
+#include <QCoreApplication>
+#include <QDebug>
+#include <QDir>
+#include <QStandardPaths>
+
 restaurantdb::restaurantdb(QObject *parent)
 {
     redb = QSqlDatabase::addDatabase("QSQLITE");
-    redb.setDatabaseName(QCoreApplication::applicationDirPath()+"/restaurantdb.db");
+
+    QString dataLocation = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
+
+    QDir dataDir(dataLocation);
+    if(!dataDir.exists())
+    {
+        dataDir.mkpath("."); // <- this one creates the path if it doesn't exist
+    }
+
+    QString dbPath = dataDir.absoluteFilePath("restaurantdb.db");
+    redb.setDatabaseName(dbPath);
+
+    qDebug() << "Attempting to open database file at: " << dbPath;
+
+    if(!QFile::exists(dbPath))
+    {
+        qDebug() << "File doesn't exist in the chosen path. It will copy it from resources.";
+        QFile::copy("F:/Projects/AP/Final Term/IUTFood/restaurantdb.db", dbPath); // ATTENITION: change this path to your directory
+    }
+
+
     if(!redb.open())
     {
         qDebug()<<"failed to open";
@@ -34,8 +57,9 @@ bool restaurantdb::adduser(QString username , QString password , QString name ,Q
     {
         return false;
     }
+
     QSqlQuery query;
-    query.prepare("INSERT INTO restaurant (username , password , name , restaurantname , country , city , postalcode , homeadress , homephone , bio) VALUES (? , ? ,? , ? ,? , ? ,? , ? ,? ,?)");
+    query.prepare("INSERT INTO restaurant (username , password , name , restaurantname , country , city , postalcode , homeaddress , homephone , bio) VALUES (? , ? ,? , ? ,? , ? ,? , ? ,? ,?)");
     query.addBindValue(username);
     query.addBindValue(password);
     query.addBindValue(name);
@@ -46,7 +70,7 @@ bool restaurantdb::adduser(QString username , QString password , QString name ,Q
     query.addBindValue(homeadress);
     query.addBindValue(homephone);
     query.addBindValue(bio);
-    qDebug()<<"here i am";
+    qDebug() << "This shit works? " << query.lastError().text();
     return query.exec();
 }
 // void restaurantdb::printAllUsers()
