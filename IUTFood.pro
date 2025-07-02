@@ -17,6 +17,7 @@ SOURCES += \
         maindish.cpp \
         menu.cpp \
         menufunctions.cpp \
+        mytime.cpp \
         person.cpp \
         personidentity.cpp \
         salad.cpp \
@@ -55,6 +56,7 @@ HEADERS += \
     maindish.h \
     menu.h \
     menufunctions.h \
+    mytime.h \
     person.h \
     personidentity.h \
     personidentity.h \
