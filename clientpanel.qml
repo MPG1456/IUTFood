@@ -8,7 +8,7 @@ Window{
     height:600
     minimumWidth: 400
     minimumHeight: 600
-    title:"delivery sign in"
+    title:"client panel"
     visible: true
     StackView
     {
@@ -37,6 +37,23 @@ Window{
         anchors.centerIn: parent
         width:Math.min(win.width-90 , 500)
         height:Math.min(win.height-130 , 750)
+        Drawer {
+                id: drawer
+                edge: Qt.RightEdge
+                width: parent.width * 0.7
+                modal: true
+
+                Column {
+                    anchors.fill: parent
+                    spacing: 20
+                    padding: 20
+
+                    Label { text: "خانه" }
+                    Label { text: "پروفایل" }
+                    Label { text: "سفارش‌ها" }
+                    Label { text: "خروج" }
+                }
+            }
         Flickable
         {
             id:insiderect

@@ -56,7 +56,7 @@ Window{
                 {
                     width:parent.width
                     id:label1
-                    text: "sign up"
+                    text: "sign in"
                     font.pixelSize: 26
                     font.bold: true
                     horizontalAlignment: Text.AlignHCenter
@@ -75,12 +75,28 @@ Window{
                     font.pixelSize: 14
                     echoMode: TextInput.Password
                 }
-                Button
-                {
+                Row{
+                    spacing:7
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    width:back.width + submit.width +spacing
+                    Button
+                    {
+                        id:back
+                        text: "back"
+                        width: col.width/3
+                        onClicked:
+                        {
+                            stackv.push("main.qml")
+                            win.close()
+                        }                    }
+                    Button
+                    {
+                        id:submit
+                        text: "submit"
+                        width: col.width/3
+                        // onClicked:
+                    }
 
-                    text: "sumbit"
-                    width: parent.width+10
-                    // onClicked:
                 }
             Row
                 {

@@ -132,25 +132,42 @@ Window{
                     width: insiderect.width-30
                     font.pixelSize: 14
                 }
-
-                Button
-                {
-                    text: "sumbit"
-                    width: parent.width+10
-                    onClicked:
+                Row{
+                    spacing:7
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    width:back.width + submit.width + spacing
+                    Button
                     {
-                        if(!db.usernameexist(usernamefield.text))
+                        id:back
+                        text: "back"
+                        width: col.width/3
+                        onClicked:
                         {
-                            db.adduser(usernamefield.text , pass.text , namefield.text , resta.text , country.text , city.text , postalcode.text , homeadr.text ,homephone.text , bio.text);
-                        }
-                        else
+                            stackv.push("restaurantsignin.qml")
+                            win.close()
+                        }                    }
+                    Button
+                    {
+                        id:submit
+                        text: "submit"
+                        width: col.width/3
+                        onClicked:
                         {
-                            // db.printAllUsers();
-                        console.log("this username already exist")
+                            if(!db.usernameexist(usernamefield.text))
+                            {
+                                db.adduser(usernamefield.text , pass.text , namefield.text , resta.text , country.text , city.text , postalcode.text , homeadr.text ,homephone.text , bio.text);
+                            }
+                            else
+                            {
+                                // db.printAllUsers();
+                            console.log("this username already exist")
+                            }
                         }
+
                     }
 
                 }
+
             }
             ScrollBar.vertical: ScrollBar
             {

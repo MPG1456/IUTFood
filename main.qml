@@ -77,13 +77,21 @@ Window{
                     echoMode: TextInput.Password
                 }
                 // adress{}
-                Button
-                {
+                Row{
+                    spacing:7
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    width:submit.width +spacing
+                    Button
+                    {
+                        id:submit
+                        text: "submit"
+                        width: col.width/2
+                        // onClicked:
+                    }
 
-                    text: "sumbit"
-                    width: parent.width+10
-                    // onClicked:
                 }
+
+
             Row
                 {
                     spacing: 5
@@ -164,7 +172,7 @@ Window{
 
                             onClicked:
                             {
-                                stackv.push("deliverysignin.qml")
+                                stackv.push("clientpanel.qml")
                                 win.close()
                             }
                         }

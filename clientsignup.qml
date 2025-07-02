@@ -158,24 +158,38 @@ Window{
                     width: insiderect.width-30
                     font.pixelSize: 14
                 }
-                Button
-                {
-                    text: "sumbit"
-                    width: parent.width+10
-                    onClicked:
+                Row{
+                    spacing:7
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    width:back.width + submit.width +spacing
+                    Button
                     {
-                        if(!db.usernameexist(username.text))
+                        id:back
+                        text: "back"
+                        width: col.width/3
+                        onClicked:
                         {
-                            db.adduser(username.text , password.text , firstname.text , lastname.text ,age.value, country.text , city.text , postalcode.text , homeadr.text ,homephone.text , phonenum.text);
-                            // db.printAllUsers();
-                            stackv.push("clientpanel.qml")
+                            stackv.push("main.qml")
                             win.close()
                         }
-                        else
-                        {
-                        console.log("this username already exist")
-                        }
                     }
+                    Button
+                    {
+                    id:submit
+                    text: "submit"
+                    width: col.width/3
+                    onClicked:                                        {
+                    if(!db.usernameexist(username.text))
+                    {
+                    db.adduser(username.text , password.text , firstname.text , lastname.text ,age.value, country.text , city.text , postalcode.text , homeadr.text ,homephone.text , phonenum.text);
+                    }
+                    else
+                    {
+                    console.log("this username already exist")
+                    }
+                    }
+                    }
+
                 }
             }
             ScrollBar.vertical: ScrollBar
