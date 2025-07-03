@@ -13,5 +13,6 @@
         <file>deliverysignup.qml</file>
         <file>clientpanel.qml</file>
         <file>restaurantpanel.qml</file>
+        <file>adminpanel.qml</file>
     </qresource>
 </RCC>
