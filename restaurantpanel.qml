@@ -73,8 +73,19 @@ ApplicationWindow{
                     onClicked:
                     {
                         menu.close()
-                        stackv.push(model.pageaddress)
-                        win.close()
+                        var component =Qt.createComponent(model.pageaddress)
+                                                if(component.status===Component.Ready)
+                                                {
+                                                    var newWin = component.createObject(null ,{
+                                                    width =win.width,
+                                                    height =win.height,
+                                                    x:win.x,
+                                                    y:win.y,
+                                                    visibility:win.visibility
+                                                                                        })
+                                                    newWin.show();
+                                                    win.close();
+                                                }
                     }
                 }
             }

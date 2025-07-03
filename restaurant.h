@@ -1,24 +1,24 @@
-#ifndef RESTAURANT_H
-#define RESTAURANT_H
+// #ifndef RESTAURANT_H
+// #define RESTAURANT_H
 
-#include "menu.h"
-#include "restaurantidentity.h"
-#include "menufunctions.h"
+// #include "menu.h"
+// #include "restaurantidentity.h"
+// #include "menufunctions.h"
 
-class Restaurant
-{
-    friend QDataStream &operator<<(QDataStream &out, const Restaurant &restaurant);
-    friend QDataStream &operator>>(QDataStream &in, Restaurant &restaurant);
+// class Restaurant
+// {
+//     friend QDataStream &operator<<(QDataStream &out, const Restaurant &restaurant);
+//     friend QDataStream &operator>>(QDataStream &in, Restaurant &restaurant);
 
-private:
-    Menu myMenu;
-    RestaurantIdentity myIdentity;
-    MenuFunctions myFunctions;
+// private:
+//     Menu myMenu;
+//     RestaurantIdentity myIdentity;
+//     MenuFunctions myFunctions;
 
-public:
-    Restaurant() = default;
-    Restaurant(QString newUsername, QString newPassword, QString newName, QString newBio, Address &newAddress, MyTime &newTime, Score &newScore);
-    // void showAllRestaurants() -> This one has to be added when the UI complete.
-};
+// public:
+//     Restaurant() = default;
+//     Restaurant(QString newUsername, QString newPassword, QString newName, QString newBio, Address &newAddress, MyTime &newTime, Score &newScore);
+//     // void showAllRestaurants() -> This one has to be added when the UI complete.
+// };
 
-#endif // RESTAURANT_H
+// #endif // RESTAURANT_H

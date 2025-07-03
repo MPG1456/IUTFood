@@ -87,8 +87,19 @@ Window{
                         width: col.width/3
                         onClicked:
                         {
-                            stackv.push("main.qml")
-                            win.close()
+                            var component =Qt.createComponent("main.qml")
+                                                    if(component.status===Component.Ready)
+                                                    {
+                                                        var newWin = component.createObject(null ,{
+                                                        width =win.width,
+                                                        height =win.height,
+                                                        x:win.x,
+                                                        y:win.y,
+                                                        visibility:win.visibility
+                                                                                            })
+                                                        newWin.show();
+                                                        win.close();
+                                                    }
                         }                    }
                     Button
                     {
@@ -122,8 +133,19 @@ Window{
                             }
                             onClicked:
                             {
-                                stackv.push("deliverysignup.qml")
-                                win.close()
+                                var component =Qt.createComponent("deliverysignup.qml")
+                                                        if(component.status===Component.Ready)
+                                                        {
+                                                            var newWin = component.createObject(null ,{
+                                                            width =win.width,
+                                                            height =win.height,
+                                                            x:win.x,
+                                                            y:win.y,
+                                                            visibility:win.visibility
+                                                                                                })
+                                                            newWin.show();
+                                                            win.close();
+                                                        }
 
                             }
                         }

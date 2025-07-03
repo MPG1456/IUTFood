@@ -89,10 +89,6 @@ Window{
                         width: col.width/2
                         onClicked:
                         {
-<<<<<<< HEAD
-                        stackv.push("adminpanel.qml")
-                        win.close()
-=======
                         var component =Qt.createComponent("clientpanel.qml")
                         if(component.status===Component.Ready)
                         {
@@ -106,7 +102,6 @@ Window{
                             newWin.show();
                             win.close();
                         }
->>>>>>> Ordertracking
                         }
                     }
 
@@ -136,8 +131,19 @@ Window{
                             }
                             onClicked:
                             {
-                                stackv.push("clientsignup.qml")
-                                win.close()
+                                var component =Qt.createComponent("clientsignup.qml")
+                                                        if(component.status===Component.Ready)
+                                                        {
+                                                            var newWin = component.createObject(null ,{
+                                                            width =win.width,
+                                                            height =win.height,
+                                                            x:win.x,
+                                                            y:win.y,
+                                                            visibility:win.visibility
+                                                                                                })
+                                                            newWin.show();
+                                                            win.close();
+                                                        }
 
                             }
                         }
@@ -168,8 +174,19 @@ Window{
 
                             onClicked:
                             {
-                                stackv.push("restaurantsignin.qml")
-                                win.close()
+                                var component =Qt.createComponent("restaurantsignin.qml")
+                                                        if(component.status===Component.Ready)
+                                                        {
+                                                            var newWin = component.createObject(null ,{
+                                                            width =win.width,
+                                                            height =win.height,
+                                                            x:win.x,
+                                                            y:win.y,
+                                                            visibility:win.visibility
+                                                                                                })
+                                                            newWin.show();
+                                                            win.close();
+                                                        }
                             }
                         }
                     }
@@ -193,8 +210,19 @@ Window{
 
                             onClicked:
                             {
-                                stackv.push("deliverysignin.qml")
-                                win.close()
+                                var component =Qt.createComponent("deliverysignin.qml")
+                                                        if(component.status===Component.Ready)
+                                                        {
+                                                            var newWin = component.createObject(null ,{
+                                                            width =win.width,
+                                                            height =win.height,
+                                                            x:win.x,
+                                                            y:win.y,
+                                                            visibility:win.visibility
+                                                                                                })
+                                                            newWin.show();
+                                                        win.close();
+                                                    }
                             }
                         }
                     }
