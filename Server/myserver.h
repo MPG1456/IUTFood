@@ -34,9 +34,9 @@ private slots:
     void customerDisconnected();
     void restaurantDisconnected();
     void deliveryDisconnected();
-    // void readCustomersData();
-    // void readRestaurantsData();
-    // void readDeliveriesData();
+    void readCustomersData();
+    void readRestaurantsData();
+    void readDeliveriesData();
 
 private:
     QSqlDatabase clientDb;

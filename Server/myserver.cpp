@@ -105,8 +105,8 @@ void MyServer::handleNewConnection()
 
     myPendings.insert(clientSocket);
 
-    connect(clientSocket, SIGNAL(QTcpSocket::readyRead()), this, SLOT(MyServer::handleClientIdentification()));
-    connect(clientSocket, SIGNAL(QTcpSocket::disconnected()), this, SLOT(MyServer::clientDisconnected()));
+    connect(clientSocket, &QTcpSocket::readyRead, this, &MyServer::handleClientIdentification);
+    connect(clientSocket, &QTcpSocket::disconnected, this, &MyServer::clientDisconnected);
 }
 
 void MyServer::handleClientIdentification()
@@ -122,36 +122,36 @@ void MyServer::handleClientIdentification()
         myRestaurants.insert(clientSocket);
         myPendings.remove(clientSocket);
 
-        disconnect(clientSocket, SIGNAL(QTcpSocket::readyRead()), this, SLOT(MyServer::handleClientIdentification));
-        connect(clientSocket, SIGNAL(QTcpSocket::readyRead()), this, SLOT(MyServer::readRestaurantsData()));
+        disconnect(clientSocket, &QTcpSocket::readyRead, this, &MyServer::handleClientIdentification);
+        connect(clientSocket, &QTcpSocket::readyRead, this, &MyServer::readRestaurantsData);
         qDebug() << "Identification successful. New restaurant: " << clientSocket->peerAddress().toString();
 
-        disconnect(clientSocket, SIGNAL(QTcpSocket::disconnected()), this, SLOT(MyServer::handleClientIdentification));
-        connect(clientSocket, SIGNAL(QTcpSocket::disconnected()), this, SLOT(MyServer::restaurantDisconnected()));
+        disconnect(clientSocket, &QTcpSocket::disconnected, this, &MyServer::handleClientIdentification);
+        connect(clientSocket, &QTcpSocket::disconnected, this, &MyServer::restaurantDisconnected);
     }
     else if(data == "Customer")
     {
         myCustomers.insert(clientSocket);
         myPendings.remove(clientSocket);
 
-        disconnect(clientSocket, SIGNAL(QTcpSocket::readyRead()), this, SLOT(MyServer::handleClientIdentification));
-        connect(clientSocket, SIGNAL(QTcpSocket::readyRead()), this, SLOT(MyServer::readCustomersData()));
+        disconnect(clientSocket, &QTcpSocket::readyRead, this, &MyServer::handleClientIdentification);
+        connect(clientSocket, &QTcpSocket::readyRead, this, &MyServer::readCustomersData);
         qDebug() << "Identification successful. New customer: " << clientSocket->peerAddress().toString();
 
-        disconnect(clientSocket, SIGNAL(QTcpSocket::disconnected()), this, SLOT(MyServer::handleClientIdentification));
-        connect(clientSocket, SIGNAL(QTcpSocket::disconnected()), this, SLOT(MyServer::customerDisconnected()));
+        disconnect(clientSocket, &QTcpSocket::disconnected, this, &MyServer::handleClientIdentification);
+        connect(clientSocket, &QTcpSocket::disconnected, this, &MyServer::customerDisconnected);
     }
     else if(data == "Delivery")
     {
         myDeliveries.insert(clientSocket);
         myPendings.remove(clientSocket);
 
-        disconnect(clientSocket, SIGNAL(QTcpSocket::readyRead()), this, SLOT(MyServer::handleClientIdentification));
-        connect(clientSocket, SIGNAL(QTcpSocket::readyRead()), this, SLOT(MyServer::readDeliveriesData()));
+        disconnect(clientSocket, &QTcpSocket::readyRead, this, &MyServer::handleClientIdentification);
+        connect(clientSocket, &QTcpSocket::readyRead, this, &MyServer::readDeliveriesData);
         qDebug() << "Identification successful. New delivery: " << clientSocket->peerAddress().toString();
 
-        disconnect(clientSocket, SIGNAL(QTcpSocket::disconnected()), this, SLOT(MyServer::handleClientIdentification));
-        connect(clientSocket, SIGNAL(QTcpSocket::disconnected()), this, SLOT(MyServer::deliveryDisconnected()));
+        disconnect(clientSocket, &QTcpSocket::disconnected, this, &MyServer::handleClientIdentification);
+        connect(clientSocket, &QTcpSocket::disconnected, this, &MyServer::deliveryDisconnected);
     }
     else
     {
@@ -164,20 +164,20 @@ void MyServer::handleClientIdentification()
 
 }
 
-// void MyServer::readRestaurantsData()
-// {
+void MyServer::readRestaurantsData()
+{
 
-// }
+}
 
-// void MyServer::readCustomersData()
-// {
+void MyServer::readCustomersData()
+{
 
-// }
+}
 
-// void MyServer::readDeliveriesData()
-// {
+void MyServer::readDeliveriesData()
+{
 
-// }
+}
 
 void MyServer::clientDisconnected()
 {
