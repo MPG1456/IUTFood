@@ -75,5 +75,8 @@ HEADERS += \
 DISTFILES +=
 
 SUBDIRS += \
+    Server/Server.pro \
+    Server/Server.pro \
+    Server/Server.pro \
     Server/Server.pro
 
