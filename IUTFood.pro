@@ -37,13 +37,10 @@ resources.files = \
     deliverysignin.qml \
     deliverysignup.qml \
     clientpanel.qml \
-<<<<<<< HEAD
     restaurantpanel.qml \
-    adminpanel.qml
-=======
+    adminpanel.qml \
     orderhistory.qml \
     filterpage.qml
->>>>>>> filterpage
 
 resources.prefix = /$${TARGET}
 RESOURCES += resources \
