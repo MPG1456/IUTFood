@@ -14,5 +14,6 @@
         <file>clientpanel.qml</file>
         <file>orderhistory.qml</file>
         <file>filterpage.qml</file>
+        <file>Ordertracking.qml</file>
     </qresource>
 </RCC>
