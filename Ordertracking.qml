@@ -1,80 +1,214 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
-import QtQuick.Layouts 1.15
-
-Page {
-    title: "پیگیری سفارش"
-    padding: 20
-
-    ColumnLayout {
+import QtQuick.Layouts 6.5
+import "."
+ApplicationWindow{
+    id: win
+    width:400
+    height:600
+    minimumWidth: 400
+    minimumHeight: 600
+    title:"client panel"
+    visible: true
+    StackView
+    {
+        id:stackv
         anchors.fill: parent
-        spacing: 20
+        initialItem: ""
+    }
+    Drawer
+    {
+        id:menu
+        edge:Qt.RightEdge
+        width:Math.min(win.width/2 ,500)
+        height: parent.height
 
-        Label {
-            text: "شماره سفارش: #12345"
-            font.bold: true
-            Layout.alignment: Qt.AlignHCenter
+        // Rectangle
+        // {
+        //     height: menu.height
+        //     width: menu.width
+        //     color:"#2E2E2E"
+        //     radius: 20
+        // }
+        ListModel
+        {
+            id:menuelement
+            ListElement{name:"Home";pageaddress:"clientpanel.qml"}
+            ListElement{name:"Filter page";pageaddress:"filterpage.qml"}
+            ListElement{name:"Order tracking";pageaddress:"Ordertracking.qml"}
+            ListElement{name:"Order history";pageaddress:"orderhistory.qml"}
         }
-
-        Label {
-            text: "زمان ثبت: 1403/04/10 - 14:26"
-            Layout.alignment: Qt.AlignHCenter
-        }
-
-        Rectangle {
-            Layout.fillWidth: true
-            height: 2
-            color: "#cccccc"
-        }
-
-        // مراحل سفارش
-        Repeater {
-            model: [
-                { step: "ثبت سفارش", done: true },
-                { step: "در حال آماده‌سازی", done: true },
-                { step: "در حال ارسال", done: false },
-                { step: "تحویل داده شد", done: false }
-            ]
-
-            delegate: RowLayout {
-                spacing: 10
-                Layout.fillWidth: true
-
-                CheckBox {
-                    checked: modelData.done
-                    enabled: false
+        ListView
+        {
+            width: parent.width
+            height: win.height*5/6
+            model: menuelement
+            // spacing: 8
+            clip: true
+            delegate: Rectangle
+            {
+                id:rectfield
+                width:parent.width
+                height: 55
+                border.color:"#ccc"
+                color:"#f5f5f5"
+                Row
+                {
+                    anchors.fill: parent
+                    anchors.margins: 10
+                    spacing: 8
+                    Column
+                    {
+                        spacing: 20
+                        Text {
+                            text: name
+                            font.pixelSize: 13
+                            font.bold: true
+                        }
+                    }
                 }
-                Label {
-                    text: modelData.step
-                    verticalAlignment: Text.AlignVCenter
-                }
-            }
-        }
-
-        Rectangle {
-            Layout.fillWidth: true
-            height: 2
-            color: "#cccccc"
-        }
-
-        RowLayout {
-            spacing: 20
-            Layout.alignment: Qt.AlignHCenter
-
-            Button {
-                text: "بروزرسانی"
-                onClicked: {
-                    // TODO: کد بروزرسانی سفارش را اینجا بنویس
-                    console.log("بروزرسانی کلیک شد")
-                }
-            }
-            Button {
-                text: "تماس با پشتیبانی"
-                onClicked: {
-                    // TODO: کد تماس با پشتیبانی اینجا
-                    console.log("تماس با پشتیبانی کلیک شد")
+                MouseArea
+                {
+                    anchors.fill: parent
+                    onClicked:
+                    {
+                        menu.close()
+                        stackv.push(model.pageaddress)
+                        win.close()
+                    }
                 }
             }
         }
     }
-}
+    Rectangle
+    {
+        id:mainrect
+
+        anchors.fill: parent
+        color:"#333"
+        Image {
+            id: mainimage
+            source: "qrc:/projimages/pexels-pixabay-260922.jpg"
+            fillMode: Image.PreserveAspectCrop
+            opacity: 0.5
+            anchors.fill: parent
+        }
+        Rectangle
+        {
+        radius:15
+        color:"#FFFAF7"
+        anchors.centerIn: parent
+        width:Math.min(win.width-90 , 500)
+        height:Math.min(win.height-130 , 750)
+        Flickable
+        {
+            id:insiderect
+            clip:true
+            anchors.fill: parent
+            contentHeight: col.height
+            ScrollBar.vertical: ScrollBar
+            {
+                policy:ScrollBar.AsNeeded
+            }
+            Column
+            {
+                id:col
+                width: parent.width*0.9
+                spacing: 12
+                anchors.top:parent.top
+                anchors.topMargin: win.height/10
+                anchors.left: parent.left
+                anchors.leftMargin: 14
+                ListModel
+                {
+                    id:element
+                    ListElement{foodname:"chicken";restaurantname:"Tarkhoon";price:"10000000";status:"ready";}
+                }
+                ListView
+                {
+                    width: searchbar.width
+                    height: win.height*5/6
+                    model: element
+                    spacing: 8
+                    clip: true
+                    delegate: Rectangle
+                    {
+                        width:parent.width
+                        height: 150
+                        radius:10
+                        border.color:"#ccc"
+                        color:"#f5f5f5"
+                        Row
+                        {
+                            anchors.fill: parent
+                            anchors.margins: 10
+                            spacing: 8
+                            Column
+                            {
+                                spacing: 20
+                                Text {
+                                    text: "food name: " + foodname
+                                    font.pixelSize: 13
+                                    font.bold: true
+                                }
+                                Text {
+                                    text: "restaurantname: " + restaurantname
+                                    font.pixelSize: 11
+                                    color: "red"
+                                }
+                                Text {
+                                    text: "price: " + price
+                                    font.pixelSize: 11
+                                    color: "green"
+                                }
+                                Text {
+                                    text: "status: " + status
+                                    font.pixelSize: 11
+                                    color: "blue"
+                                }
+
+                            }
+                        }
+                    }
+                }
+
+            }
+        }
+        Button{
+        id:hamburger
+        anchors.top: parent.top
+        anchors.right: parent.right
+        icon.source: "qrc:/projimages/hamburger.png"
+        width:parent.width/5
+        height:parent.height/7.5
+        background: null
+        anchors.rightMargin: 2
+        onClicked:
+        {
+            console.log("clickeddd")
+            menu.open();
+        }
+        }
+        Button{
+        id:cart
+        anchors.top: parent.top
+        anchors.left: parent.left
+        icon.source: "qrc:/projimages/cart.png"
+        width:parent.width/5
+        height:parent.height/7.5
+        background: null
+        anchors.rightMargin: 2
+        onClicked:
+        {
+            console.log("clickeddd")
+            menu.open();
+        }
+        }
+
+
+
+            }
+        }
+
+
+    }
