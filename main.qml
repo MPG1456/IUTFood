@@ -2,6 +2,7 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 6.5
 import "."
+import QtQuick.Window
 Window{
     id: win
     width:400
@@ -88,8 +89,19 @@ Window{
                         width: col.width/2
                         onClicked:
                         {
-                        stackv.push("clientpanel.qml")
-                        win.close()
+                        var component =Qt.createComponent("clientpanel.qml")
+                        if(component.status===Component.Ready)
+                        {
+                            var newWin = component.createObject(null ,{
+                            width =win.width,
+                            height =win.height,
+                            x:win.x,
+                            y:win.y,
+                            visibility:win.visibility
+                                                                })
+                            newWin.show();
+                            win.close();
+                        }
                         }
                     }
 

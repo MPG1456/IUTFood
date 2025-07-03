@@ -143,8 +143,19 @@ Window{
                         width: col.width/3
                         onClicked:
                         {
-                            stackv.push("restaurantsignin.qml")
-                            win.close()
+                            var component =Qt.createComponent("restaurantsignin.qml")
+                            if(component.status===Component.Ready)
+                            {
+                                var newWin = component.createObject(null ,{
+                                width =win.width,
+                                height =win.height,
+                                x:win.x,
+                                y:win.y,
+                                visibility:win.visibility
+                                                                    })
+                                newWin.show();
+                                win.close();
+                            }
                         }                    }
                     Button
                     {

@@ -106,6 +106,10 @@ ApplicationWindow{
             clip:true
             anchors.fill: parent
             contentHeight: col.height
+            ScrollBar.vertical: ScrollBar
+            {
+                policy:ScrollBar.AsNeeded
+            }
             Column
             {
                 id:col
@@ -212,10 +216,7 @@ ApplicationWindow{
         }
 
 
-            ScrollBar.vertical: ScrollBar
-            {
-                policy:ScrollBar.AsNeeded
-            }
+
             }
         }
 
