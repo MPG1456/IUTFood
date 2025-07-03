@@ -23,7 +23,7 @@ clientdb::clientdb(QObject *parent)
     if(!QFile::exists(dbPath))
     {
         qDebug() << "File doesn't exist in the chosen path. It will copy it from resources.";
-        QFile::copy("C:/Users/Ravis/Desktop/IUTFood/clientdb2.db", dbPath); // ATTENITION: change this path to your directory
+        QFile::copy("F:/Projects/AP/Final Term/IUTFood/clientdb2.db", dbPath); // ATTENITION: change this path to your directory
     }
 
 

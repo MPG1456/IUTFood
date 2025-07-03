@@ -26,7 +26,6 @@ SOURCES += \
         clientdb.cpp \
         restaurantdb.cpp \
         deliverydb.cpp \
-        menufunctions.cpp \
         score.cpp
 
 resources.files = \
@@ -62,7 +61,6 @@ HEADERS += \
     menufunctions.h \
     mytime.h \
     person.h \
-    personidentity.h \
     personidentity.h \
     restaurant.h \
     restaurantidentity.h \
