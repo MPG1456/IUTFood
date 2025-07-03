@@ -3,11 +3,14 @@
 #include <QDebug>
 #include <QStandardPaths>
 #include <QDir>
+
 MyServer::MyServer(QObject *parent) : QTcpServer(parent)
 {
     clientDb = QSqlDatabase::addDatabase("QSQLITE" , "clientconnection");
     restaurantDb = QSqlDatabase::addDatabase("QSQLITE" , "restaurantconnection");
     deliveryDb = QSqlDatabase::addDatabase("QSQLITE" , "deliveryconnection");
+
+
     QString dataLocation = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
     QDir dataDir(dataLocation);
     if(!dataDir.exists())
@@ -26,11 +29,12 @@ MyServer::MyServer(QObject *parent) : QTcpServer(parent)
         QFile::copy("F:/Projects/AP/Final Term/IUTFood/clientdb2.db", dbPath); // ATTENITION: change this path to your directory
     }
 
-
     if(!clientDb.open())
     {
         qDebug()<<"Failed to open";
     }
+
+
     QString dataLocationRe = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
     QDir dataDirRe(dataLocationRe);
     if(!dataDirRe.exists())
@@ -49,11 +53,12 @@ MyServer::MyServer(QObject *parent) : QTcpServer(parent)
         QFile::copy("F:/Projects/AP/Final Term/IUTFood/restaurantdb.db", dbPathRe); // ATTENITION: change this path to your directory
     }
 
-
     if(!restaurantDb.open())
     {
         qDebug()<<"failed to open";
     }
+
+
     QString dataLocationDe = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
 
     // Create the directory if it doesn't exist.
