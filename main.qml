@@ -88,7 +88,7 @@ Window{
                         width: col.width/2
                         onClicked:
                         {
-                        stackv.push("restaurantpanel.qml")
+                        stackv.push("adminpanel.qml")
                         win.close()
                         }
                     }
