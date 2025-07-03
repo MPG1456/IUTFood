@@ -10,13 +10,6 @@ Window{
     minimumHeight: 600
     title:"delivery sign in"
     visible: true
-    StackView
-    {
-        id:stackv
-        anchors.fill: parent
-        initialItem: ""
-    }
-
     Rectangle
     {
         id:mainrect

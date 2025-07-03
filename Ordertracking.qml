@@ -2,77 +2,55 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
 
-Page {
-    title: "پیگیری سفارش"
-    padding: 20
+ApplicationWindow{
+    id: trackPage
+    title: "رهگیری سفارش"
+    property int orderStatus: 2  // تستی، در عمل باید از دیتابیس یا C++ بیاد
 
     ColumnLayout {
-        anchors.fill: parent
+        anchors.centerIn: parent
         spacing: 20
 
         Label {
             text: "شماره سفارش: #12345"
             font.bold: true
-            Layout.alignment: Qt.AlignHCenter
+            font.pixelSize: 20
         }
 
-        Label {
-            text: "زمان ثبت: 1403/04/10 - 14:26"
-            Layout.alignment: Qt.AlignHCenter
-        }
-
-        Rectangle {
-            Layout.fillWidth: true
-            height: 2
-            color: "#cccccc"
-        }
-
-        // مراحل سفارش
         Repeater {
-            model: [
-                { step: "ثبت سفارش", done: true },
-                { step: "در حال آماده‌سازی", done: true },
-                { step: "در حال ارسال", done: false },
-                { step: "تحویل داده شد", done: false }
-            ]
-
-            delegate: RowLayout {
-                spacing: 10
-                Layout.fillWidth: true
-
-                CheckBox {
-                    checked: modelData.done
-                    enabled: false
-                }
-                Label {
-                    text: modelData.step
-                    verticalAlignment: Text.AlignVCenter
-                }
+            model: ListModel {
+                ListElement { label: "در حال بررسی توسط رستوران" }
+                ListElement { label: "در حال آماده‌سازی" }
+                ListElement { label: "تحویل به پیک" }
+                ListElement { label: "در حال ارسال" }
+                ListElement { label: "تحویل داده شد" }
             }
-        }
 
-        Rectangle {
-            Layout.fillWidth: true
-            height: 2
-            color: "#cccccc"
-        }
+            delegate: Rectangle {
+                width: 300
+                height: 40
+                color: index <= trackPage.orderStatus ? "#4CAF50" : "#e0e0e0"
+                radius: 10
+                border.color: "gray"
+                border.width: 1
 
-        RowLayout {
-            spacing: 20
-            Layout.alignment: Qt.AlignHCenter
+                Row {
+                    anchors.fill: parent
+                    anchors.margins: 10
+                    spacing: 10
 
-            Button {
-                text: "بروزرسانی"
-                onClicked: {
-                    // TODO: کد بروزرسانی سفارش را اینجا بنویس
-                    console.log("بروزرسانی کلیک شد")
-                }
-            }
-            Button {
-                text: "تماس با پشتیبانی"
-                onClicked: {
-                    // TODO: کد تماس با پشتیبانی اینجا
-                    console.log("تماس با پشتیبانی کلیک شد")
+                    Label {
+                        text: (index + 1) + ". " + label
+                        color: index <= trackPage.orderStatus ? "white" : "black"
+                    }
+
+                    // نشانه مرحله فعلی
+                    Rectangle {
+                        width: 10; height: 10
+                        radius: 5
+                        color: index === trackPage.orderStatus ? "yellow" : "transparent"
+                        anchors.verticalCenter: parent.verticalCenter
+                    }
                 }
             }
         }

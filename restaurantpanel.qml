@@ -10,12 +10,6 @@ ApplicationWindow{
     minimumHeight: 600
     title:"restaurant panel"
     visible: true
-    StackView
-    {
-        id:stackv
-        anchors.fill: parent
-        initialItem: ""
-    }
     Drawer
     {
         id:menu
