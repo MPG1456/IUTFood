@@ -5,6 +5,7 @@
 #include<QSqlDatabase>
 #include<QSqlQuery>
 #include<QSqlError>
+
 class restaurantdb:public QObject
 {
     Q_OBJECT

@@ -5,6 +5,9 @@
 #include <QTcpSocket>
 #include <QDebug>
 #include <QSet>
+#include <QSqlDatabase>
+#include <QSqlError>
+#include <QSqlQuery>
 
 class MyServer : public QTcpServer
 {

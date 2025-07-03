@@ -1,9 +1,11 @@
 #ifndef DELIVERYDB_H
 #define DELIVERYDB_H
+
 #include <QObject>
 #include<QSqlDatabase>
 #include<QSqlQuery>
 #include<QSqlError>
+
 class deliverydb:public QObject
 {
     Q_OBJECT

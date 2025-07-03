@@ -1,9 +1,11 @@
 #ifndef CLIENTDB_H
 #define CLIENTDB_H
+
 #include <QObject>
 #include<QSqlDatabase>
 #include<QSqlQuery>
 #include<QSqlError>
+
 class clientdb:public QObject
 {
     Q_OBJECT
