@@ -8,14 +8,21 @@ ApplicationWindow{
     height:600
     minimumWidth: 400
     minimumHeight: 600
-    title:"restaurant panel"
+    title:"order tracking"
     visible: true
+    StackView
+    {
+        id:stackv
+        anchors.fill: parent
+        initialItem: ""
+    }
     Drawer
     {
         id:menu
         edge:Qt.RightEdge
         width:Math.min(win.width/2 ,500)
         height: parent.height
+
         // Rectangle
         // {
         //     height: menu.height
@@ -26,9 +33,10 @@ ApplicationWindow{
         ListModel
         {
             id:menuelement
-            ListElement{name:"Home";pageaddress:"adminpanel.qml"}
-            ListElement{name:"change or add user";pageaddress:"changeuser.qml"}
-            ListElement{name:"accept  restaurant request";pageaddress:"acceptrequest.qml"}
+            ListElement{name:"Home";pageaddress:"clientpanel.qml"}
+            ListElement{name:"Filter page";pageaddress:"filterpage.qml"}
+            ListElement{name:"Order tracking";pageaddress:"Ordertracking.qml"}
+            ListElement{name:"Order history";pageaddress:"orderhistory.qml"}
         }
         ListView
         {
@@ -66,18 +74,18 @@ ApplicationWindow{
                     {
                         menu.close()
                         var component =Qt.createComponent(model.pageaddress)
-                                                if(component.status===Component.Ready)
-                                                {
-                                                    var newWin = component.createObject(null ,{
-                                                    width =win.width,
-                                                    height =win.height,
-                                                    x:win.x,
-                                                    y:win.y,
-                                                    visibility:win.visibility
-                                                                                        })
-                                                    newWin.show();
-                                                    win.close();
-                                                }
+                        if(component.status===Component.Ready)
+                        {
+                            var newWin = component.createObject(null ,{
+                            width =win.width,
+                            height =win.height,
+                            x:win.x,
+                            y:win.y,
+                            visibility:win.visibility
+                                                                })
+                            newWin.show();
+                            win.close();
+                        }
                     }
                 }
             }
@@ -109,6 +117,10 @@ ApplicationWindow{
             clip:true
             anchors.fill: parent
             contentHeight: col.height
+            ScrollBar.vertical: ScrollBar
+            {
+                policy:ScrollBar.AsNeeded
+            }
             Column
             {
                 id:col
@@ -118,25 +130,15 @@ ApplicationWindow{
                 anchors.topMargin: win.height/10
                 anchors.left: parent.left
                 anchors.leftMargin: 14
-                TextField
-                {
-                    id:searchbar
-                    placeholderText: "search..."
-                    width: insiderect.width-30
-                    font.pixelSize: 14
-                }
                 ListModel
                 {
                     id:element
-                    ListElement{name:"Saleh";order:"kentaki";restaurant:"kentakihouse"}
-                    ListElement{name:"Parsa";order:"salad";restaurant:"Tarkhoon"}
-                    ListElement{name:"Ali";order:"chicken";restaurant:"jan"}
-                    ListElement{name:"Reza";order:"water";restaurant:"alibaba"}
-
+                    ListElement{foodname:"chicken";restaurantname:"Tarkhoon";price:"10000000"}
+                    ListElement{foodname:"salad";restaurantname:"alibaba";price:"3400000"}
                 }
                 ListView
                 {
-                    width: searchbar.width
+                    width: insiderect.width-30
                     height: win.height*5/6
                     model: element
                     spacing: 8
@@ -144,7 +146,7 @@ ApplicationWindow{
                     delegate: Rectangle
                     {
                         width:parent.width
-                        height: 80
+                        height: 100
                         radius:10
                         border.color:"#ccc"
                         color:"#f5f5f5"
@@ -155,26 +157,21 @@ ApplicationWindow{
                             spacing: 8
                             Column
                             {
-                                spacing:20
+                                spacing: 15
                                 Text {
-                                    text:name
+                                    text: "food name: " + foodname
                                     font.pixelSize: 13
                                     font.bold: true
                                 }
-                                Row
-                                {
-                                    anchors.margins: 10
-                                    spacing: 9
                                 Text {
-                                    text: "order: " + order
+                                    text: "restaurantname: " + restaurantname
                                     font.pixelSize: 11
                                     color: "red"
                                 }
                                 Text {
-                                    text: "restaurant: " + restaurant
+                                    text: "price: " + price
                                     font.pixelSize: 11
                                     color: "green"
-                                }
                                 }
                             }
                         }
@@ -227,10 +224,7 @@ ApplicationWindow{
         }
 
 
-            ScrollBar.vertical: ScrollBar
-            {
-                policy:ScrollBar.AsNeeded
-            }
+
             }
         }
 
