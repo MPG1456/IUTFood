@@ -31,7 +31,8 @@ resources.files = \
     deliverysignin.qml \
     deliverysignup.qml \
     clientpanel.qml \
-    orderhistory.qml
+    orderhistory.qml \
+    filterpage.qml
 
 resources.prefix = /$${TARGET}
 RESOURCES += resources \

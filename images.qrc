@@ -13,5 +13,6 @@
         <file>deliverysignup.qml</file>
         <file>clientpanel.qml</file>
         <file>orderhistory.qml</file>
+        <file>filterpage.qml</file>
     </qresource>
 </RCC>
