@@ -1,8 +1,12 @@
 QT = core
 QT += core network
+<<<<<<< HEAD
 QT += sql
 QT += core network sql
 
+=======
+QT+=sql
+>>>>>>> 22c857f65537d2a9a88571ee968f6cc8ffe1954e
 CONFIG += c++17 cmdline
 
 # You can make your code fail to compile if it uses deprecated APIs.

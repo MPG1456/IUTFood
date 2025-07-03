@@ -72,3 +72,8 @@ HEADERS += \
     menufunctions.h \
     score.h
 
+DISTFILES +=
+
+SUBDIRS += \
+    Server/Server.pro
+
