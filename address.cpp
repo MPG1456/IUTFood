@@ -7,6 +7,14 @@ Address::Address(QString newCountry, QString newCity,
     postalCode(newPostalCode)
 {}
 
+Address::Address(const Address &copyAddress)
+{
+    this->country = copyAddress.country;
+    this->city = copyAddress.city;
+    this->homeAddress = copyAddress.homeAddress;
+    this->homePhone = copyAddress.homePhone;
+    this->postalCode = copyAddress.postalCode;
+}
 QString Address::getCountry()
 {
     return country;

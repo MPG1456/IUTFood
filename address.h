@@ -13,6 +13,7 @@ private:
     long long int postalCode;
 public:
     Address(QString newCountry, QString newCity, QString newHomeAddress, QString newHomePhone, long long int newPostalCode);
+    Address(const Address &copyAddress);
     QString getCountry();
     void setCountry(QString newCountry);
     QString getCity();

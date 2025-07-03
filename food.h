@@ -8,12 +8,16 @@ class Drinks;
 class Salad;
 class MainDish;
 
+class MenuFunctions;
+
 class Food
 {
     friend class Dessert;
     friend class Salad;
     friend class Drinks;
     friend class MainDish;
+
+    friend class MenuFunctions;
 
 private:
     QString name;

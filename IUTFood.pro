@@ -16,12 +16,18 @@ SOURCES += \
         main.cpp \
         maindish.cpp \
         menu.cpp \
+        menufunctions.cpp \
+        mytime.cpp \
         person.cpp \
         personidentity.cpp \
+        restaurant.cpp \
+        restaurantidentity.cpp \
         salad.cpp \
         clientdb.cpp \
         restaurantdb.cpp \
-        deliverydb.cpp
+        deliverydb.cpp \
+        menufunctions.cpp \
+        score.cpp
 
 resources.files = \
     main.qml \
@@ -53,11 +59,17 @@ HEADERS += \
     iranifood.h \
     maindish.h \
     menu.h \
+    menufunctions.h \
+    mytime.h \
     person.h \
     personidentity.h \
     personidentity.h \
+    restaurant.h \
+    restaurantidentity.h \
     salad.h \
     clientdb.h \
     restaurantdb.h \
     deliverydb.h \
+    menufunctions.h \
+    score.h
 

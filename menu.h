@@ -4,10 +4,15 @@
 #include "food.h"
 #include <QSet>
 
+class MenuFunctions;
+
 class Menu
 {
+    friend class MenuFunctions;
+
 private:
     QSet<Food *> menu;
+
 public:
     // void showMenu();
 };
