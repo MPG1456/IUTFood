@@ -36,7 +36,7 @@ ApplicationWindow{
             ListElement{name:"Home";pageaddress:"clientpanel.qml"}
             ListElement{name:"Filter page";pageaddress:"restaurantfliter.qml"}
             ListElement{name:"Order tracking";pageaddress:"Ordertracking.qml"}
-            ListElement{name:"Order history";pageaddress:"Orderhistory.qml"}
+            ListElement{name:"Order history";pageaddress:"orderhistory.qml"}
 
         }
         ListView
