@@ -64,3 +64,17 @@ void Address::setPostalCode(long long int newPostalCode)
 {
     this->postalCode = newPostalCode;
 }
+
+
+
+Address &Address::operator= (const Address &other)
+{
+    if (this != &other) {
+        this->country = other.country;
+        this->city = other.city;
+        this->homeAddress = other.homeAddress;
+        this->homePhone = other.homePhone;
+        this->postalCode = other.postalCode;
+    }
+    return *this;
+}

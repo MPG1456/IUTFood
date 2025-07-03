@@ -1,8 +1,13 @@
 #ifndef SCORE_H
 #define SCORE_H
 
+#include <QDataStream>
+
 class Score
 {
+    friend QDataStream &operator<<(QDataStream &out, const Score &score);
+    friend QDataStream &operator>>(QDataStream &in, Score &score);
+
 private:
     int counter;
     float myScore;

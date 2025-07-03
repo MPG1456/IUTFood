@@ -1,20 +1,20 @@
 #ifndef MENUFUNCTIONS_H
 #define MENUFUNCTIONS_H
 
-#include "food.h"
 #include "menu.h"
 #include <QDebug>
 
 class MenuFunctions
 {
 private:
-    Menu &myMenu;
+    Menu myMenu;
 
 public:
+    MenuFunctions() = default;
     MenuFunctions(Menu &newMenu);
-    void addFood(Food *newFood);
-    void deleteFood(Food *newFood);
-    Food * searchFood(Food *newFood);
+    void addFood(QVariant newFood);
+    void deleteFood(QVariant newFood);
+    QVariant searchFood(QVariant newFood);
     // void editFood(); I don't think this part is neccessary. Just delete a food and add a new one.
 };
 

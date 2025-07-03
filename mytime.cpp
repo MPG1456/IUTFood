@@ -21,3 +21,4 @@ void MyTime::setTime(QString newTime)
 {
     myTime = newTime;
 }
+

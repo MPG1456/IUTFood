@@ -5,9 +5,11 @@
 
 class Customer : public Person
 {
-private:
+    friend QDataStream &operator<<(QDataStream &out, const Customer &customer);
+    friend QDataStream &operator>>(QDataStream &in, Customer &customer);
 
 public:
+    Customer() = default;
     Customer(PersonIdentity newPersonIdentity);
 };
 

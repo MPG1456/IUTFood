@@ -5,9 +5,11 @@
 #include <QTcpSocket>
 #include <QDebug>
 #include <QSet>
-#include<QSqlDatabase>
-#include<QSqlQuery>
-#include<QSqlError>
+#include <QSqlDatabase>
+#include <QSqlQuery>
+#include <QSqlError>
+
+#include "../protocol.h"
 
 class MyServer : public QTcpServer
 {

@@ -7,12 +7,16 @@
 
 class Restaurant
 {
+    friend QDataStream &operator<<(QDataStream &out, const Restaurant &restaurant);
+    friend QDataStream &operator>>(QDataStream &in, Restaurant &restaurant);
+
 private:
     Menu myMenu;
     RestaurantIdentity myIdentity;
     MenuFunctions myFunctions;
 
 public:
+    Restaurant() = default;
     Restaurant(QString newUsername, QString newPassword, QString newName, QString newBio, Address &newAddress, MyTime &newTime, Score &newScore);
     // void showAllRestaurants() -> This one has to be added when the UI complete.
 };

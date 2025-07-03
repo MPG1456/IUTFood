@@ -2,9 +2,13 @@
 #define ADDRESS_H
 
 #include <QString>
+#include <QDataStream>
 
 class Address
 {
+    friend QDataStream &operator<<(QDataStream &out, const Address &address);
+    friend QDataStream &operator>>(QDataStream &in, Address &address);
+
 private:
     QString country;
     QString city;
@@ -12,8 +16,10 @@ private:
     QString homePhone;
     long long int postalCode;
 public:
+    Address() = default;
     Address(QString newCountry, QString newCity, QString newHomeAddress, QString newHomePhone, long long int newPostalCode);
     Address(const Address &copyAddress);
+    Address& operator= (const Address &other);
     QString getCountry();
     void setCountry(QString newCountry);
     QString getCity();

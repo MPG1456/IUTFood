@@ -6,7 +6,7 @@
 #include<QSqlQuery>
 #include<QSqlError>
 
-class restaurantdb:public QObject
+class restaurantdb : public QObject
 {
     Q_OBJECT
 private:

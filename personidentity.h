@@ -2,10 +2,14 @@
 #define PERSONIDENTITY_H
 
 #include <QString>
+#include <QDataStream>
 #include "address.h"
 
 class PersonIdentity
 {
+    friend QDataStream &operator<<(QDataStream &out, const PersonIdentity &person);
+    friend QDataStream &operator>>(QDataStream &in, PersonIdentity &person);
+
 private:
     QString username;
     QString password;
@@ -16,7 +20,11 @@ private:
     Address address;
 
 public:
+    PersonIdentity() = default;
     PersonIdentity(QString newUsername, QString newPassword, QString newFirstName, QString newLastName, QString newPhoneNumber, int newAge, Address newAddress);
+    PersonIdentity(const PersonIdentity &newPersonIdentity);
+    PersonIdentity &operator= (const PersonIdentity &other);
+
     QString getUsername();
     void setUsername(QString newUsername);
     QString getPassword();

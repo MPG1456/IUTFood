@@ -3,7 +3,7 @@
 MenuFunctions::MenuFunctions(Menu &newMenu) : myMenu(newMenu)
 {}
 
-void MenuFunctions::addFood(Food *newFood)
+void MenuFunctions::addFood(QVariant newFood)
 {
     if(searchFood(newFood))
     {
@@ -13,7 +13,7 @@ void MenuFunctions::addFood(Food *newFood)
     myMenu.menu.insert(newFood);
 }
 
-void MenuFunctions::deleteFood(Food *newFood)
+void MenuFunctions::deleteFood(QVariant newFood)
 {
     if(!searchFood(newFood))
     {
@@ -23,7 +23,7 @@ void MenuFunctions::deleteFood(Food *newFood)
     myMenu.menu.remove(newFood);
 }
 
-Food * MenuFunctions::searchFood(Food *newFood)
+QVariant MenuFunctions::searchFood(QVariant newFood)
 {
     QSet<Food *>::Iterator it;
     for(const auto &it2 : myMenu.menu)

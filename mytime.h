@@ -6,6 +6,9 @@
 
 class MyTime
 {
+    friend QDataStream &operator<<(QDataStream &out, const MyTime &time);
+    friend QDataStream &operator>>(QDataStream &in, MyTime &time);
+
 private:
     QString myTime;
 public:

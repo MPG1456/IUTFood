@@ -12,3 +12,5 @@ void FastFood::setDishType(QString newDishType)
     else
         dishType = newDishType;
 }
+
+

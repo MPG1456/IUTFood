@@ -5,7 +5,11 @@
 
 class Salad : public Food
 {
+    friend QDataStream &operator<<(QDataStream &out, const Salad &salad);
+    friend QDataStream &operator>>(QDataStream &in, Salad &salad);
+
 public:
+    Salad() = default;
     Salad(QString name, QString ingredients, int capacity, double price);
     void setType(QString newType = "NULL") override;
 };
