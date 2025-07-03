@@ -1,11 +1,12 @@
 #ifndef MYSERVER_H
 #define MYSERVER_H
-
 #include <QTcpServer>
 #include <QTcpSocket>
 #include <QDebug>
 #include <QSet>
-
+#include<QSqlDatabase>
+#include<QSqlQuery>
+#include<QSqlError>
 class MyServer : public QTcpServer
 {
     Q_OBJECT
@@ -34,6 +35,9 @@ private slots:
     void readDeliveriesData();
 
 private:
+    QSqlDatabase clientDb;
+    QSqlDatabase restaurantDb;
+    QSqlDatabase deliveryDb;
     QSet<QTcpSocket *> myCustomers;
     QSet<QTcpSocket *> myDeliveries;
     QSet<QTcpSocket *> myRestaurants;
