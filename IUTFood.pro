@@ -40,7 +40,8 @@ resources.files = \
     restaurantpanel.qml \
     adminpanel.qml \
     orderhistory.qml \
-    filterpage.qml
+    filterpage.qml \
+    Ordertracking.qml
 
 resources.prefix = /$${TARGET}
 RESOURCES += resources \

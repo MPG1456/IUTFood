@@ -18,6 +18,10 @@
 =======
         <file>orderhistory.qml</file>
         <file>filterpage.qml</file>
+<<<<<<< HEAD
 >>>>>>> filterpage
+=======
+        <file>Ordertracking.qml</file>
+>>>>>>> Ordertracking
     </qresource>
 </RCC>

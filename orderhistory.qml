@@ -34,10 +34,9 @@ ApplicationWindow{
         {
             id:menuelement
             ListElement{name:"Home";pageaddress:"clientpanel.qml"}
-            ListElement{name:"Filter page";pageaddress:"restaurantfliter.qml"}
+            ListElement{name:"Filter page";pageaddress:"filterpage.qml"}
             ListElement{name:"Order tracking";pageaddress:"Ordertracking.qml"}
-            ListElement{name:"Order history";pageaddress:"Orderhistory.qml"}
-
+            ListElement{name:"Order history";pageaddress:"orderhistory.qml"}
         }
         ListView
         {
@@ -107,6 +106,10 @@ ApplicationWindow{
             clip:true
             anchors.fill: parent
             contentHeight: col.height
+            ScrollBar.vertical: ScrollBar
+            {
+                policy:ScrollBar.AsNeeded
+            }
             Column
             {
                 id:col
@@ -213,10 +216,7 @@ ApplicationWindow{
         }
 
 
-            ScrollBar.vertical: ScrollBar
-            {
-                policy:ScrollBar.AsNeeded
-            }
+
             }
         }
 
