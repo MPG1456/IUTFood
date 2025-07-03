@@ -12,5 +12,6 @@
         <file>deliverysignin.qml</file>
         <file>deliverysignup.qml</file>
         <file>clientpanel.qml</file>
+        <file>orderhistory.qml</file>
     </qresource>
 </RCC>
