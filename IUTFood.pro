@@ -69,10 +69,10 @@ HEADERS += \
     personidentity.h \
     protocol.h \
     restaurant.h \
+    restaurantdb.h \
     restaurantidentity.h \
     salad.h \
     clientdb.h \
-    restaurantdb.h \
     deliverydb.h \
     menufunctions.h \
     score.h

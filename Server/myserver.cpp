@@ -1,14 +1,11 @@
 #include "myserver.h"
-#include <QCoreApplication>
-#include <QDebug>
-#include <QStandardPaths>
-#include <QDir>
+
 
 MyServer::MyServer(QObject *parent) : QTcpServer(parent)
 {
-    clientDb = QSqlDatabase::addDatabase("QSQLITE" , "clientconnection");
-    restaurantDb = QSqlDatabase::addDatabase("QSQLITE" , "restaurantconnection");
-    deliveryDb = QSqlDatabase::addDatabase("QSQLITE" , "deliveryconnection");
+    clientDb = QSqlDatabase::addDatabase("QSQLITE" , "clientConnection");
+    restaurantDb = QSqlDatabase::addDatabase("QSQLITE" , "restaurantConnection");
+    deliveryDb = QSqlDatabase::addDatabase("QSQLITE" , "deliveryConnection");
 
 
     QString dataLocation = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
@@ -166,7 +163,31 @@ void MyServer::handleClientIdentification()
 
 void MyServer::readRestaurantsData()
 {
+    QTcpSocket *socket = qobject_cast<QTcpSocket *>(sender());
+    if(!socket)
+        return;
 
+    QDataStream in(socket);
+    in.setVersion(QDataStream::Qt_6_8);
+
+    while(!in.atEnd())
+    {
+        MessageType mType;
+        QVariant payload;
+
+        in >> mType >> payload;
+
+        switch(mType)
+        {
+        case MessageType::sendRestaurantSignIn:
+            if(payload.canConvert<class Restaurant>())
+            {
+                class Restaurant newRestaurant = payload.value<class Restaurant>();
+                QSqlQuery query(QSqlDatabase::database("restaurantConnection"));
+            }
+
+        }
+    }
 }
 
 void MyServer::readCustomersData()

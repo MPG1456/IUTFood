@@ -8,7 +8,14 @@
 #include <QSqlDatabase>
 #include <QSqlQuery>
 #include <QSqlError>
+#include <QCoreApplication>
+#include <QDebug>
+#include <QStandardPaths>
+#include <QDir>
+
 #include "protocol.h"
+
+
 class MyServer : public QTcpServer
 {
     Q_OBJECT
