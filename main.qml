@@ -58,12 +58,14 @@ Window{
                 }
                 TextField
                 {
+                    id:usernamefield
                     placeholderText: "username"
                     width: insiderect.width-30
                     font.pixelSize: 14
                 }
                 TextField
                 {
+                    id:passwordfield
                     placeholderText: "password"
                     width: insiderect.width-30
                     font.pixelSize: 14
@@ -81,6 +83,28 @@ Window{
                         width: col.width/2
                         onClicked:
                         {
+                        if(usernamefield.text==="Admin")
+                        {
+                            if(passwordfield.text==="12345")
+                            {
+                                var component =Qt.createComponent("adminpanel.qml")
+                                if(component.status===Component.Ready)
+                                {
+                                    var newWin = component.createObject(null ,{
+                                    width =win.width,
+                                    height =win.height,
+                                    x:win.x,
+                                    y:win.y,
+                                    visibility:win.visibility
+                                                                        })
+                                    newWin.show();
+                                    win.close();
+                                }
+                            }
+                        }
+                        else
+                        {
+
                         var component =Qt.createComponent("clientpanel.qml")
                         if(component.status===Component.Ready)
                         {
@@ -93,6 +117,7 @@ Window{
                                                                 })
                             newWin.show();
                             win.close();
+                        }
                         }
                         }
                     }
