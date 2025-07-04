@@ -8,7 +8,7 @@ ApplicationWindow{
     height:600
     minimumWidth: 400
     minimumHeight: 600
-    title:"restaurant panel"
+    title:"admin panel"
     visible: true
     Drawer
     {
@@ -16,13 +16,13 @@ ApplicationWindow{
         edge:Qt.RightEdge
         width:Math.min(win.width/2 ,500)
         height: parent.height
-        // Rectangle
-        // {
-        //     height: menu.height
-        //     width: menu.width
-        //     color:"#2E2E2E"
-        //     radius: 20
-        // }
+        Rectangle
+        {
+            anchors.fill: parent
+            color:"#2E2E2E"
+            radius: 20
+            z:-1
+        }
         ListModel
         {
             id:menuelement

@@ -8,7 +8,7 @@ ApplicationWindow{
     height:600
     minimumWidth: 400
     minimumHeight: 600
-    title:"client panel"
+    title:"filter page"
     visible: true
     Drawer
     {
