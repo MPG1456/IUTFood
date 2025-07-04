@@ -3,9 +3,13 @@
 
 MyServer::MyServer(QObject *parent) : QTcpServer(parent)
 {
-    setupDatabase(clientDb, "clientConnection", "clientdb2.db");
+    setupDatabase(clientDb, "clientConnection", "clientdb.db");
     setupDatabase(restaurantDb, "restaurantConnection", "restaurantdb.db");
     setupDatabase(deliveryDb, "deliveryConnection", "deliverydb.db");
+
+    m_clientDbManager = new ClientDB("clientConnection", this);
+    m_restaurantDbManager = new RestaurantDB("restaurantConnection", this);
+    m_deliveryDbManager = new DeliveryDB("deliveryConnection", this);
 }
 
 void MyServer::setupDatabase(QSqlDatabase &db, const QString &connectionName, const QString &dbFileName)
@@ -139,8 +143,38 @@ void MyServer::readRestaurantsData()
             if(payload.canConvert<class Restaurant>())
             {
                 class Restaurant newRestaurant = payload.value<class Restaurant>();
-                QSqlQuery query(QSqlDatabase::database("restaurantConnection"));
+
+                if(m_restaurantDbManager->usernameExist(newRestaurant.getIdentity().getUsername()))
+                {
+                    qDebug() << "Successfully regiestered new Restaurant: " << newRestaurant.getIdentity().getUsername();
+                    sendMessageToClient(socket, MessageType::serverRespondSuccess, "Registration successful!");
+                }
+                else
+                {
+                    qDebug() << "Failed to register new customer (username might be taken).";
+                    sendMessageToClient(socket, MessageType::serverRespondFailure, "Username is already taken.");
+                }
             }
+            break;
+
+        case MessageType::sendRestaurantSignUp:
+            if(payload.canConvert<class Restaurant>())
+            {
+                class Restaurant newRestaurant = payload.value<class Restaurant>();
+
+                if(m_restaurantDbManager->usernameExist(newRestaurant.getIdentity().getUsername()))
+                {
+                    m_restaurantDbManager->addUser(newRestaurant.getIdentity().getUsername(), newRestaurant.getIdentity().getPassword(), newRestaurant.getIdentity().getName(), newRestaurant.getIdentity().getAddress().getCountry(), newRestaurant.getIdentity().getAddress().getCity(), newRestaurant.getIdentity.getAddress().getPostalCode(), newRestaurant.getIdentity().getAddress().getHomeAddress(), newRestaurant.getIdentity().getAddress().getHomePhone(), newRestaurant.getIdentity().getBio(), newRestaurant.getIdentity().getIsAvailable());
+                    qDebug() << "Successfully regiestered new Restaurant: " << newRestaurant.getIdentity().getUsername();
+                    sendMessageToClient(socket, MessageType::serverRespondSuccess, "Registration successful!");
+                }
+                else
+                {
+                    qDebug() << "Failed to register new customer (username might be taken).";
+                    sendMessageToClient(socket, MessageType::serverRespondFailure, "Username is already taken.");
+                }
+            }
+            break;
 
         }
     }
@@ -200,7 +234,18 @@ void MyServer::deliveryDisconnected()
     qDebug() << "Delivery disconnectd: " << clientSocket->peerAddress().toString();
 }
 
+void MyServer::sendMessageToClient(QTcpSocket *socket, MessageType type, const QVariant &payload)
+{
+    if (!socket || !socket->isOpen()) return;
 
+    QByteArray dataBlock;
+    QDataStream out(&dataBlock, QIODevice::WriteOnly);
+    out.setVersion(QDataStream::Qt_6_8);
+
+    out << type << payload;
+
+    socket->write(dataBlock);
+}
 
 
 

@@ -60,3 +60,8 @@ void RestaurantIdentity::setIsAvailable(bool newAvailablity)
 {
     isAvailable = newAvailablity;
 }
+
+Address &RestaurantIdentity::getAddress()
+{
+    return address;
+}

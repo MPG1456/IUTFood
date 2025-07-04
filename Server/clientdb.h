@@ -7,6 +7,8 @@
 #include <QSqlError>
 #include <QDebug>
 
+#include "customer.h"
+
 class ClientDB : public QObject
 {
     Q_OBJECT

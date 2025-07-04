@@ -36,7 +36,10 @@ enum class MessageType : quint8
 
     sendRestaurantSignIn,
     sendRestaurantSignUp,
-    sendRestaurantMenu
+    sendRestaurantMenu,
+
+    serverRespondSuccess,
+    serverRespondFailure
 };
 
 Q_DECLARE_METATYPE(Address);

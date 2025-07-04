@@ -16,17 +16,16 @@ bool RestaurantDB::usernameExist(QString username)
         return false;
 }
 
-bool RestaurantDB::addUser(QString username , QString password , QString name ,QString restaurantName , QString country ,QString city ,long long int postalcode , QString homeAddress ,QString homePhone ,QString bio)
+bool RestaurantDB::addUser(QString username , QString password, QString restaurantName , QString country ,QString city ,long long int postalcode , QString homeAddress ,QString homePhone ,QString bio, bool isAvailable)
 {
     if (usernameExist(username))
         return false;
 
     QSqlDatabase db = QSqlDatabase::database(connectionName);
     QSqlQuery query(db);
-    query.prepare("INSERT INTO restaurant (username , password , name , restaurantName , country , city , postalCode , homeAddress , homePhone , bio) VALUES (? , ? ,? , ? ,? , ? ,? , ? ,? ,?)");
+    query.prepare("INSERT INTO restaurant (username , password , restaurantName , country , city , postalCode , homeAddress , homePhone , bio, isAvailable) VALUES (? , ? ,? , ? ,? , ? ,? , ? ,? ,?)");
     query.addBindValue(username);
     query.addBindValue(password);
-    query.addBindValue(name);
     query.addBindValue(restaurantName);
     query.addBindValue(country);
     query.addBindValue(city);
@@ -34,6 +33,7 @@ bool RestaurantDB::addUser(QString username , QString password , QString name ,Q
     query.addBindValue(homeAddress);
     query.addBindValue(homePhone);
     query.addBindValue(bio);
+    query.addBindValue(isAvailable);
     return query.exec();
 }
 bool RestaurantDB::deleteUser(QString username)

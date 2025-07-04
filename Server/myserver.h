@@ -14,6 +14,9 @@
 #include <QDir>
 
 #include "protocol.h"
+#include "clientdb.h"
+#include "deliverydb.h"
+#include "restaurantdb.h"
 
 class MyServer : public QTcpServer
 {
@@ -44,9 +47,16 @@ private slots:
     void readDeliveriesData();
 
 private:
+    void sendMessageToClient(QTcpSocket *socket, MessageType type, const QVariant &payload = QVariant());
+
     QSqlDatabase clientDb;
     QSqlDatabase restaurantDb;
     QSqlDatabase deliveryDb;
+
+    ClientDB* m_clientDbManager;
+    RestaurantDB* m_restaurantDbManager;
+    DeliveryDB* m_deliveryDbManager;
+
     QSet<QTcpSocket *> myCustomers;
     QSet<QTcpSocket *> myDeliveries;
     QSet<QTcpSocket *> myRestaurants;

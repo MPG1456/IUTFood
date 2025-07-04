@@ -6,3 +6,7 @@ Restaurant::Restaurant(QString newUsername, QString newPassword,
                        Score &newScore) : myIdentity(newUsername, newPassword, newName, newBio, newAddress, newTime, newScore) , myFunctions(myMenu)
 {}
 
+RestaurantIdentity &Restaurant::getIdentity()
+{
+    return myIdentity;
+}

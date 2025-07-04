@@ -33,6 +33,7 @@ public:
     void setBio(QString newBio);
     bool getIsAvailable();
     void setIsAvailable(bool newAvailablity);
+    Address &getAddress();
 };
 
 #endif // RESTAURANTIDENTITY_H
