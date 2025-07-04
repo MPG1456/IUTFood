@@ -24,7 +24,6 @@ SOURCES += \
         restaurant.cpp \
         restaurantidentity.cpp \
         salad.cpp \
-        deliverydb.cpp \
         score.cpp
 
 resources.files = \
@@ -66,10 +65,8 @@ HEADERS += \
     personidentity.h \
     protocol.h \
     restaurant.h \
-    restaurantdb.h \
     restaurantidentity.h \
     salad.h \
-    deliverydb.h \
     score.h
 
 DISTFILES +=

@@ -94,6 +94,7 @@ QDataStream &operator>> (QDataStream &in, Drinks &drinks)
 
 void serializeMainDish(QDataStream &out, const MainDish &dish)
 {
+    qDebug() << "test";
     serializeFood(out, dish);
 }
 void deserializeMainDish(QDataStream &in, MainDish &dish)
@@ -109,6 +110,17 @@ QDataStream &operator<< (QDataStream &out, const FastFood &fastfood)
 QDataStream &operator>> (QDataStream &in, FastFood &fastfood)
 {
     deserializeMainDish(in, fastfood);
+    return in;
+}
+
+QDataStream &operator<< (QDataStream &out, const IraniFood &iranifood)
+{
+    serializeMainDish(out, iranifood);
+    return out;
+}
+QDataStream &operator>> (QDataStream &in, IraniFood &iranifood)
+{
+    deserializeMainDish(in, iranifood);
     return in;
 }
 
