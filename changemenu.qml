@@ -9,7 +9,7 @@ ApplicationWindow {
     height: 600
     minimumWidth: 400
     minimumHeight: 600
-    title: "client panel"
+    title: "restaurant panel"
     visible: true
 
     Drawer {
@@ -21,10 +21,10 @@ ApplicationWindow {
 
         ListModel {
             id: menuelement
-            ListElement { name: "Home"; pageaddress: "clientpanel.qml" }
-            ListElement { name: "Filter page"; pageaddress: "filterpage.qml" }
-            ListElement { name: "Order tracking"; pageaddress: "Ordertracking.qml" }
-            ListElement { name: "Order history"; pageaddress: "orderhistory.qml" }
+            ListElement { name: "Home"; pageaddress: "restaurantpanel.qml" }
+            ListElement { name: "change menu"; pageaddress: "changemenu.qml" }
+            ListElement { name: "change order status"; pageaddress: "Orderstatus.qml" }
+            // ListElement { name: "preview"; pageaddress: "Preview.qml" }
         }
 
         ListView {
@@ -42,15 +42,11 @@ ApplicationWindow {
                 Row {
                     anchors.fill: parent
                     anchors.margins: 10
-                    spacing: 8
 
-                    Column {
-                        spacing: 20
-                        Text {
-                            text: name
-                            font.pixelSize: 13
-                            font.bold: true
-                        }
+                    Text {
+                        text: name
+                        font.pixelSize: 13
+                        font.bold: true
                     }
                 }
 
@@ -67,10 +63,14 @@ ApplicationWindow {
                                 y: win.y,
                                 visibility: win.visibility
                             })
-                            newWin.show()
-                            win.close()
+                            if (newWin) {
+                                newWin.show()
+                                win.close()
+                            } else {
+                                console.log("Error creating component object.")
+                            }
                         } else {
-                            console.log("Component load error:", component.errorString())
+                            console.log("Error loading component:", component.errorString())
                         }
                     }
                 }
@@ -82,7 +82,6 @@ ApplicationWindow {
         id: mainrect
         anchors.fill: parent
         color: "#333"
-
         Image {
             id: mainimage
             source: "qrc:/projimages/pexels-pixabay-260922.jpg"
@@ -90,7 +89,6 @@ ApplicationWindow {
             opacity: 0.5
             anchors.fill: parent
         }
-
         Rectangle {
             radius: 15
             color: "#FFFAF7"
@@ -112,56 +110,24 @@ ApplicationWindow {
                     anchors.topMargin: win.height / 10
                     anchors.left: parent.left
                     anchors.leftMargin: 14
-
-                    TextField {
-                        id: searchbar
-                        placeholderText: "search..."
-                        width: insiderect.width - 30
+                    TextField
+                    {
+                        id:foodname
+                        placeholderText: "food name"
+                        width: insiderect.width-30
                         font.pixelSize: 14
-                    }
-
-                    ListModel {
-                        id: element
-                        ListElement { name: "Tarkhoon"; location: "isfahan soroosh" }
-                        ListElement { name: "Kentakihouse"; location: "isfahan Ahmadabad" }
-                        ListElement { name: "Safa"; location: "isfahan noorbaran" }
-                        ListElement { name: "golchin"; location: "Tehran saadat abad" }
-                    }
-
-                    ListView {
-                        width: searchbar.width
-                        height: win.height * 5 / 6
-                        model: element
-                        spacing: 8
-                        clip: true
-
-                        delegate: Rectangle {
-                            width: ListView.view.width
-                            height: 80
-                            radius: 10
-                            border.color: "#ccc"
-                            color: "#f5f5f5"
-
-                            Row {
-                                anchors.fill: parent
-                                anchors.margins: 10
-                                spacing: 8
-
-                                Column {
-                                    spacing: 20
-                                    Text {
-                                        text: "restaurant name: " + name
-                                        font.pixelSize: 13
-                                        font.bold: true
-                                    }
-                                    Text {
-                                        text: "location: " + location
-                                        font.pixelSize: 11
-                                        color: "red"
-                                    }
-                                }
-                            }
-                        }
+                    }                TextField
+                    {
+                        id:price
+                        placeholderText: "price"
+                        width: insiderect.width-30
+                        font.pixelSize: 14
+                    }                TextField
+                    {
+                        id:topping
+                        placeholderText: "topping"
+                        width: insiderect.width-30
+                        font.pixelSize: 14
                     }
                 }
 
@@ -169,11 +135,11 @@ ApplicationWindow {
                     policy: ScrollBar.AsNeeded
                 }
             }
-
+        }
 
         Button {
             id: hamburger
-            z: 100
+            z: 10
             anchors.top: parent.top
             anchors.right: parent.right
             icon.source: "qrc:/projimages/hamburger.png"
@@ -187,8 +153,8 @@ ApplicationWindow {
 
         Button {
             id: cart
-            z: 100
-            anchors.top: parent.top
+            z: 10
+            anchors.top: insiderect.top
             anchors.left: parent.left
             icon.source: "qrc:/projimages/cart.png"
             width: parent.width / 5
@@ -197,7 +163,6 @@ ApplicationWindow {
             anchors.leftMargin: 2
 
             onClicked: {
-                console.log("clickeddd")
                 var component = Qt.createComponent("shoppingcart.qml")
                 if (component.status === Component.Ready) {
                     var newWin = component.createObject(null, {
@@ -207,13 +172,14 @@ ApplicationWindow {
                         y: win.y,
                         visibility: win.visibility
                     })
-                    newWin.show()
-                    win.close()
+                    if (newWin) {
+                        newWin.show()
+                        win.close()
+                    }
                 } else {
-                    console.log("Component error:", component.errorString())
+                    console.log("Error loading cart component:", component.errorString())
                 }
             }
-        }
         }
     }
 }

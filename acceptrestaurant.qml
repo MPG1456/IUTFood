@@ -234,33 +234,7 @@ ApplicationWindow{
             menu.open();
         }
         }
-        Button{
-        id:adduser
-        anchors.top: parent.top
-        anchors.left: parent.left
-        icon.source: "qrc:/projimages/plus.png"
-        width:parent.width/5
-        height:parent.height/7.5
-        background: null
-        anchors.rightMargin: 2
-        onClicked:
-        {
-            console.log("clickeddd")
-            var component =Qt.createComponent("clientsignup.qml")
-            if(component.status===Component.Ready)
-            {
-                var newWin = component.createObject(null ,{
-                width =win.width,
-                height =win.height,
-                x:win.x,
-                y:win.y,
-                visibility:win.visibility
-                                                    })
-                newWin.show();
-                win.close();
-            }
-        }
-        }
+
             ScrollBar.vertical: ScrollBar
             {
                 policy:ScrollBar.AsNeeded

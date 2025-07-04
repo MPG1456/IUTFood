@@ -8,7 +8,7 @@ ApplicationWindow{
     height:600
     minimumWidth: 400
     minimumHeight: 600
-    title:"admin panel"
+    title:"delivery panel"
     visible: true
     Drawer
     {
@@ -26,9 +26,8 @@ ApplicationWindow{
         ListModel
         {
             id:menuelement
-            ListElement{name:"Home";pageaddress:"adminpanel.qml"}
-            ListElement{name:"change or add user";pageaddress:"admincroud.qml"}
-            ListElement{name:"accept  restaurant request";pageaddress:"acceptrestaurant.qml"}
+            ListElement{name:"Home";pageaddress:"deliverypanel.qml"}
+            ListElement{name:"order status";pageaddress:"orderstatus.qml"}
         }
         ListView
         {
@@ -128,10 +127,10 @@ ApplicationWindow{
                 ListModel
                 {
                     id:element
-                    ListElement{name:"Saleh";order:"kentaki";restaurant:"kentakihouse"}
-                    ListElement{name:"Parsa";order:"salad";restaurant:"Tarkhoon"}
-                    ListElement{name:"Ali";order:"chicken";restaurant:"jan"}
-                    ListElement{name:"Reza";order:"water";restaurant:"alibaba"}
+                    ListElement{name:"Saleh";order:"kentaki";restaurant:"kentakihouse";address:"soroosh"}
+                    ListElement{name:"Parsa";order:"salad";restaurant:"Tarkhoon";address:"ahmadabad"}
+                    ListElement{name:"Ali";order:"chicken";restaurant:"jan";address:"toghchi"}
+                    ListElement{name:"Reza";order:"water";restaurant:"alibaba";address:"soroosh"}
 
                 }
                 ListView

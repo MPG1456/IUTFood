@@ -43,14 +43,6 @@ ApplicationWindow {
                     anchors.top: parent.top
                     anchors.topMargin: 20
                     anchors.horizontalCenter: parent.horizontalCenter
-
-                    TextField {
-                        id: searchbar
-                        placeholderText: "search..."
-                        width: parent.width
-                        font.pixelSize: 14
-                    }
-
                     ListModel {
                         id: element
                         ListElement { username: "Saleh"; phonenumber: "09133325279"; city: "Isfahan" }
@@ -136,7 +128,7 @@ ApplicationWindow {
                     policy: ScrollBar.AsNeeded
                 }
             }
-        }
+
 
         // دکمه اضافه کردن کاربر
         Button {
@@ -164,8 +156,6 @@ ApplicationWindow {
                 }
             }
         }
-
-        // دکمه منو همبرگری
         Button {
             id: hamburger
             anchors.top: parent.top
@@ -180,9 +170,8 @@ ApplicationWindow {
                 menu.open()
             }
         }
+        }
     }
-
-    // منوی کشویی
     Drawer {
         id: menu
         edge: Qt.RightEdge

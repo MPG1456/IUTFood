@@ -24,5 +24,7 @@
         <file>admincroud.qml</file>
         <file>acceptrestaurant.qml</file>
         <file>Orderstatus.qml</file>
+        <file>changemenu.qml</file>
+        <file>deliverypanel.qml</file>
     </qresource>
 </RCC>
