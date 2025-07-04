@@ -14,7 +14,7 @@ public:
     MenuFunctions(Menu &newMenu);
     void addFood(QVariant newFood);
     void deleteFood(QVariant newFood);
-    QVariant searchFood(QVariant newFood);
+    int searchFood(QVariant newFood);
     // void editFood(); I don't think this part is neccessary. Just delete a food and add a new one.
 };
 

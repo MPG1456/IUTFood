@@ -4,13 +4,14 @@
 
 Menu::Menu(const Menu &other)
 {
-    for(const auto &i : other.menu)
-        this->menu.insert(i);
+    for(int i = 0; i < other.menu.size(); ++i)
+        this->menu[i] = other.menu[i];
 }
 
 Menu &Menu::operator=(const Menu &other)
 {
-    for(const auto &i : other.menu)
-        this->menu.insert(i);
+    for(int i = 0; i < other.menu.size(); ++i)
+        this->menu[i] = other.menu[i];
+
     return *this;
 }

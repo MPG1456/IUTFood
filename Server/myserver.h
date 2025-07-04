@@ -15,7 +15,6 @@
 
 #include "protocol.h"
 
-
 class MyServer : public QTcpServer
 {
     Q_OBJECT
@@ -30,6 +29,7 @@ public:
     Q_ENUM(ClientType);
 
     explicit MyServer(QObject *parent = nullptr);
+    void setupDatabase(QSqlDatabase &db, const QString &connectionName, const QString &dbFileName);
     void startServer();
 
 private slots:

@@ -15,7 +15,7 @@ class Menu
     friend QDataStream &operator>> (QDataStream &in, Menu &menu);
 
 private:
-    QSet<QVariant> menu;
+    QList<QVariant> menu;
 
 public:
     Menu() = default;

@@ -3,82 +3,38 @@
 
 MyServer::MyServer(QObject *parent) : QTcpServer(parent)
 {
-    clientDb = QSqlDatabase::addDatabase("QSQLITE" , "clientConnection");
-    restaurantDb = QSqlDatabase::addDatabase("QSQLITE" , "restaurantConnection");
-    deliveryDb = QSqlDatabase::addDatabase("QSQLITE" , "deliveryConnection");
+    setupDatabase(clientDb, "clientConnection", "clientdb2.db");
+    setupDatabase(restaurantDb, "restaurantConnection", "restaurantdb.db");
+    setupDatabase(deliveryDb, "deliveryConnection", "deliverydb.db");
+}
 
-
+void MyServer::setupDatabase(QSqlDatabase &db, const QString &connectionName, const QString &dbFileName)
+{
+    db = QSqlDatabase::addDatabase("QSQLITE", connectionName);
     QString dataLocation = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
     QDir dataDir(dataLocation);
-    if(!dataDir.exists())
-    {
+    if (!dataDir.exists()) {
         dataDir.mkpath(".");
     }
 
-    QString dbPath = dataDir.absoluteFilePath("clientdb2.db");
-    clientDb.setDatabaseName(dbPath);
+    QString dbPath = dataDir.absoluteFilePath(dbFileName);
+    db.setDatabaseName(dbPath);
 
-    qDebug() << "Attempting to open database file at: " << dbPath;
+    qDebug() << "Attempting to open database file at:" << dbPath;
 
-    if(!QFile::exists(dbPath))
+    if (!QFile::exists(dbPath))
     {
-        qDebug() << "File doesn't exist in the chosen path. It will copy it from resources.";
-        QFile::copy("F:/Projects/AP/Final Term/IUTFood/clientdb2.db", dbPath); // ATTENITION: change this path to your directory
+        QString sourcePath = QString(":/databases/%1").arg(dbFileName);
+        if (QFile::copy(sourcePath, dbPath)) {
+            QFile::setPermissions(dbPath, QFile::WriteOwner | QFile::ReadOwner);
+            qDebug() << "Database copied successfully from resources.";
+        } else {
+            qDebug() << "ERROR: Failed to copy database from" << sourcePath;
+        }
     }
 
-    if(!clientDb.open())
-    {
-        qDebug()<<"Failed to open";
-    }
-
-
-    QString dataLocationRe = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
-    QDir dataDirRe(dataLocationRe);
-    if(!dataDirRe.exists())
-    {
-        dataDirRe.mkpath("."); // <- this one creates the path if it doesn't exist
-    }
-
-    QString dbPathRe = dataDirRe.absoluteFilePath("restaurantdb.db");
-    restaurantDb.setDatabaseName(dbPathRe);
-
-    qDebug() << "Attempting to open database file at: " << dbPathRe;
-
-    if(!QFile::exists(dbPathRe))
-    {
-        qDebug() << "File doesn't exist in the chosen path. It will copy it from resources.";
-        QFile::copy("F:/Projects/AP/Final Term/IUTFood/restaurantdb.db", dbPathRe); // ATTENITION: change this path to your directory
-    }
-
-    if(!restaurantDb.open())
-    {
-        qDebug()<<"failed to open";
-    }
-
-
-    QString dataLocationDe = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
-
-    // Create the directory if it doesn't exist.
-    QDir dataDirDe(dataLocationDe);
-    if(!dataDirDe.exists())
-    {
-        dataDirDe.mkpath("."); // <- this one creates the path if it doesn't exist
-    }
-
-    QString dbPathDe = dataDirDe.absoluteFilePath("deliverydb.db");
-    deliveryDb.setDatabaseName(dbPathDe);
-
-    qDebug() << "Attempting to open database file at: " << dbPathDe;
-
-    if(!QFile::exists(dbPathDe))
-    {
-        qDebug() << "File doesn't exist in the chosen path. It will copy it from resources.";
-        QFile::copy("F:/Projects/AP/Final Term/IUTFood/deliverydb.db", dbPathDe); // ATTENITION: change this path to your directory
-    }
-
-    if(!deliveryDb.open())
-    {
-        qDebug()<<"Failed to open";
+    if (!db.open()) {
+        qDebug() << "Failed to open database:" << db.lastError().text();
     }
 }
 
