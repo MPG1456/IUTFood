@@ -8,7 +8,7 @@ ApplicationWindow{
     height:600
     minimumWidth: 400
     minimumHeight: 600
-    title:"order history"
+    title:"order tracking"
     visible: true
     Drawer
     {
@@ -26,11 +26,10 @@ ApplicationWindow{
         // }
         ListModel
         {
-            id:menuelement
-            ListElement{name:"Home";pageaddress:"clientpanel.qml"}
-            ListElement{name:"Filter page";pageaddress:"filterpage.qml"}
-            ListElement{name:"Order tracking";pageaddress:"Ordertracking.qml"}
-            ListElement{name:"Order history";pageaddress:"orderhistory.qml"}
+            id: menuelement
+            ListElement { name: "Home"; pageaddress: "restaurantpanel.qml" }
+            ListElement { name: "change menu"; pageaddress: "changemenu.qml" }
+            ListElement { name: "change order status"; pageaddress: "Orderstatus.qml" }
         }
         ListView
         {
@@ -68,18 +67,18 @@ ApplicationWindow{
                     {
                         menu.close()
                         var component =Qt.createComponent(model.pageaddress)
-                                                if(component.status===Component.Ready)
-                                                {
-                                                    var newWin = component.createObject(null ,{
-                                                    width =win.width,
-                                                    height =win.height,
-                                                    x:win.x,
-                                                    y:win.y,
-                                                    visibility:win.visibility
-                                                                                        })
-                                                    newWin.show();
-                                                    win.close();
-                                                }
+                        if(component.status===Component.Ready)
+                        {
+                            var newWin = component.createObject(null ,{
+                            width =win.width,
+                            height =win.height,
+                            x:win.x,
+                            y:win.y,
+                            visibility:win.visibility
+                                                                })
+                            newWin.show();
+                            win.close();
+                        }
                     }
                 }
             }
@@ -124,20 +123,34 @@ ApplicationWindow{
                 anchors.topMargin: win.height/10
                 anchors.left: parent.left
                 anchors.leftMargin: 14
-                TextField
-                {
-                    id:searchbar
-                    placeholderText: "search..."
-                    width: insiderect.width-30
-                    font.pixelSize: 14
-                }
                 ListModel
                 {
                     id:element
-                    ListElement{foodname:"chicken";restaurantname:"Tarkhoon";price:"10000000"}
-                    ListElement{foodname:"Kentaki";restaurantname:"kentakihouse";price:"1273000"}
-                    ListElement{foodname:"pizza";restaurantname:"alibaba";price:"22273000"}
-                    ListElement{foodname:"salad";restaurantname:"janan";price:"3273000"}
+                    ListElement{foodname:"chicken";restaurantname:"Tarkhoon";price:"10000000";status:"ready";}
+                }
+                ComboBox
+                {
+                    model: ["ready" ,"cooking"]
+                    width: col.width
+
+                }
+                Button
+                {
+                    id:submit
+                    text: "submit"
+                    width: col.width/3
+                    // onClicked:
+                    // {
+                    //     // if(!db.usernameexist(usernamefield.text))
+                    //     // {
+                    //     //     db.adduser(usernamefield.text , pass.text , namefield.text , resta.text , country.text , city.text , postalcode.text , homeadr.text ,homephone.text , bio.text);
+                    //     // }
+                    //     // else
+                    //     // {
+                    //     //     // db.printAllUsers();
+                    //     // console.log("this username already exist")
+                    //     }
+                    // }
 
                 }
                 ListView
@@ -150,7 +163,7 @@ ApplicationWindow{
                     delegate: Rectangle
                     {
                         width:parent.width
-                        height: 80
+                        height: 150
                         radius:10
                         border.color:"#ccc"
                         color:"#f5f5f5"
@@ -167,10 +180,6 @@ ApplicationWindow{
                                     font.pixelSize: 13
                                     font.bold: true
                                 }
-                                Row
-                                {
-                                    anchors.margins: 10
-                                    spacing: 8
                                 Text {
                                     text: "restaurantname: " + restaurantname
                                     font.pixelSize: 11
@@ -181,11 +190,17 @@ ApplicationWindow{
                                     font.pixelSize: 11
                                     color: "green"
                                 }
-                                }
+                                // Text {
+                                //     text: "status: " + status
+                                //     font.pixelSize: 11
+                                //     color: "blue"
+                                // }
+
                             }
                         }
                     }
                 }
+
 
             }
         }
@@ -230,7 +245,6 @@ ApplicationWindow{
                 win.close();
             }
         }
-
         }
 
 
