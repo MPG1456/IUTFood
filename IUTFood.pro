@@ -22,6 +22,7 @@ SOURCES += \
         personidentity.cpp \
         protocol.cpp \
         restaurant.cpp \
+        restaurantbackend.cpp \
         restaurantidentity.cpp \
         salad.cpp \
         score.cpp
@@ -66,6 +67,7 @@ HEADERS += \
     personidentity.h \
     protocol.h \
     restaurant.h \
+    restaurantbackend.h \
     restaurantidentity.h \
     salad.h \
     score.h

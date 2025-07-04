@@ -49,14 +49,20 @@ void MyServer::startServer()
     if(!this->listen(QHostAddress::Any, 1234))
         qDebug() << "Server Could not be found!";
     else
+    {
         qDebug() << "Server started! Listening for multiple connections on port 1234...";
+        connect(this, &QTcpServer::newConnection, this, &MyServer::handleNewConnection);
+    }
 }
 
 void MyServer::handleNewConnection()
 {
     QTcpSocket *clientSocket = this->nextPendingConnection();
     if(!clientSocket)
-        return;
+    {
+        qDebug() << "couldn't handleNewConnection";
+        return;        
+    }
     else
         qDebug() << "New client connectd: " << clientSocket->peerAddress().toString();
 
@@ -134,7 +140,6 @@ void MyServer::readRestaurantsData()
     {
         MessageType mType;
         QVariant payload;
-
         in >> mType >> payload;
 
         switch(mType)
@@ -158,14 +163,15 @@ void MyServer::readRestaurantsData()
             break;
 
         case MessageType::sendRestaurantSignUp:
+            qDebug() << "tret";
             if(payload.canConvert<class Restaurant>())
             {
                 class Restaurant newRestaurant = payload.value<class Restaurant>();
 
                 if(m_restaurantDbManager->usernameExist(newRestaurant.getIdentity().getUsername()))
                 {
-                    m_restaurantDbManager->addUser(newRestaurant.getIdentity().getUsername(), newRestaurant.getIdentity().getPassword(), newRestaurant.getIdentity().getName(), newRestaurant.getIdentity().getAddress().getCountry(), newRestaurant.getIdentity().getAddress().getCity(), newRestaurant.getIdentity.getAddress().getPostalCode(), newRestaurant.getIdentity().getAddress().getHomeAddress(), newRestaurant.getIdentity().getAddress().getHomePhone(), newRestaurant.getIdentity().getBio(), newRestaurant.getIdentity().getIsAvailable());
                     qDebug() << "Successfully regiestered new Restaurant: " << newRestaurant.getIdentity().getUsername();
+                    m_restaurantDbManager->addUser(newRestaurant.getIdentity().getUsername(), newRestaurant.getIdentity().getPassword(), newRestaurant.getIdentity().getName(), newRestaurant.getIdentity().getAddress().getCountry(), newRestaurant.getIdentity().getAddress().getCity(), newRestaurant.getIdentity().getAddress().getPostalCode(), newRestaurant.getIdentity().getAddress().getHomeAddress(), newRestaurant.getIdentity().getAddress().getHomePhone(), newRestaurant.getIdentity().getBio(), newRestaurant.getIdentity().getIsAvailable());
                     sendMessageToClient(socket, MessageType::serverRespondSuccess, "Registration successful!");
                 }
                 else
