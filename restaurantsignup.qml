@@ -1,7 +1,7 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 6.5
-import restdb
+// import restdb
 
 Window{
     id: win
@@ -11,9 +11,9 @@ Window{
     minimumHeight: 600
     title:"restaurant sign up"
     visible: true
-    Restaurantbatabse {
-        id: db
-    }
+    // Restaurantbatabse {
+    //     id: db
+    // }
     Rectangle
     {
 

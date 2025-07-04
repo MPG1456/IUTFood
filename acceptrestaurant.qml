@@ -28,7 +28,7 @@ ApplicationWindow{
             id:menuelement
             ListElement{name:"Home";pageaddress:"adminpanel.qml"}
             ListElement{name:"change or add user";pageaddress:"admincroud.qml"}
-            ListElement{name:"accept  restaurant request";pageaddress:"acceptrequest.qml"}
+            ListElement{name:"accept  restaurant request";pageaddress:"acceptrestaurant.qml"}
         }
         ListView
         {

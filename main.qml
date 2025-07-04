@@ -81,7 +81,7 @@ Window{
                         width: col.width/2
                         onClicked:
                         {
-                        var component =Qt.createComponent("adminpanel.qml")
+                        var component =Qt.createComponent("clientpanel.qml")
                         if(component.status===Component.Ready)
                         {
                             var newWin = component.createObject(null ,{

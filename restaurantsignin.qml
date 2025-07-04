@@ -99,7 +99,22 @@ Window{
                         id:submit
                         text: "submit"
                         width: col.width/3
-                        // onClicked:
+                        onClicked:
+                        {
+                            var component =Qt.createComponent("restaurantpanel.qml")
+                            if(component.status===Component.Ready)
+                            {
+                                var newWin = component.createObject(null ,{
+                                width =win.width,
+                                height =win.height,
+                                x:win.x,
+                                y:win.y,
+                                visibility:win.visibility
+                                                                    })
+                                newWin.show();
+                                win.close();
+                            }
+                        }
                     }
 
                 }

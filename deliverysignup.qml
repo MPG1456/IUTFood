@@ -1,7 +1,7 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 6.5
-import delivdb
+// import delivdb
 Window{
     id: win
     width:400
@@ -10,10 +10,10 @@ Window{
     minimumHeight: 600
     title:"delivery sign up"
     visible: true
-    Deliverydatbase
-    {
-        id:db
-    }
+    // Deliverydatbase
+    // {
+    //     id:db
+    // }
     Rectangle
     {
         id:mainrect

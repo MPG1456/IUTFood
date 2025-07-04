@@ -190,14 +190,20 @@ Window{
                     text: "submit"
                     width: col.width/3
                     onClicked:                                        {
-                    // if(!db.usernameexist(username.text))
-                    // {
-                    // db.adduser(username.text , password.text , firstname.text , lastname.text ,age.value, country.text , city.text , postalcode.text , homeadr.text ,homephone.text , phonenum.text);
-                    // }
-                    // else
-                    // {
-                    // console.log("this username already exist")
-                    // }
+                        var component =Qt.createComponent("main.qml")
+                                                    if(component.status===Component.Ready)
+                                                    {
+                                                        var newWin = component.createObject(null ,{
+                                                        width =win.width,
+                                                        height =win.height,
+                                                        x:win.x,
+                                                        y:win.y,
+                                                        visibility:win.visibility
+                                                                                            })
+                                                        newWin.show();
+                                                        win.close();
+                                                    }
+
                     }
                     }
 
