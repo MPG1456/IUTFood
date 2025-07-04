@@ -1,7 +1,7 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 6.5
-import clidb
+// import clidb
 Window{
     id: win
     width:400
@@ -10,10 +10,10 @@ Window{
     minimumHeight: 600
     title:"client sign up"
     visible: true
-    Clientdatbase
-    {
-        id:db
-    }
+    // Clientdatbase
+    // {
+    //     id:db
+    // }
 
     Rectangle
     {
@@ -190,14 +190,14 @@ Window{
                     text: "submit"
                     width: col.width/3
                     onClicked:                                        {
-                    if(!db.usernameexist(username.text))
-                    {
-                    db.adduser(username.text , password.text , firstname.text , lastname.text ,age.value, country.text , city.text , postalcode.text , homeadr.text ,homephone.text , phonenum.text);
-                    }
-                    else
-                    {
-                    console.log("this username already exist")
-                    }
+                    // if(!db.usernameexist(username.text))
+                    // {
+                    // db.adduser(username.text , password.text , firstname.text , lastname.text ,age.value, country.text , city.text , postalcode.text , homeadr.text ,homephone.text , phonenum.text);
+                    // }
+                    // else
+                    // {
+                    // console.log("this username already exist")
+                    // }
                     }
                     }
 

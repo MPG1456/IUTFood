@@ -14,7 +14,6 @@ Window{
     Rectangle
     {
         id:mainrect
-
         anchors.fill: parent
         color:"#333"
         Image {

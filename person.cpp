@@ -11,4 +11,3 @@ void Person::setIdentity(PersonIdentity newIdentity)
 {
     this->myIdentity = newIdentity;
 }
-

@@ -8,7 +8,7 @@ ApplicationWindow{
     height:600
     minimumWidth: 400
     minimumHeight: 600
-    title:"admin panel"
+    title:"change users"
     visible: true
     Drawer
     {
@@ -128,10 +128,10 @@ ApplicationWindow{
                 ListModel
                 {
                     id:element
-                    ListElement{name:"Saleh";order:"kentaki";restaurant:"kentakihouse"}
-                    ListElement{name:"Parsa";order:"salad";restaurant:"Tarkhoon"}
-                    ListElement{name:"Ali";order:"chicken";restaurant:"jan"}
-                    ListElement{name:"Reza";order:"water";restaurant:"alibaba"}
+                    ListElement{username:"Saleh";phonenumber:"09133325279";city:"isfahan"}
+                    ListElement{username:"Parsa";phonenumber:"09133325279";city:"Tehran"}
+                    ListElement{username:"Ali";phonenumber:"09133325279";city:"shiraz"}
+                    ListElement{username:"Reza";phonenumber:"09133325279";city:"tabriz"}
 
                 }
                 ListView
@@ -143,11 +143,42 @@ ApplicationWindow{
                     clip: true
                     delegate: Rectangle
                     {
+                        id:littlerect
                         width:parent.width
                         height: 80
                         radius:10
                         border.color:"#ccc"
                         color:"#f5f5f5"
+                        Row {
+                            id: actionButtons
+                            spacing: 5
+                            anchors.top: parent.top
+                            anchors.right: parent.right
+                            anchors.topMargin: 5
+                            anchors.rightMargin: 5
+
+                            Button {
+                                id: deleteuser
+                                icon.source: "qrc:/projimages/bin.png"
+                                width: 30
+                                height: 30
+                                background: null
+                                onClicked: {
+                                    console.log("delete clicked")
+                                }
+                            }
+
+                            Button {
+                                id: blockuser
+                                icon.source: "qrc:/projimages/block.png"
+                                width: 30
+                                height: 30
+                                background: null
+                                onClicked: {
+                                    console.log("block clicked")
+                                }
+                            }
+                        }
                         Row
                         {
                             anchors.fill: parent
@@ -156,22 +187,27 @@ ApplicationWindow{
                             Column
                             {
                                 spacing:20
+                                Row
+                                {
+                                    anchors.margins: 10
+                                    spacing: 9
                                 Text {
-                                    text:name
+                                    text:username
                                     font.pixelSize: 13
                                     font.bold: true
+                                }
                                 }
                                 Row
                                 {
                                     anchors.margins: 10
                                     spacing: 9
                                 Text {
-                                    text: "order: " + order
+                                    text: "phonenumber: " + phonenumber
                                     font.pixelSize: 11
                                     color: "red"
                                 }
                                 Text {
-                                    text: "restaurant: " + restaurant
+                                    text: "city: " + city
                                     font.pixelSize: 11
                                     color: "green"
                                 }
@@ -198,8 +234,33 @@ ApplicationWindow{
             menu.open();
         }
         }
-
-
+        Button{
+        id:adduser
+        anchors.top: parent.top
+        anchors.left: parent.left
+        icon.source: "qrc:/projimages/plus.png"
+        width:parent.width/5
+        height:parent.height/7.5
+        background: null
+        anchors.rightMargin: 2
+        onClicked:
+        {
+            console.log("clickeddd")
+            var component =Qt.createComponent("clientsignup.qml")
+            if(component.status===Component.Ready)
+            {
+                var newWin = component.createObject(null ,{
+                width =win.width,
+                height =win.height,
+                x:win.x,
+                y:win.y,
+                visibility:win.visibility
+                                                    })
+                newWin.show();
+                win.close();
+            }
+        }
+        }
             ScrollBar.vertical: ScrollBar
             {
                 policy:ScrollBar.AsNeeded

@@ -4,6 +4,9 @@
         <file>hamburger.png</file>
         <file>widget.png</file>
         <file>cart.png</file>
+        <file>bin.png</file>
+        <file>block.png</file>
+        <file>plus.png</file>
     </qresource>
     <qresource prefix="/">
         <file>restaurantsignup.qml</file>
@@ -18,5 +21,6 @@
         <file>filterpage.qml</file>
         <file>Ordertracking.qml</file>
         <file>shoppingcart.qml</file>
+        <file>admincroud.qml</file>
     </qresource>
 </RCC>
