@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/databases">
+        <file>restaurantdb.db</file>
+        <file>clientdb2.db</file>
+        <file>deliverydb.db</file>
+    </qresource>
+</RCC>

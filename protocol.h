@@ -74,8 +74,8 @@ QDataStream &operator>>(QDataStream &in, Dessert &dessert);
 QDataStream &operator<<(QDataStream &out, const Drinks &drinks);
 QDataStream &operator>>(QDataStream &in, Drinks &drinks);
 
-void serializeFood(QDataStream &out, const MainDish &dish);
-void deserializeFood(QDataStream &in, MainDish &dish);
+void serializeMainDish(QDataStream &out, const MainDish &dish);
+void deserializeMainDish(QDataStream &in, MainDish &dish);
 
 QDataStream &operator<<(QDataStream &out, const FastFood &fastfood);
 QDataStream &operator>>(QDataStream &in, FastFood &fastfood);

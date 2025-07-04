@@ -24,9 +24,6 @@ SOURCES += \
         restaurant.cpp \
         restaurantidentity.cpp \
         salad.cpp \
-        clientdb.cpp \
-        restaurantdb.cpp \
-        deliverydb.cpp \
         score.cpp
 
 resources.files = \
@@ -55,7 +52,6 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 HEADERS += \
     address.h \
-    address.h \
     customer.h \
     dessert.h \
     drinks.h \
@@ -72,10 +68,6 @@ HEADERS += \
     restaurant.h \
     restaurantidentity.h \
     salad.h \
-    clientdb.h \
-    restaurantdb.h \
-    deliverydb.h \
-    menufunctions.h \
     score.h
 
 DISTFILES +=

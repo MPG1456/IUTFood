@@ -10,8 +10,29 @@ CONFIG += c++17 cmdline
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+        clientdb.cpp \
+        deliverydb.cpp \
+        restaurantdb.cpp \
         main.cpp \
-        myserver.cpp
+        myserver.cpp \
+        ../protocol.cpp \
+        ../address.cpp \
+        ../mytime.cpp \
+        ../score.cpp \
+        ../menu.cpp \
+        ../person.cpp \
+        ../personidentity.cpp \
+        ../restaurant.cpp \
+        ../restaurantidentity.cpp \
+        ../customer.cpp \
+        ../dessert.cpp \
+        ../drinks.cpp \
+        ../salad.cpp \
+        ../fastfood.cpp \
+        ../iranifood.cpp \
+        ../food.cpp \
+        ../maindish.cpp \
+        ../menufunctions.cpp
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -21,4 +42,10 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 INCLUDEPATH += $$PWD/../
 
 HEADERS += \
+    clientdb.h \
+    deliverydb.h \
     myserver.h \
+    restaurantdb.h
+
+RESOURCES += \
+    database.qrc
