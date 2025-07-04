@@ -38,7 +38,8 @@ resources.files = \
     adminpanel.qml \
     orderhistory.qml \
     filterpage.qml \
-    Ordertracking.qml
+    Ordertracking.qml \
+    shoppingcart.qml
 
 resources.prefix = /$${TARGET}
 RESOURCES += resources \

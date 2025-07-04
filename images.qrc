@@ -17,5 +17,6 @@
         <file>orderhistory.qml</file>
         <file>filterpage.qml</file>
         <file>Ordertracking.qml</file>
+        <file>shoppingcart.qml</file>
     </qresource>
 </RCC>

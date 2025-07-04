@@ -10,12 +10,6 @@ ApplicationWindow{
     minimumHeight: 600
     title:"client panel"
     visible: true
-    StackView
-    {
-        id:stackv
-        anchors.fill: parent
-        initialItem: ""
-    }
     Drawer
     {
         id:menu
@@ -208,7 +202,19 @@ ApplicationWindow{
         onClicked:
         {
             console.log("clickeddd")
-            menu.open();
+            var component =Qt.createComponent("shoppingcart.qml")
+            if(component.status===Component.Ready)
+            {
+                var newWin = component.createObject(null ,{
+                width =win.width,
+                height =win.height,
+                x:win.x,
+                y:win.y,
+                visibility:win.visibility
+                                                    })
+                newWin.show();
+                win.close();
+            }
         }
         }
 
