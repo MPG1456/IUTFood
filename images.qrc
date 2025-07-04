@@ -22,5 +22,6 @@
         <file>Ordertracking.qml</file>
         <file>shoppingcart.qml</file>
         <file>admincroud.qml</file>
+        <file>acceptrestaurant.qml</file>
     </qresource>
 </RCC>

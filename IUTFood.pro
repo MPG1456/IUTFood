@@ -40,7 +40,8 @@ resources.files = \
     filterpage.qml \
     Ordertracking.qml \
     shoppingcart.qml \
-    admincroud.qml
+    admincroud.qml \
+    acceptrestaurant.qml
 
 resources.prefix = /$${TARGET}
 RESOURCES += resources \

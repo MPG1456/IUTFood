@@ -168,6 +168,8 @@ ApplicationWindow{
                                     font.pixelSize: 11
                                     color: "red"
                                 }
+                                    }
+                                }
                             }
                         }
                     }
