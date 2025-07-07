@@ -131,7 +131,7 @@ ApplicationWindow{
                 }
                 ListView
                 {
-                    width: searchbar.width
+                    width: col.width
                     height: win.height*5/6
                     model: element
                     spacing: 8

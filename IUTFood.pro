@@ -43,7 +43,8 @@ resources.files = \
     admincroud.qml \
     acceptrestaurant.qml \
     Orderstatus.qml \
-    deliverypanel.qml
+    deliverypanel.qml \
+    changemenu.qml
 
 resources.prefix = /$${TARGET}
 RESOURCES += resources \

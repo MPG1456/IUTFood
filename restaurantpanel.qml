@@ -169,51 +169,52 @@ ApplicationWindow {
                     policy: ScrollBar.AsNeeded
                 }
             }
-        }
+            Button {
+                id: hamburger
+                z: 10
+                anchors.top: parent.top
+                anchors.right: parent.right
+                icon.source: "qrc:/projimages/hamburger.png"
+                width: parent.width / 5
+                height: parent.height / 7.5
+                background: null
+                anchors.rightMargin: 2
 
-        Button {
-            id: hamburger
-            z: 10
-            anchors.top: parent.top
-            anchors.right: parent.right
-            icon.source: "qrc:/projimages/hamburger.png"
-            width: parent.width / 5
-            height: parent.height / 7.5
-            background: null
-            anchors.rightMargin: 2
+                onClicked: menu.open()
+            }
 
-            onClicked: menu.open()
-        }
+            Button {
+                id: cart
+                z: 10
+                anchors.top: parent.top
+                anchors.left: parent.left
+                icon.source: "qrc:/projimages/cart.png"
+                width: parent.width / 5
+                height: parent.height / 7.5
+                background: null
+                anchors.leftMargin: 2
 
-        Button {
-            id: cart
-            z: 10
-            anchors.top: parent.top
-            anchors.left: parent.left
-            icon.source: "qrc:/projimages/cart.png"
-            width: parent.width / 5
-            height: parent.height / 7.5
-            background: null
-            anchors.leftMargin: 2
-
-            onClicked: {
-                var component = Qt.createComponent("shoppingcart.qml")
-                if (component.status === Component.Ready) {
-                    var newWin = component.createObject(null, {
-                        width: win.width,
-                        height: win.height,
-                        x: win.x,
-                        y: win.y,
-                        visibility: win.visibility
-                    })
-                    if (newWin) {
-                        newWin.show()
-                        win.close()
+                onClicked: {
+                    var component = Qt.createComponent("shoppingcart.qml")
+                    if (component.status === Component.Ready) {
+                        var newWin = component.createObject(null, {
+                            width: win.width,
+                            height: win.height,
+                            x: win.x,
+                            y: win.y,
+                            visibility: win.visibility
+                        })
+                        if (newWin) {
+                            newWin.show()
+                            win.close()
+                        }
+                    } else {
+                        console.log("Error loading cart component:", component.errorString())
                     }
-                } else {
-                    console.log("Error loading cart component:", component.errorString())
                 }
             }
         }
+
+
     }
 }

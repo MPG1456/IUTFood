@@ -154,7 +154,7 @@ ApplicationWindow{
                             spacing: 8
                             Column
                             {
-                                spacing:20
+                                spacing:13
                                 Text {
                                     text:name
                                     font.pixelSize: 13
@@ -174,6 +174,12 @@ ApplicationWindow{
                                     font.pixelSize: 11
                                     color: "green"
                                 }
+                                }
+                                Text {
+
+                                    text: "address: " + address
+                                    font.pixelSize: 11
+                                    color: "blue"
                                 }
                             }
                         }
