@@ -9,7 +9,7 @@ ApplicationWindow {
     height: 600
     minimumWidth: 400
     minimumHeight: 600
-    title: "restaurant panel"
+    title: "menu"
     visible: true
 
     Drawer {
@@ -20,10 +20,11 @@ ApplicationWindow {
         // background: Rectangle { color: "#2E2E2E" }
 
         ListModel {
-            id:menuelement
-            ListElement{name:"Home";pageaddress:"adminpanel.qml"}
-            ListElement{name:"change or add user";pageaddress:"admincroud.qml"}
-            ListElement{name:"accept  restaurant request";pageaddress:"acceptrestaurant.qml"}
+            id: menuelement
+            ListElement { name: "Home"; pageaddress: "clientpanel.qml" }
+            ListElement { name: "Filter page"; pageaddress: "filterpage.qml" }
+            ListElement { name: "Order tracking"; pageaddress: "Ordertracking.qml" }
+            ListElement { name: "Order history"; pageaddress: "orderhistory.qml" }
         }
 
         ListView {

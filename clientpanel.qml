@@ -32,7 +32,6 @@
                 height: win.height * 5 / 6
                 model: menuelement
                 clip: true
-
                 delegate: Rectangle {
                     width: ListView.view.width
                     property bool hovered: false
@@ -138,11 +137,12 @@
                             spacing: 8
                             clip: true
                             delegate: Rectangle {
-                                width: ListView.view.width
-                                height: 80
-                                radius: 10
-                                border.color: "#ccc"
-                                color: "#f5f5f5"
+                            width: ListView.view.width
+                            property bool hovered: false
+                            border.color: hovered ? "#888" : "#ccc"
+                            height: 80
+                            radius: 10
+                            color: hovered ? "#d0eaff" : "#f5f5f5"
 
                                 Row {
                                     anchors.fill: parent
@@ -165,6 +165,9 @@
                                 }
                                 MouseArea {
                                     anchors.fill: parent
+                                    hoverEnabled: true
+                                    onEntered: hovered = true
+                                    onExited: hovered = false
                                     onClicked: {
                                         menu.close()
                                         var component = Qt.createComponent(pageaddress)
