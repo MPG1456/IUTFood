@@ -30,6 +30,7 @@ ApplicationWindow{
             ListElement { name: "Home"; pageaddress: "restaurantpanel.qml" }
             ListElement { name: "change menu"; pageaddress: "changemenu.qml" }
             ListElement { name: "change order status"; pageaddress: "Orderstatus.qml" }
+            ListElement { name: "preview"; pageaddress: "restaurantpreview.qml" }
         }
         ListView
         {

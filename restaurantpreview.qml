@@ -17,7 +17,7 @@ ApplicationWindow {
         edge: Qt.RightEdge
         width: Math.min(win.width / 2, 500)
         height: parent.height
-        background: Rectangle { color: "#2E2E2E" }
+        // background: Rectangle { color: "#2E2E2E" }
 
         ListModel {
             id: menuelement
@@ -53,10 +53,10 @@ ApplicationWindow {
 
                 MouseArea {
                     anchors.fill : parent
-                                            hoverEnabled: true
-                                            onEntered: hovered = true
-                                            onExited: hovered = false
-                                            onClicked: {
+                    hoverEnabled: true
+                    onEntered: hovered = true
+                    onExited: hovered = false
+                    onClicked: {
                         menu.close()
                         var component = Qt.createComponent(pageaddress)
                         if (component.status === Component.Ready) {
@@ -86,6 +86,7 @@ ApplicationWindow {
         id: mainrect
         anchors.fill: parent
         color: "#333"
+
         Image {
             id: mainimage
             source: "qrc:/projimages/pexels-pixabay-260922.jpg"
@@ -93,6 +94,7 @@ ApplicationWindow {
             opacity: 0.5
             anchors.fill: parent
         }
+
         Rectangle {
             radius: 15
             color: "#FFFAF7"
@@ -114,34 +116,53 @@ ApplicationWindow {
                     anchors.topMargin: win.height / 10
                     anchors.left: parent.left
                     anchors.leftMargin: 14
-                    TextField
-                    {
-                        id:foodname
-                        placeholderText: "food name"
-                        width: insiderect.width-30
-                        font.pixelSize: 14
-                    }                TextField
-                    {
-                        id:price
-                        placeholderText: "price"
-                        width: insiderect.width-30
-                        font.pixelSize: 14
-                    }                TextField
-                    {
-                        id:topping
-                        placeholderText: "topping"
-                        width: insiderect.width-30
+                    TextField {
+                        id: searchbar
+                        placeholderText: "search..."
+                        width: insiderect.width - 30
                         font.pixelSize: 14
                     }
-                    Row{
-                        spacing:7
-                        anchors.horizontalCenter: parent.horizontalCenter
-                        width:submit.width +spacing
-                        Button
-                        {
-                            id:submit
-                            text: "submit"
-                            width: col.width/2
+                    ListModel {
+                        id: element
+                        ListElement { foodname: "kentaki"; ingredients: "kentaki" }
+                        ListElement { foodname: "pizza"; ingredients: "cheese" }
+                        ListElement { foodname: "salad"; ingredients: "chicken" }
+                        ListElement { foodname: "gheymeh"; ingredients: "lappeh" }
+                    }
+
+                    ListView {
+                        width: searchbar.width
+                        height: win.height * 5 / 6
+                        model: element
+                        spacing: 8
+                        clip: true
+
+                        delegate: Rectangle {
+                            width: ListView.view.width
+                            height: 80
+                            radius: 10
+                            border.color: "#ccc"
+                            color: "#f5f5f5"
+
+                            Row {
+                                anchors.fill: parent
+                                anchors.margins: 10
+                                spacing: 8
+
+                                Column {
+                                    spacing: 20
+                                    Text {
+                                        text: foodname
+                                        font.pixelSize: 13
+                                        font.bold: true
+                                    }
+                                    Text {
+                                        text: "ingredients: " + ingredients
+                                        font.pixelSize: 11
+                                        color: "red"
+                                    }
+                                }
+                            }
                         }
                     }
                 }
@@ -167,7 +188,7 @@ ApplicationWindow {
             Button {
                 id: cart
                 z: 10
-                anchors.top: insiderect.top
+                anchors.top: parent.top
                 anchors.left: parent.left
                 icon.source: "qrc:/projimages/cart.png"
                 width: parent.width / 5
@@ -195,5 +216,7 @@ ApplicationWindow {
                 }
             }
         }
+
+
     }
 }
