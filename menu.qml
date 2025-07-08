@@ -150,7 +150,7 @@ ApplicationWindow {
                                 spacing: 8
 
                                 Column {
-                                    spacing: 20
+                                    spacing: 10
                                     Text {
                                         text: foodname
                                         font.pixelSize: 13
@@ -158,10 +158,29 @@ ApplicationWindow {
                                     }
                                     Text {
                                         text: "ingredients: " + ingredients
-                                        font.pixelSize: 11
-                                        color: "red"
+                                        font.pixelSize: 12
+                                        color: "green"
                                     }
+
                                 }
+                                Button
+                                {
+                                    width: 15
+                                    height: 15
+                                    anchors.right: parent.right
+                                    background: Rectangle
+                                    {
+                                        color: "transparent"
+                                    }
+                                    contentItem:Image {
+                                        source: "qrc:/projimages/plus.png"
+                                        anchors.fill: parent
+                                        fillMode: Image.PreserveAspectFit
+                                    }
+
+                                }
+
+
                             }
                         }
                     }

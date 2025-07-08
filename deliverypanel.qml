@@ -27,7 +27,7 @@ ApplicationWindow{
         {
             id:menuelement
             ListElement{name:"Home";pageaddress:"deliverypanel.qml"}
-            ListElement{name:"order status";pageaddress:"orderstatus.qml"}
+            ListElement{name:"order status";pageaddress:"Orderstatus.qml"}
         }
         ListView
         {
@@ -116,7 +116,7 @@ ApplicationWindow{
             {
                 id:col
                 width: parent.width*0.9
-                spacing: 12
+                spacing: 8
                 anchors.top:parent.top
                 anchors.topMargin: win.height/10
                 anchors.left: parent.left
