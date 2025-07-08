@@ -42,10 +42,11 @@ ApplicationWindow{
             delegate: Rectangle
             {
                 id:rectfield
-                width:parent.width
+                width: ListView.view.width
+                property bool hovered: false
+                border.color: hovered ? "#888" : "#ccc"
                 height: 55
-                border.color:"#ccc"
-                color:"#f5f5f5"
+                color: hovered ? "#d0eaff" : "#f5f5f5"
                 Row
                 {
                     anchors.fill: parent
@@ -63,8 +64,11 @@ ApplicationWindow{
                 }
                 MouseArea
                 {
-                    anchors.fill: parent
-                    onClicked:
+                    anchors.fill : parent
+                                            hoverEnabled: true
+                                            onEntered: hovered = true
+                                            onExited: hovered = false
+                                            onClicked:
                     {
                         menu.close()
                         var component =Qt.createComponent(model.pageaddress)

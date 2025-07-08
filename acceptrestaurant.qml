@@ -8,7 +8,7 @@ ApplicationWindow{
     height:600
     minimumWidth: 400
     minimumHeight: 600
-    title:"change users"
+    title:"accept restaurant"
     visible: true
     Drawer
     {
@@ -40,10 +40,11 @@ ApplicationWindow{
             delegate: Rectangle
             {
                 id:rectfield
-                width:parent.width
+                width: ListView.view.width
+                property bool hovered: false
+                border.color: hovered ? "#888" : "#ccc"
                 height: 55
-                border.color:"#ccc"
-                color:"#f5f5f5"
+                color: hovered ? "#d0eaff" : "#f5f5f5"
                 Row
                 {
                     anchors.fill: parent
@@ -61,8 +62,11 @@ ApplicationWindow{
                 }
                 MouseArea
                 {
-                    anchors.fill: parent
-                    onClicked:
+                    anchors.fill : parent
+                                            hoverEnabled: true
+                                            onEntered: hovered = true
+                                            onExited: hovered = false
+                                            onClicked:
                     {
                         menu.close()
                         var component =Qt.createComponent(model.pageaddress)
@@ -128,10 +132,10 @@ ApplicationWindow{
                 ListModel
                 {
                     id:element
-                    ListElement{username:"Saleh";phonenumber:"09133325279";city:"isfahan"}
-                    ListElement{username:"Parsa";phonenumber:"09133325279";city:"Tehran"}
-                    ListElement{username:"Ali";phonenumber:"09133325279";city:"shiraz"}
-                    ListElement{username:"Reza";phonenumber:"09133325279";city:"tabriz"}
+                    ListElement{restaurantname:"Tarkhoon";phonenumber:"09133325279";address:"isfahan soroosh"}
+                    ListElement{restaurantname:"housekentaki";phonenumber:"09133325279";address:"Tehran saadeat abad"}
+                    ListElement{restaurantname:"alibaba";phonenumber:"09133325279";address:"shiraz davazeh ghoran"}
+                    ListElement{restaurantname:"dadaali";phonenumber:"09133325279";address:"tabriz gaz"}
 
                 }
                 ListView

@@ -17,7 +17,7 @@ ApplicationWindow {
         edge: Qt.RightEdge
         width: Math.min(win.width / 2, 500)
         height: parent.height
-        background: Rectangle { color: "#2E2E2E" }
+        // background: Rectangle { color: "#2E2E2E" }
 
         ListModel {
             id: menuelement
@@ -35,9 +35,10 @@ ApplicationWindow {
 
             delegate: Rectangle {
                 width: ListView.view.width
+                property bool hovered: false
+                border.color: hovered ? "#888" : "#ccc"
                 height: 55
-                border.color: "#ccc"
-                color: "#f5f5f5"
+                color: hovered ? "#d0eaff" : "#f5f5f5"
 
                 Row {
                     anchors.fill: parent
@@ -51,7 +52,10 @@ ApplicationWindow {
                 }
 
                 MouseArea {
-                    anchors.fill: parent
+                    anchors.fill : parent
+                    hoverEnabled: true
+                    onEntered: hovered = true
+                    onExited: hovered = false
                     onClicked: {
                         menu.close()
                         var component = Qt.createComponent(pageaddress)

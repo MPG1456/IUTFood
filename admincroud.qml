@@ -9,7 +9,7 @@ ApplicationWindow {
     minimumWidth: 400
     minimumHeight: 600
     visible: true
-    title: "change users"
+    title: "admin croud"
 
     Rectangle {
         id: mainrect
@@ -35,7 +35,6 @@ ApplicationWindow {
                 clip: true
                 anchors.fill: parent
                 contentHeight: col.height
-
                 Column {
                     id: col
                     width: parent.width * 0.9
@@ -65,8 +64,6 @@ ApplicationWindow {
                             radius: 10
                             border.color: "#ccc"
                             color: "#f5f5f5"
-
-                            // دکمه‌های حذف و بلاک
                             Row {
                                 spacing: 6
                                 anchors.top: parent.top
@@ -192,10 +189,11 @@ ApplicationWindow {
             clip: true
 
             delegate: Rectangle {
-                width: parent.width
+                width: ListView.view.width
+                property bool hovered: false
+                border.color: hovered ? "#888" : "#ccc"
                 height: 55
-                border.color: "#ccc"
-                color: "#f5f5f5"
+                color: hovered ? "#d0eaff" : "#f5f5f5"
                 Row {
                     anchors.fill: parent
                     anchors.margins: 10
@@ -209,8 +207,10 @@ ApplicationWindow {
                 }
 
                 MouseArea {
-                    anchors.fill: parent
-                    onClicked: {
+                    anchors.fill : parent
+                                            hoverEnabled: true
+                                            onEntered: hovered = true
+                                            onExited: hovered = false                    onClicked: {
                         menu.close()
                         var component = Qt.createComponent(pageaddress)
                         if (component.status === Component.Ready) {
