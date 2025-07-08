@@ -125,10 +125,10 @@
 
                         ListModel {
                             id: element
-                            ListElement { name: "Tarkhoon"; location: "isfahan soroosh";pageaddress: "restaurantpreview.qml"}
-                            ListElement { name: "Kentakihouse"; location: "isfahan Ahmadabad";pageaddress: "restaurantpreview.qml"}
-                            ListElement { name: "Safa"; location: "isfahan noorbaran";pageaddress: "restaurantpreview.qml" }
-                            ListElement { name: "golchin"; location: "Tehran saadat abad";pageaddress: "restaurantpreview.qml" }
+                            ListElement { name: "Tarkhoon"; location: "isfahan soroosh";pageaddress: "menu.qml"}
+                            ListElement { name: "Kentakihouse"; location: "isfahan Ahmadabad";pageaddress: "menu.qml"}
+                            ListElement { name: "Safa"; location: "isfahan noorbaran";pageaddress: "menu.qml" }
+                            ListElement { name: "golchin"; location: "Tehran saadat abad";pageaddress: "menu.qml" }
                         }
 
                         ListView {

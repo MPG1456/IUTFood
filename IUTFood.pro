@@ -45,7 +45,8 @@ resources.files = \
     Orderstatus.qml \
     deliverypanel.qml \
     changemenu.qml \
-    restaurantpreview.qml
+    restaurantpreview.qml \
+    menu.qml
 
 resources.prefix = /$${TARGET}
 RESOURCES += resources \

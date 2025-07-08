@@ -9,7 +9,7 @@ ApplicationWindow {
     height: 600
     minimumWidth: 400
     minimumHeight: 600
-    title: "restaurant preview"
+    title: "restaurant panel"
     visible: true
 
     Drawer {
@@ -20,11 +20,10 @@ ApplicationWindow {
         // background: Rectangle { color: "#2E2E2E" }
 
         ListModel {
-            id: menuelement
-            ListElement { name: "Home"; pageaddress: "restaurantpanel.qml" }
-            ListElement { name: "change menu"; pageaddress: "changemenu.qml" }
-            ListElement { name: "change order status"; pageaddress: "Orderstatus.qml" }
-            ListElement { name: "preview"; pageaddress: "restaurantpreview.qml" }
+            id:menuelement
+            ListElement{name:"Home";pageaddress:"adminpanel.qml"}
+            ListElement{name:"change or add user";pageaddress:"admincroud.qml"}
+            ListElement{name:"accept  restaurant request";pageaddress:"acceptrestaurant.qml"}
         }
 
         ListView {
@@ -183,6 +182,37 @@ ApplicationWindow {
                 anchors.rightMargin: 2
 
                 onClicked: menu.open()
+            }
+
+            Button {
+                id: cart
+                z: 10
+                anchors.top: parent.top
+                anchors.left: parent.left
+                icon.source: "qrc:/projimages/cart.png"
+                width: parent.width / 5
+                height: parent.height / 7.5
+                background: null
+                anchors.leftMargin: 2
+
+                onClicked: {
+                    var component = Qt.createComponent("shoppingcart.qml")
+                    if (component.status === Component.Ready) {
+                        var newWin = component.createObject(null, {
+                            width: win.width,
+                            height: win.height,
+                            x: win.x,
+                            y: win.y,
+                            visibility: win.visibility
+                        })
+                        if (newWin) {
+                            newWin.show()
+                            win.close()
+                        }
+                    } else {
+                        console.log("Error loading cart component:", component.errorString())
+                    }
+                }
             }
         }
 
