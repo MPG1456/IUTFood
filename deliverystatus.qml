@@ -8,7 +8,7 @@ ApplicationWindow{
     height:600
     minimumWidth: 400
     minimumHeight: 600
-    title:"delivery panel"
+    title:"order tracking"
     visible: true
     Drawer
     {
@@ -16,16 +16,17 @@ ApplicationWindow{
         edge:Qt.RightEdge
         width:Math.min(win.width/2 ,500)
         height: parent.height
+
         // Rectangle
         // {
-        //     anchors.fill: parent
+        //     height: menu.height
+        //     width: menu.width
         //     color:"#2E2E2E"
         //     radius: 20
-        //     z:-1
         // }
         ListModel
         {
-            id:menuelement
+            id: menuelement
             ListElement{name:"Home";pageaddress:"deliverypanel.qml"}
             ListElement{name:"order status";pageaddress:"deliverystatus.qml"}
         }
@@ -69,18 +70,18 @@ ApplicationWindow{
                     {
                         menu.close()
                         var component =Qt.createComponent(model.pageaddress)
-                                                if(component.status===Component.Ready)
-                                                {
-                                                    var newWin = component.createObject(null ,{
-                                                    width =win.width,
-                                                    height =win.height,
-                                                    x:win.x,
-                                                    y:win.y,
-                                                    visibility:win.visibility
-                                                                                        })
-                                                    newWin.show();
-                                                    win.close();
-                                                }
+                        if(component.status===Component.Ready)
+                        {
+                            var newWin = component.createObject(null ,{
+                            width =win.width,
+                            height =win.height,
+                            x:win.x,
+                            y:win.y,
+                            visibility:win.visibility
+                                                                })
+                            newWin.show();
+                            win.close();
+                        }
                     }
                 }
             }
@@ -112,29 +113,47 @@ ApplicationWindow{
             clip:true
             anchors.fill: parent
             contentHeight: col.height
+            ScrollBar.vertical: ScrollBar
+            {
+                policy:ScrollBar.AsNeeded
+            }
             Column
             {
                 id:col
                 width: parent.width*0.9
-                spacing: 8
+                spacing: 12
                 anchors.top:parent.top
                 anchors.topMargin: win.height/10
                 anchors.left: parent.left
                 anchors.leftMargin: 14
-                TextField
-                {
-                    id:searchbar
-                    placeholderText: "search..."
-                    width: insiderect.width-30
-                    font.pixelSize: 14
-                }
                 ListModel
                 {
                     id:element
                     ListElement{name:"Saleh";order:"kentaki";restaurant:"kentakihouse";address:"soroosh"}
-                    ListElement{name:"Parsa";order:"salad";restaurant:"Tarkhoon";address:"ahmadabad"}
-                    ListElement{name:"Ali";order:"chicken";restaurant:"jan";address:"toghchi"}
-                    ListElement{name:"Reza";order:"water";restaurant:"alibaba";address:"soroosh"}
+                }
+                ComboBox
+                {
+                    model: ["notDelivered" ,"Delivered"]
+                    width: col.width
+
+                }
+                Button
+                {
+                    id:submit
+                    text: "submit"
+                    width: col.width/3
+                    // onClicked:
+                    // {
+                    //     // if(!db.usernameexist(usernamefield.text))
+                    //     // {
+                    //     //     db.adduser(usernamefield.text , pass.text , namefield.text , resta.text , country.text , city.text , postalcode.text , homeadr.text ,homephone.text , bio.text);
+                    //     // }
+                    //     // else
+                    //     // {
+                    //     //     // db.printAllUsers();
+                    //     // console.log("this username already exist")
+                    //     }
+                    // }
 
                 }
                 ListView
@@ -147,7 +166,7 @@ ApplicationWindow{
                     delegate: Rectangle
                     {
                         width:parent.width
-                        height: 80
+                        height: 150
                         radius:10
                         border.color:"#ccc"
                         color:"#f5f5f5"
@@ -158,40 +177,36 @@ ApplicationWindow{
                             spacing: 8
                             Column
                             {
-                                spacing:9
+                                spacing: 20
                                 Text {
-                                    text:name
+                                    text: "name: " + name
                                     font.pixelSize: 13
                                     font.bold: true
                                 }
-                                Row
-                                {
-                                    anchors.margins: 10
-                                    spacing: 9
                                 Text {
                                     text: "order: " + order
                                     font.pixelSize: 11
                                     color: "red"
                                 }
                                 Text {
-                                    text: "restaurant: " + restaurant
+                                    text: "restaurnt: " + restaurant
                                     font.pixelSize: 11
                                     color: "green"
                                 }
-                                }
                                 Text {
-
                                     text: "address: " + address
                                     font.pixelSize: 11
                                     color: "blue"
                                 }
+
                             }
                         }
                     }
                 }
 
-            }
 
+            }
+        }
         Button{
         id:hamburger
         anchors.top: parent.top
@@ -207,15 +222,38 @@ ApplicationWindow{
             menu.open();
         }
         }
-
-
-            ScrollBar.vertical: ScrollBar
+        Button{
+        id:cart
+        anchors.top: parent.top
+        anchors.left: parent.left
+        icon.source: "qrc:/projimages/cart.png"
+        width:parent.width/5
+        height:parent.height/7.5
+        background: null
+        anchors.rightMargin: 2
+        onClicked:
+        {
+            console.log("clickeddd")
+            var component =Qt.createComponent("shoppingcart.qml")
+            if(component.status===Component.Ready)
             {
-                policy:ScrollBar.AsNeeded
-            }
+                var newWin = component.createObject(null ,{
+                width =win.width,
+                height =win.height,
+                x:win.x,
+                y:win.y,
+                visibility:win.visibility
+                                                    })
+                newWin.show();
+                win.close();
             }
         }
-    }
+        }
+
+
+
+            }
+        }
 
 
     }

@@ -28,5 +28,6 @@
         <file>deliverypanel.qml</file>
         <file>restaurantpreview.qml</file>
         <file>menu.qml</file>
+        <file>deliverystatus.qml</file>
     </qresource>
 </RCC>
