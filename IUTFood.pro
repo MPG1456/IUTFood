@@ -8,6 +8,7 @@ CONFIG += c++17 cmdline
 SOURCES += \
         address.cpp \
         customer.cpp \
+        delivery.cpp \
         dessert.cpp \
         drinks.cpp \
         fastfood.cpp \
@@ -61,6 +62,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 HEADERS += \
     address.h \
     customer.h \
+    delivery.h \
     dessert.h \
     drinks.h \
     fastfood.h \

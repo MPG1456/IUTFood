@@ -12,5 +12,4 @@ public:
     Customer() = default;
     Customer(PersonIdentity newPersonIdentity);
 };
-
 #endif // CUSTOMER_H

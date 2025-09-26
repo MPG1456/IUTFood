@@ -245,6 +245,4 @@ ApplicationWindow{
             }
             }
         }
-
-
     }

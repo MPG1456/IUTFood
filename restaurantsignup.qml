@@ -67,6 +67,29 @@ Window{
                     placeholderText: "username"
                     width: insiderect.width-30
                     font.pixelSize: 14
+                    property int validusername: 0
+                    onTextChanged:
+                    {
+                        if(usernamefield.length<3)
+                        {
+                            errorText.visible = true
+                            errorText.text = "at least 3 character"
+                            usernamefield.validusername = 0
+                        }
+                        else
+                        {
+                            errorText.visible = false
+                            usernamefield.validusername = 1
+                        }
+                    }
+                }
+                Text
+                {
+                id: errorText
+                color:"red"
+                visible: false
+                font.pixelSize: 12
+                anchors.margins: 2
                 }
                 TextField
                 {
@@ -75,6 +98,29 @@ Window{
                     width: insiderect.width-30
                     font.pixelSize: 14
                     echoMode: TextInput.Password
+                    property int validpassword: 0
+                    onTextChanged:
+                    {
+                        if(pass.length<6)
+                        {
+                            passErr.visible = true
+                            passErr.text = "at least 6 character"
+                            pass.validpassword = 0
+                        }
+                        else
+                        {
+                            passErr.visible = false
+                            pass.validpassword = 1
+                        }
+                    }
+                }
+                Text
+                {
+                id: passErr
+                color:"red"
+                visible: false
+                font.pixelSize: 12
+                anchors.margins: 2
                 }
                 TextField
                 {
@@ -82,6 +128,29 @@ Window{
                     placeholderText: "name"
                     width: insiderect.width-30
                     font.pixelSize: 14
+                    property int validname: 0
+                    onTextChanged:
+                    {
+                        if(namefield.length<3)
+                        {
+                            nameErr.visible = true
+                            nameErr.text = "at least 3 character"
+                            namefield.validname = 0
+                        }
+                        else
+                        {
+                            nameErr.visible = false
+                            namefield.validname = 1
+                        }
+                    }
+                }
+                Text
+                {
+                id: nameErr
+                color:"red"
+                visible: false
+                font.pixelSize: 12
+                anchors.margins: 2
                 }
                 TextField
                 {
@@ -89,6 +158,29 @@ Window{
                     placeholderText: "restaurant name"
                     width: insiderect.width-30
                     font.pixelSize: 14
+                    property int validrestname: 0
+                    onTextChanged:
+                    {
+                        if(resta.length<3)
+                        {
+                            resNameErr.visible = true
+                            resNameErr.text = "at least 3 character"
+                            resta.validrestname = 0
+                        }
+                        else
+                        {
+                            resNameErr.visible = false
+                            resta.validrestname = 1
+                        }
+                    }
+                }
+                Text
+                {
+                id: resNameErr
+                color:"red"
+                visible: false
+                font.pixelSize: 12
+                anchors.margins: 2
                 }
                 TextField
                 {
@@ -96,6 +188,29 @@ Window{
                     placeholderText: "country"
                     width: insiderect.width-30
                     font.pixelSize: 14
+                    property int validcountry: 0
+                    onTextChanged:
+                    {
+                        if(country.length<3)
+                        {
+                            countryErr.visible = true
+                            countryErr.text = "at least 3 character"
+                            country.validcountry = 0
+                        }
+                        else
+                        {
+                            countryErr.visible = false
+                            country.validcountry = 1
+                        }
+                    }
+                }
+                Text
+                {
+                id: countryErr
+                color:"red"
+                visible: false
+                font.pixelSize: 12
+                anchors.margins: 2
                 }
                 TextField
                 {
@@ -103,6 +218,29 @@ Window{
                     placeholderText: "city"
                     width: insiderect.width-30
                     font.pixelSize: 14
+                    property int validcity: 0
+                    onTextChanged:
+                    {
+                        if(city.length<3)
+                        {
+                            cityErr.visible = true
+                            cityErr.text = "at least 3 character"
+                            city.validcity = 0
+                        }
+                        else
+                        {
+                            cityErr.visible = false
+                            city.validcity = 1
+                        }
+                    }
+                }
+                Text
+                {
+                id: cityErr
+                color:"red"
+                visible: false
+                font.pixelSize: 12
+                anchors.margins: 2
                 }
                 TextField
                 {
@@ -110,6 +248,47 @@ Window{
                     placeholderText: "postal code"
                     width: insiderect.width-30
                     font.pixelSize: 14
+                    property int validpost: 0
+                    onTextChanged:
+                    {
+                        if(postalcode.text.length!==10)
+                        {
+                            postalErr.visible = true
+                            postalErr.text = "must have 10 character and should be number"
+                            postalcode.validpost = 0
+                        }
+                        else
+                        {
+                            var flag=0;
+                            for (var i=0 ;i<=9;i+=1)
+                            {
+                                var isNum = postalcode.text.charCodeAt(i)
+                                if(isNum<48 || isNum >57)
+                                {
+                                    flag=1
+                                }
+                            }
+                            if (flag===1)
+                            {
+                                postalErr.visible = true
+                                postalErr.text = "must be 10 character and should be number"
+                                postalcode.validpost = 0
+                            }
+                            else
+                            {
+                            postalErr.visible = false
+                            postalcode.validpost = 1
+                            }
+                        }
+                    }
+                }
+                Text
+                {
+                id: postalErr
+                color:"red"
+                visible: false
+                font.pixelSize: 12
+                anchors.margins: 2
                 }
                 TextField
                 {
@@ -117,6 +296,29 @@ Window{
                     placeholderText: "home adress"
                     width: insiderect.width-30
                     font.pixelSize: 14
+                    property int validhome: 0
+                    onTextChanged:
+                    {
+                        if(homeadr.length<3)
+                        {
+                            addressErr.visible = true
+                            addressErr.text = "at least 3 character"
+                            homeadr.validhome = 0
+                        }
+                        else
+                        {
+                            addressErr.visible = false
+                            homeadr.validhome = 1
+                        }
+                    }
+                }
+                Text
+                {
+                id: addressErr
+                color:"red"
+                visible: false
+                font.pixelSize: 12
+                anchors.margins: 2
                 }
                 TextField
                 {
@@ -124,6 +326,42 @@ Window{
                     placeholderText: "home phone"
                     width: insiderect.width-30
                     font.pixelSize: 14
+                    property int validHomePhone: 0
+                    onTextChanged: {
+                        if (homephone.text.length !== 8) {
+                            homePhoneErr.visible = true
+                            homePhoneErr.text = "must be 8 character and should be number"
+                            homephone.validHomePhone = 0
+                        } else {
+                            var flag = 0
+                            for (var i = 0; i < 8; i++) {
+                                var code = homephone.text.charCodeAt(i)
+                                if (code < 48 || code > 57) {
+                                    flag = 1
+                                    break
+                                }
+                            }
+
+                            if (flag === 1) {
+                                homePhoneErr.visible = true
+                                homePhoneErr.text = "must be 8 character and should be number"
+                                homephone.validHomePhone = 0
+                            } else
+                            {
+                                homePhoneErr.visible = false
+                                homephone.validHomePhone = 1
+                            }
+                        }
+                    }
+
+                }
+                Text
+                {
+                id: homePhoneErr
+                color:"red"
+                visible: false
+                font.pixelSize: 12
+                anchors.margins: 2
                 }
                 TextArea
                 {
@@ -131,6 +369,29 @@ Window{
                     placeholderText: "bio"
                     width: insiderect.width-30
                     font.pixelSize: 14
+                    property int validbio: 0
+                    onTextChanged:
+                    {
+                        if(bio.length<10)
+                        {
+                            bioErr.visible = true
+                            bioErr.text = "at least 10 character"
+                            bio.validbio = 0
+                        }
+                        else
+                        {
+                            bioErr.visible = false
+                            bio.validbio = 1
+                        }
+                    }
+                }
+                Text
+                {
+                id: bioErr
+                color:"red"
+                visible: false
+                font.pixelSize: 12
+                anchors.margins: 2
                 }
                 Row{
                     spacing:7
@@ -152,7 +413,7 @@ Window{
                                 x:win.x,
                                 y:win.y,
                                 visibility:win.visibility
-                                                                    })
+                                })
                                 newWin.show();
                                 win.close();
                             }
@@ -164,13 +425,20 @@ Window{
                         width: col.width/3
                         onClicked:
                         {
-                            if(!db.usernameexist(usernamefield.text))
+                            var flag =0
+                            if(!(usernamefield.validusername && pass.validpassword && namefield.validname && resta.validrestname && country.validcountry && city.validcity && postalcode.validpost && homeadr.validhome && homephone.validHomePhone && bio.validbio))
                             {
-                                db.adduser(usernamefield.text , pass.text , namefield.text , resta.text , country.text , city.text , postalcode.text , homeadr.text ,homephone.text , bio.text);
+                                flag=1
+                            }
+                            if(db.usernameexist(usernamefield.text) || flag)
+                            {
+
+
                             }
                             else
                             {
                                 // db.printAllUsers();
+                            db.adduser(usernamefield.text , pass.text , namefield.text , resta.text , country.text , city.text , postalcode.text , homeadr.text ,homephone.text , bio.text);
                             console.log("this username already exist")
                             }
                         }

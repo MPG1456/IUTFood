@@ -4,7 +4,6 @@ IraniFood::IraniFood(QString name, QString ingredients, int capacity, double pri
 {
     setDishType();
 }
-
 void IraniFood::setDishType(QString newDishType)
 {
     if(newDishType == "NULL")

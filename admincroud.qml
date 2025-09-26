@@ -210,7 +210,8 @@ ApplicationWindow {
                     anchors.fill : parent
                                             hoverEnabled: true
                                             onEntered: hovered = true
-                                            onExited: hovered = false                    onClicked: {
+                                            onExited: hovered = false
+                                            onClicked: {
                         menu.close()
                         var component = Qt.createComponent(pageaddress)
                         if (component.status === Component.Ready) {
