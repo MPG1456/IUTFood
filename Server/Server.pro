@@ -12,27 +12,32 @@ CONFIG += c++17 cmdline
 SOURCES += \
         clientdb.cpp \
         deliverydb.cpp \
+        menudb.cpp \
+        ordered_foods.cpp \
         restaurantdb.cpp \
         main.cpp \
         myserver.cpp \
-        ../protocol.cpp \
-        ../address.cpp \
-        ../mytime.cpp \
-        ../score.cpp \
-        ../menu.cpp \
-        ../person.cpp \
-        ../personidentity.cpp \
-        ../restaurant.cpp \
-        ../restaurantidentity.cpp \
-        ../customer.cpp \
-        ../dessert.cpp \
-        ../drinks.cpp \
-        ../salad.cpp \
-        ../fastfood.cpp \
-        ../iranifood.cpp \
-        ../food.cpp \
-        ../maindish.cpp \
-        ../menufunctions.cpp
+        orderdb.cpp \
+        menudb.cpp \
+        orderdb.cpp
+        # ../protocol.cpp \
+        # ../address.cpp \
+        # ../mytime.cpp \
+        # ../score.cpp \
+        # ../menu.cpp \
+        # ../person.cpp \
+        # ../personidentity.cpp \
+        # ../restaurant.cpp \
+        # ../restaurantidentity.cpp \
+        # ../customer.cpp \
+        # ../dessert.cpp \
+        # ../drinks.cpp \
+        # ../salad.cpp \
+        # ../fastfood.cpp \
+        # ../iranifood.cpp \
+        # ../food.cpp \
+        # ../maindish.cpp \
+        # ../menufunctions.cpp
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -44,8 +49,13 @@ INCLUDEPATH += $$PWD/../
 HEADERS += \
     clientdb.h \
     deliverydb.h \
+    menudb.h \
     myserver.h \
-    restaurantdb.h
+    ordered_foods.h \
+    restaurantdb.h \
+    orderdb.h \
+    menudb.h \
+    orderdb.h
 
 RESOURCES += \
     database.qrc
