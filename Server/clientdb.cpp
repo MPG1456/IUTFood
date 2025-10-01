@@ -2,7 +2,7 @@
 #include "qcoreapplication.h"
 #include "QDir"
 
-ClientDB::ClientDB(const QString &connName, QObject *parent) : QObject(parent), connectionName(connName)
+ClientDB::ClientDB()
 {
     if (!QSqlDatabase::contains("main_connection"))
     {

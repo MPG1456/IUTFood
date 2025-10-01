@@ -10,7 +10,7 @@ class menudb : public QObject
 {
     Q_OBJECT
 public:
-    menudb(QObject *parent = nullptr);
+    menudb();
     // Q_INVOKABLE bool usernameExist(QString username);
     Q_INVOKABLE bool addMenu(int restaurant_id , QString name ,QString ingredients , QString type ,  int capacity , double price);
     // Q_INVOKABLE bool deleteUser(QString username);

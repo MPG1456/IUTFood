@@ -11,7 +11,7 @@ class orderdb:public QObject
 {
     Q_OBJECT
 public:
-    orderdb(QObject *parent = nullptr);
+    orderdb();
     // Q_INVOKABLE bool usernameExist(QString username);
     Q_INVOKABLE bool addOrder(int client_id , int restaurant_id , int delivery_id ,QString order_time , QString reached_time ,  QString status);
     // Q_INVOKABLE bool deleteUser(QString username);

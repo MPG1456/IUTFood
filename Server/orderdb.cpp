@@ -2,7 +2,7 @@
 #include "qcoreapplication.h"
 #include "QDir"
 
-orderdb::orderdb(QObject *parent) : QObject(parent)
+orderdb::orderdb()
 {
     if (!QSqlDatabase::contains("main_connection"))
     {

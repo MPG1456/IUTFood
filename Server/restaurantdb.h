@@ -13,10 +13,10 @@ class RestaurantDB : public QObject
 private:
     QString connectionName;
 public:
-    RestaurantDB(const QString &connName, QObject *parent = nullptr);
+    RestaurantDB();
 
     Q_INVOKABLE bool usernameExist(QString username);
-    Q_INVOKABLE bool addUser(QString username , QString password ,QString restaurantName , QString country ,QString city ,long long int postalcode , QString homeAddress ,QString homePhone ,QString bio , QString phoneNumber , QString time , QString score , QString score_counter);
+    Q_INVOKABLE bool addRestaurant(QString username , QString password ,QString restaurantName , QString country ,QString city ,long long int postalcode , QString homeAddress ,QString homePhone ,QString bio , QString phoneNumber , QString time , QString score="0" , QString score_counter="0");
     Q_INVOKABLE bool deleteUser(QString username);
     // Q_INVOKABLE void printAllUsers();
 

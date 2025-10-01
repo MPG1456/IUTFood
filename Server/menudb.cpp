@@ -2,7 +2,7 @@
 #include "qcoreapplication.h"
 #include "QDir"
 
-menudb::menudb(QObject *parent)
+menudb::menudb()
 {
     if (!QSqlDatabase::contains("main_connection"))
     {

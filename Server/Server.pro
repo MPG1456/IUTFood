@@ -17,8 +17,6 @@ SOURCES += \
         restaurantdb.cpp \
         main.cpp \
         myserver.cpp \
-        orderdb.cpp \
-        menudb.cpp \
         orderdb.cpp
         # ../protocol.cpp \
         # ../address.cpp \
@@ -53,8 +51,6 @@ HEADERS += \
     myserver.h \
     ordered_foods.h \
     restaurantdb.h \
-    orderdb.h \
-    menudb.h \
     orderdb.h
 
 RESOURCES += \

@@ -1,7 +1,7 @@
 #include "deliverydb.h"
 #include "qcoreapplication.h"
 #include "QDir"
-DeliveryDB::DeliveryDB(const QString &connName, QObject *parent) : QObject(parent), connectionName(connName)
+DeliveryDB::DeliveryDB()
 {
     if (!QSqlDatabase::contains("main_connection"))
     {

@@ -1,7 +1,7 @@
 #include "restaurantdb.h"
 #include "qcoreapplication.h"
 #include "QDir"
-RestaurantDB::RestaurantDB(const QString &connName, QObject *parent) : QObject(parent), connectionName(connName)
+RestaurantDB::RestaurantDB()
 {
     if (!QSqlDatabase::contains("main_connection"))
     {
@@ -58,7 +58,7 @@ bool RestaurantDB::usernameExist(QString username)
         return false;
 }
 
-bool RestaurantDB::addUser(QString username , QString password , QString restaurantName , QString country ,QString city ,long long int postalcode , QString homeAddress ,QString homePhone ,QString bio , QString phoneNumber , QString time , QString score , QString score_counter)
+bool RestaurantDB::addRestaurant(QString username , QString password , QString restaurantName , QString country ,QString city ,long long int postalcode , QString homeAddress ,QString homePhone ,QString bio , QString phoneNumber , QString time , QString score , QString score_counter)
 {
     if (usernameExist(username))
         return false;

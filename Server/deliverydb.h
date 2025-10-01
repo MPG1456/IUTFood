@@ -13,7 +13,7 @@ class DeliveryDB : public QObject
 private:
     QString connectionName;
 public:
-    DeliveryDB(const QString &connName, QObject *parent = nullptr);
+    DeliveryDB();
 
     Q_INVOKABLE bool usernameExist(QString username);
     Q_INVOKABLE bool addUser(QString username , QString password , QString firstName ,QString lastName ,int age , QString country ,QString city ,long long int postalCode , QString homeAddress ,QString homePhone ,QString phoneNumber);
