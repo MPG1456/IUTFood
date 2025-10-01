@@ -1,56 +1,30 @@
-// #ifndef MYSERVER_H
-// #define MYSERVER_H
+#ifndef MYSERVER_H
+#define MYSERVER_H
+#include <QTcpServer>
+#include <QTcpSocket>
+#include <QDebug>
+#include <QSet>
+#include <QSqlDatabase>
+#include <QSqlQuery>
+#include <QSqlError>
+#include <QCoreApplication>
+#include <QDebug>
+#include <QStandardPaths>
+#include <QDir>
+#include <QObject>
+#include <QHash>
+class MyServer: public QTcpServer
+{
+    Q_OBJECT
+public:
+    MyServer(QObject *parent = nullptr);
+private:
+    void incomingConnection(qintptr socketDescriptor);
+    QHash <QTcpSocket* , QString> roles;
 
-// #include <QTcpServer>
-// #include <QTcpSocket>
-// #include <QDebug>
-// #include <QSet>
-// #include <QSqlDatabase>
-// #include <QSqlQuery>
-// #include <QSqlError>
-// #include <QCoreApplication>
-// #include <QDebug>
-// #include <QStandardPaths>
-// #include <QDir>
+private slots:
+    void onReadyRead();
+    void onDisconneced();
+};
 
-// #include "protocol.h"
-
-// class MyServer : public QTcpServer
-// {
-//     Q_OBJECT
-
-// public:
-//     enum ClientType
-//     {
-//         Restaurant,
-//         Customer,
-//         Delivery
-//     };
-//     Q_ENUM(ClientType);
-
-//     explicit MyServer(QObject *parent = nullptr);
-//     void setupDatabase(QSqlDatabase &db, const QString &connectionName, const QString &dbFileName);
-//     void startServer();
-
-// private slots:
-//     void handleNewConnection();
-//     void handleClientIdentification();
-//     void clientDisconnected();
-//     void customerDisconnected();
-//     void restaurantDisconnected();
-//     void deliveryDisconnected();
-//     void readCustomersData();
-//     void readRestaurantsData();
-//     void readDeliveriesData();
-
-// private:
-//     QSqlDatabase clientDb;
-//     QSqlDatabase restaurantDb;
-//     QSqlDatabase deliveryDb;
-//     QSet<QTcpSocket *> myCustomers;
-//     QSet<QTcpSocket *> myDeliveries;
-//     QSet<QTcpSocket *> myRestaurants;
-//     QSet<QTcpSocket *> myPendings;
-// };
-
-// #endif // MYSERVER_H
+#endif // MYSERVER_H
