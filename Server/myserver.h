@@ -24,7 +24,7 @@ private:
 
 private slots:
     void onReadyRead();
-    void onDisconneced();
+    void onDisconnected();
 };
 
 #endif // MYSERVER_H

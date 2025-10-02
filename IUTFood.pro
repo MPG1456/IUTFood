@@ -26,7 +26,8 @@ SOURCES += \
         restaurant.cpp \
         restaurantidentity.cpp \
         salad.cpp \
-        score.cpp
+        score.cpp \
+        clientnetwork.cpp
 
 resources.files = \
     main.qml \
@@ -80,7 +81,8 @@ HEADERS += \
     restaurant.h \
     restaurantidentity.h \
     salad.h \
-    score.h
+    score.h \
+    clientnetwork.h
 
 DISTFILES +=
 
