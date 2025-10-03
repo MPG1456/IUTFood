@@ -9,6 +9,7 @@ SOURCES += \
         address.cpp \
         clientnetwork.cpp \
         customer.cpp \
+        datastore.cpp \
         delivery.cpp \
         dessert.cpp \
         drinks.cpp \
@@ -65,6 +66,7 @@ HEADERS += \
     address.h \
     clientnetwork.h \
     customer.h \
+    datastore.h \
     delivery.h \
     dessert.h \
     drinks.h \

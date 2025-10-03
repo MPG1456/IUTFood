@@ -22,8 +22,12 @@ void clientNetwork::onReadyRead()
     QJsonDocument jsDoc = QJsonDocument::fromJson(allData);
     if (!jsDoc.isNull() && jsDoc.isObject())
     {
-        QJsonObject allData = jsDoc.object();
-
+        // QJsonObject allData = jsDoc.object();
+        loadClientFromDb(jsDoc);
+        loadDeliveryFromDb(jsDoc);
+        loadMenuFromDb(jsDoc);
+        loadRestaurantFromDb(jsDoc);
+        loadOrderFromDb(jsDoc);
     }
 }
 void clientNetwork::loadClientFromDb(QJsonDocument doc)
@@ -48,6 +52,7 @@ void clientNetwork::loadClientFromDb(QJsonDocument doc)
         identity.setPhoneNumber(obj["phoneNumber"].toString());
         identity.setAge(obj["age"].toInt());
         identity.setAddress(addr);
+        identity.setId(obj["id"].toInt());
         Customer C(identity);
         //add to vector clients
     }
@@ -73,6 +78,7 @@ void clientNetwork::loadRestaurantFromDb(QJsonDocument doc)
         identity.setBio(obj["bio"].toString());
         identity.setPhonenumber(obj["phoneNumber"].toString());
         identity.setAddress(addr);
+        identity.setId(obj["id"].toInt());
         Score score;
         score.addScore(obj["score"].toDouble());
         score.setCounter(obj["score_counter"].toInt());
@@ -94,23 +100,23 @@ void clientNetwork::loadMenuFromDb(QJsonDocument doc)
     {
         QJsonObject obj = val.toObject();
         Food *f = nullptr;
-        if (obj["type"]=="salad")
+        if (obj["type"].toString()=="salad")
         {
             f = new Salad(obj["name"].toString() , obj["ingredients"].toString(), obj["capacity"].toInt() ,obj["price"].toDouble() , obj["id"].toInt());
         }
-        else if (obj["type"]=="drinks")
+        else if (obj["type"].toString()=="drinks")
         {
             f = new Drinks(obj["name"].toString() , obj["ingredients"].toString(), obj["capacity"].toInt() ,obj["price"].toDouble() ,obj["id"].toInt());
         }
-        else if (obj["type"]=="dessert")
+        else if (obj["type"].toString()=="dessert")
         {
             f = new Dessert(obj["name"].toString() , obj["ingredients"].toString(), obj["capacity"].toInt() ,obj["price"].toDouble() ,obj["id"].toInt());
         }
-        else if (obj["type"]=="iranifood")
+        else if (obj["type"].toString()=="iranifood")
         {
             f = new IraniFood(obj["name"].toString() , obj["ingredients"].toString(), obj["capacity"].toInt() ,obj["price"].toDouble() ,obj["id"].toInt());
         }
-        else if (obj["type"]=="fastfood")
+        else if (obj["type"].toString()=="fastfood")
         {
             f = new FastFood(obj["name"].toString() , obj["ingredients"].toString(), obj["capacity"].toInt() ,obj["price"].toDouble() ,obj["id"].toInt());
         }
@@ -123,12 +129,26 @@ void clientNetwork::loadMenuFromDb(QJsonDocument doc)
 }
 void clientNetwork::loadOrderFromDb(QJsonDocument doc)
 {
-
+    QJsonObject root = doc.object();
+    QJsonArray deliveiesArray = root["orders"].toArray();
+    for (auto val : deliveiesArray)
+    {
+        QJsonObject obj = val.toObject();
+        order ord;
+        ord.setId(obj["id"].toInt());
+        ord.setClientId(obj["client_id"].toInt());
+        ord.setRestaurantId(obj["restaurant_id"].toInt());
+        ord.setDeliveryId(obj["delivery_id"].toInt());
+        ord.setOrderTime(obj["order_time"].toString());
+        ord.setReachedTime(obj["reached_time"].toString());
+        ord.setStatus(obj["status"].toString());
+        //add to vector clients
+    }
 }
 void clientNetwork::loadDeliveryFromDb(QJsonDocument doc)
 {
     QJsonObject root = doc.object();
-    QJsonArray deliveiesArray = root["clients"].toArray();
+    QJsonArray deliveiesArray = root["delivery"].toArray();
     for (auto val : deliveiesArray)
     {
         QJsonObject obj = val.toObject();
@@ -147,6 +167,7 @@ void clientNetwork::loadDeliveryFromDb(QJsonDocument doc)
         identity.setPhoneNumber(obj["phoneNumber"].toString());
         identity.setAge(obj["age"].toInt());
         identity.setAddress(addr);
+        identity.setId(obj["id"].toInt());
         delivery D(identity);
         //add to vector clients
     }

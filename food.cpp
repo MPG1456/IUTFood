@@ -57,4 +57,6 @@ void Food::setId(int id)
 {
     this->id = id;
 }
-
+Food::Food(QObject *parent)
+{
+}

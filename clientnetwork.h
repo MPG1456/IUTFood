@@ -22,7 +22,7 @@
 #include "restaurant.h"
 #include "salad.h"
 #include "score.h"
-
+#include "order.h"
 class clientNetwork: public QObject
 {
     Q_OBJECT

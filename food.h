@@ -10,9 +10,10 @@ class Salad;
 class MainDish;
 
 class MenuFunctions;
-
-class Food
+#include <QObject>
+class Food : public QObject
 {
+    Q_OBJECT
     friend class Dessert;
     friend class Salad;
     friend class Drinks;
@@ -32,7 +33,7 @@ private:
     double price;
 
 public:
-    Food() = default;
+    Food(QObject *parent = nullptr);
     Food(QString newName, QString newIngredients, int newCapacity, double newPrice , int id);
     QString getName();
     void setName(QString newName);
