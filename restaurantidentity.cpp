@@ -3,12 +3,13 @@
 RestaurantIdentity::RestaurantIdentity(QString newUsername, QString newPassword,
                                        QString newName, QString newBio,
                                        Address &newAddress, MyTime &newTime,
-                                       Score &newScore) : username(newUsername), password(newPassword),
+                                       Score &newScore ,int id) : username(newUsername), password(newPassword),
                                                           name(newName), bio(newBio),
                                                           address(newAddress), time(newTime),
                                                           score(newScore)
 {
     isAvailable = false;
+    this->id = id;
 }
 
 QString RestaurantIdentity::getUsername()
@@ -74,5 +75,5 @@ void RestaurantIdentity::setTime(MyTime& newTime)
 }
 void RestaurantIdentity::setScore(Score newScore)
 {
-    score = newScore;
+    this->score = newScore;
 }

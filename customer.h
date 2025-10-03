@@ -3,7 +3,7 @@
 
 #include <person.h>
 
-class Customer : public Person
+class Customer:public Person
 {
     friend QDataStream &operator<<(QDataStream &out, const Customer &customer);
     friend QDataStream &operator>>(QDataStream &in, Customer &customer);
@@ -11,5 +11,6 @@ class Customer : public Person
 public:
     Customer() = default;
     Customer(PersonIdentity newPersonIdentity);
+
 };
 #endif // CUSTOMER_H

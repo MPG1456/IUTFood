@@ -19,7 +19,7 @@ private:
 
 public:
     MainDish() = default;
-    MainDish(QString name, QString ingredients, int capacity, double price);
+    MainDish(QString name, QString ingredients, int capacity, double price ,int id);
     void setType(QString newType = "NULL") override;
     virtual void setDishType(QString newMainDish = "NULL") = 0;
 };

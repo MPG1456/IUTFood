@@ -24,6 +24,7 @@ class Food
     friend void deserializeFood(QDataStream &in, Food &food);
 
 private:
+    int id;
     QString name;
     QString type;
     QString ingredients;
@@ -32,7 +33,7 @@ private:
 
 public:
     Food() = default;
-    Food(QString newName, QString newIngredients, int newCapacity, double newPrice);
+    Food(QString newName, QString newIngredients, int newCapacity, double newPrice , int id);
     QString getName();
     void setName(QString newName);
     QString getType();
@@ -43,6 +44,7 @@ public:
     void setCapacity(int newCapacity);
     double getPrice();
     void setPrice(double newPrice);
+    void setId(int id);
 };
 
 #endif // FOOD_H

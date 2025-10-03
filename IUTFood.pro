@@ -20,14 +20,14 @@ SOURCES += \
         menu.cpp \
         menufunctions.cpp \
         mytime.cpp \
+        order.cpp \
         person.cpp \
         personidentity.cpp \
         protocol.cpp \
         restaurant.cpp \
         restaurantidentity.cpp \
         salad.cpp \
-        score.cpp \
-        clientnetwork.cpp
+        score.cpp
 
 resources.files = \
     main.qml \
@@ -75,14 +75,14 @@ HEADERS += \
     menu.h \
     menufunctions.h \
     mytime.h \
+    order.h \
     person.h \
     personidentity.h \
     protocol.h \
     restaurant.h \
     restaurantidentity.h \
     salad.h \
-    score.h \
-    clientnetwork.h
+    score.h
 
 DISTFILES +=
 

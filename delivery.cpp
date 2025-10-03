@@ -1,4 +1,8 @@
 #include "delivery.h"
 
-delivery::delivery(QString newUsername, QString newPassword, QString newFirstName, QString newLastName, QString newPhoneNumber, int newAge, Address newAddress):PersonIdentity( newUsername,  newPassword,  newFirstName,  newLastName,  newPhoneNumber,  newAge,newAddress)
+delivery::delivery(PersonIdentity newIdentity):Person(newIdentity)
 {}
+// void delivery::setIdentity(PersonIdentity newIdentity)
+// {
+//     this->myIdentity = newIdentity;
+// }

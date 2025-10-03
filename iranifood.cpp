@@ -1,6 +1,6 @@
 #include "iranifood.h"
 
-IraniFood::IraniFood(QString name, QString ingredients, int capacity, double price) : MainDish(name, ingredients, capacity, price)
+IraniFood::IraniFood(QString name, QString ingredients, int capacity, double price ,int id) : MainDish(name, ingredients, capacity, price , id)
 {
     setDishType();
 }

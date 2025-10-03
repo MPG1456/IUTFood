@@ -11,6 +11,7 @@ class PersonIdentity
     friend QDataStream &operator>>(QDataStream &in, PersonIdentity &person);
 
 private:
+    int id;
     QString username;
     QString password;
     QString firstName;
@@ -21,7 +22,7 @@ private:
 
 public:
     PersonIdentity() = default;
-    PersonIdentity(QString newUsername, QString newPassword, QString newFirstName, QString newLastName, QString newPhoneNumber, int newAge, Address newAddress);
+    PersonIdentity(QString newUsername, QString newPassword, QString newFirstName, QString newLastName, QString newPhoneNumber, int newAge, Address newAddress, int id);
     PersonIdentity(const PersonIdentity &newPersonIdentity);
     PersonIdentity &operator= (const PersonIdentity &other);
 
@@ -39,6 +40,7 @@ public:
     void setAge(int newAge);
     Address getAddress();
     void setAddress(Address newAddress);
+    void setId(int id);
 };
 
 #endif // PERSONIDENTITY_H

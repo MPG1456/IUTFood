@@ -3,11 +3,12 @@
 PersonIdentity::PersonIdentity(QString newUsername, QString newPassword,
                                QString newFirstName, QString newLastName,
                                QString newPhoneNumber, int newAge,
-                               Address newAddress) : username(newUsername), password(newPassword),
+                               Address newAddress ,int id) : username(newUsername), password(newPassword),
                                                     firstName(newFirstName), lastName(newLastName),
-                                                    phoneNumber(newPhoneNumber), age(newAge),
-                                                    address(newAddress)
-{}
+                                                    phoneNumber(newPhoneNumber), age(newAge),address(newAddress)
+{
+    this->id = id;
+}
 
 QString PersonIdentity::getUsername()
 {

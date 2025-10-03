@@ -1,13 +1,16 @@
 #ifndef DELIVERY_H
 #define DELIVERY_H
-#include "personidentity.h"
+#include "person.h"
 #include <QObject>
-class delivery: public PersonIdentity
+class delivery: public Person
 {
     Q_OBJECT
 public:
-    delivery(QString newUsername, QString newPassword, QString newFirstName, QString newLastName, QString newPhoneNumber, int newAge, Address newAddress);
-
+    delivery(PersonIdentity newIdentity);
+    delivery()=default;
+    // void setIdentity(PersonIdentity newIdentity);
+private:
+    PersonIdentity myIdentity;
 };
 
 #endif // DELIVERY_H

@@ -22,6 +22,7 @@ public:
     int getCounter();
     void setCounter(int newCounter);
     //void showScore(); // This should change later. (Showing this straight to IU or not.)
+    Score& operator=(Score & other)=default;
 };
 
 #endif // SCORE_H

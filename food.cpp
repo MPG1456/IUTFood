@@ -1,10 +1,12 @@
 #include "food.h"
 
 Food::Food(QString newName, QString newIngredients,
-           int newCapacity, double newPrice) : name(newName), type("NULL"),
+           int newCapacity, double newPrice ,int id) : name(newName), type("NULL"),
                                                ingredients(newIngredients), capacity(newCapacity),
                                                price(newPrice)
-{}
+{
+    this->id =id;
+}
 
 QString Food::getName()
 {
@@ -51,6 +53,8 @@ void Food::setPrice(double newPrice)
     this->price = newPrice;
 }
 
-
-
+void Food::setId(int id)
+{
+    this->id = id;
+}
 

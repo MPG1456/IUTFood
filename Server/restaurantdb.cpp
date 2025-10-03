@@ -115,8 +115,8 @@ QJsonDocument RestaurantDB::dbToJson()
             obj["homePhone"] = query.value("homePhone").toString();
             obj["phoneNumber"] = query.value("phoneNumber").toString();
             obj["time"] = query.value("time").toString();
-            obj["score"] = query.value("score").toString();
-            obj["score_counter"] = query.value("score_counter").toString();
+            obj["score"] = query.value("score").toDouble();
+            obj["score_counter"] = query.value("score_counter").toInt();
 
             array.append(obj);
         }
