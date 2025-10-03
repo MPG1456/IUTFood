@@ -88,3 +88,37 @@ bool DeliveryDB::deleteUser(QString username)
     query.addBindValue(username);
     return query.exec();
 }
+QJsonDocument DeliveryDB::dbToJson()
+{
+    QJsonArray array;
+    QSqlDatabase db = QSqlDatabase::database("main_connection");
+    QSqlQuery query(db);
+
+    if(query.exec("SELECT * FROM delivery"))
+    {
+        while(query.next())
+        {
+            QJsonObject obj;
+            obj["id"] = query.value("id").toInt();
+            obj["username"] = query.value("username").toString();
+            obj["password"] = query.value("password").toString();
+            obj["firstname"] = query.value("firstname").toString();
+            obj["lastname"] = query.value("lastname").toString();
+            obj["country"] = query.value("country").toString();
+            obj["city"] = query.value("city").toString();
+            obj["postalcode"] = query.value("postalcode").toLongLong();
+            obj["homeAddress"] = query.value("homeAddress").toString();
+            obj["homePhone"] = query.value("homePhone").toString();
+            obj["phoneNumber"] = query.value("phoneNumber").toString();
+            obj["age"] = query.value("age").toInt();
+
+            array.append(obj);
+        }
+    }
+    else
+    {
+        qDebug() << "Failed to fetch delivery data:" << query.lastError().text();
+    }
+
+    return QJsonDocument(array);
+}

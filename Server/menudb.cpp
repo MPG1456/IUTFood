@@ -58,3 +58,32 @@ bool menudb::addMenu(int restaurant_id , QString name ,QString ingredients , QSt
     query.addBindValue(price);
     return query.exec();
 }
+QJsonDocument menudb::dbToJson()
+{
+    QJsonArray array;
+    QSqlDatabase db = QSqlDatabase::database("main_connection");
+    QSqlQuery query(db);
+
+    if(query.exec("SELECT * FROM menu"))
+    {
+        while(query.next())
+        {
+            QJsonObject obj;
+            obj["id"] = query.value("id").toInt();
+            obj["restaurant_id"] = query.value("restaurant_id").toInt();
+            obj["name"] = query.value("name").toString();
+            obj["ingredients"] = query.value("ingredients").toString();
+            obj["type"] = query.value("type").toString();
+            obj["capacity"] = query.value("capacity").toInt();
+            obj["price"] = query.value("price").toDouble();
+
+            array.append(obj);
+        }
+    }
+    else
+    {
+        qDebug() << "Failed to fetch menu data:" << query.lastError().text();
+    }
+
+    return QJsonDocument(array);
+}

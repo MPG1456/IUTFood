@@ -6,6 +6,10 @@
 #include <QSqlQuery>
 #include <QSqlError>
 #include <QDebug>
+#include <QSqlRecord>
+#include <QJsonObject>
+#include <QJsonArray>
+#include <QJsonDocument>
 
 class RestaurantDB : public QObject
 {
@@ -19,7 +23,7 @@ public:
     Q_INVOKABLE bool addRestaurant(QString username , QString password ,QString restaurantName , QString country ,QString city ,long long int postalcode , QString homeAddress ,QString homePhone ,QString bio , QString phoneNumber , QString time , QString score="0" , QString score_counter="0");
     Q_INVOKABLE bool deleteUser(QString username);
     // Q_INVOKABLE void printAllUsers();
-
+    QJsonDocument dbToJson();
 };
 
 #endif // RESTAURANTDB_H

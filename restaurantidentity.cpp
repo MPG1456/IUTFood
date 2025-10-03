@@ -60,3 +60,19 @@ void RestaurantIdentity::setIsAvailable(bool newAvailablity)
 {
     isAvailable = newAvailablity;
 }
+void RestaurantIdentity::setPhonenumber(QString phoneNumber)
+{
+    this->phoneNumber = phoneNumber;
+}
+void RestaurantIdentity::setAddress(Address newAddress)
+{
+    this->address = newAddress;
+}
+void RestaurantIdentity::setTime(MyTime& newTime)
+{
+    this->time = newTime;
+}
+void RestaurantIdentity::setScore(Score newScore)
+{
+    score = newScore;
+}

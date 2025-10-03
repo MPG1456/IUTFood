@@ -19,6 +19,7 @@ public:
     Restaurant() = default;
     Restaurant(QString newUsername, QString newPassword, QString newName, QString newBio, Address &newAddress, MyTime &newTime, Score &newScore);
     // void showAllRestaurants() -> This one has to be added when the UI complete.
+    void setIdentity(RestaurantIdentity newIdentity);
 };
 
 #endif // RESTAURANT_H

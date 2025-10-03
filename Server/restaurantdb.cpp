@@ -92,3 +92,39 @@ bool RestaurantDB::deleteUser(QString username)
     query.addBindValue(username);
     return query.exec();
 }
+QJsonDocument RestaurantDB::dbToJson()
+{
+    QJsonArray array;
+    QSqlDatabase db = QSqlDatabase::database("main_connection");
+    QSqlQuery query(db);
+
+    if(query.exec("SELECT * FROM restaurant"))
+    {
+        while(query.next())
+        {
+            QJsonObject obj;
+            obj["id"] = query.value("id").toInt();
+            obj["username"] = query.value("username").toString();
+            obj["password"] = query.value("password").toString();
+            obj["restaurantname"] = query.value("restaurantname").toString();
+            obj["bio"] = query.value("bio").toString();
+            obj["country"] = query.value("country").toString();
+            obj["city"] = query.value("city").toString();
+            obj["postalcode"] = query.value("postalcode").toInt();
+            obj["homeAddress"] = query.value("homeAddress").toString();
+            obj["homePhone"] = query.value("homePhone").toString();
+            obj["phoneNumber"] = query.value("phoneNumber").toString();
+            obj["time"] = query.value("time").toString();
+            obj["score"] = query.value("score").toString();
+            obj["score_counter"] = query.value("score_counter").toString();
+
+            array.append(obj);
+        }
+    }
+    else
+    {
+        qDebug() << "Failed to fetch restaurants data:" << query.lastError().text();
+    }
+
+    return QJsonDocument(array);
+}

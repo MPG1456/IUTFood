@@ -89,3 +89,34 @@ bool ClientDB::deleteUser(QString username)
     query.addBindValue(username);
     return query.exec();
 }
+QJsonDocument ClientDB::dbToJson()
+{
+    QJsonArray clientsArray;
+    QSqlDatabase db = QSqlDatabase::database("main_connection");
+    QSqlQuery query(db);
+
+    if (!query.exec("SELECT * FROM client")) {
+        qDebug() << "Failed to select clients:" << query.lastError().text();
+        return QJsonDocument(clientsArray); // خالی برمی‌گرده
+    }
+
+    while (query.next()) {
+        QJsonObject clientObj;
+        clientObj["id"] = query.value("id").toInt();
+        clientObj["username"] = query.value("username").toString();
+        clientObj["password"] = query.value("password").toString();
+        clientObj["firstname"] = query.value("firstname").toString();
+        clientObj["lastname"] = query.value("lastname").toString();
+        clientObj["country"] = query.value("country").toString();
+        clientObj["city"] = query.value("city").toString();
+        clientObj["postalcode"] = query.value("postalcode").toInt();
+        clientObj["homeAddress"] = query.value("homeAddress").toString();
+        clientObj["homePhone"] = query.value("homePhone").toString();
+        clientObj["phoneNumber"] = query.value("phoneNumber").toString();
+        clientObj["age"] = query.value("age").toInt();
+
+        clientsArray.append(clientObj);
+    }
+
+    return QJsonDocument(clientsArray);
+}

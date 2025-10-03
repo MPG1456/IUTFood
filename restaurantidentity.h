@@ -14,6 +14,7 @@ private:
     QString username;
     QString password;
     QString name;
+    QString phoneNumber;
     QString bio;
     Address address;
     MyTime time;
@@ -33,6 +34,10 @@ public:
     void setBio(QString newBio);
     bool getIsAvailable();
     void setIsAvailable(bool newAvailablity);
+    void setPhonenumber(QString phoneNumber);
+    void setAddress(Address newAddress);
+    void setTime(MyTime& newTime);
+    void setScore(Score newScore);
 };
 
 #endif // RESTAURANTIDENTITY_H

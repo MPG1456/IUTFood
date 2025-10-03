@@ -17,7 +17,7 @@ private:
     long long int postalCode;
 public:
     Address() = default;
-    Address(QString newCountry, QString newCity, QString newHomeAddress, QString newHomePhone, long long int newPostalCode);
+    Address(QString newCountry, QString newCity, QString newHomeAddress, QString newHomePhone,int newPostalCode);
     Address(const Address &copyAddress);
     Address& operator= (const Address &other);
     QString getCountry();

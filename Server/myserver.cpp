@@ -18,6 +18,16 @@ void MyServer::incomingConnection(qintptr socketDescriptor)
     connect(socket , &QTcpSocket::disconnected , this , &MyServer::onDisconnected);
     roles[socket] = "unknown";
     qDebug()<<"new connection!";
+    QJsonObject allData;
+    allData["clients"] = clientDataBase.dbToJson().array();
+    allData["delivery"] = deliveryDataBase.dbToJson().array();
+    allData["restaurants"] = restaurantDataBase.dbToJson().array();
+    allData["menus"] = menuDataBase.dbToJson().array();
+    allData["orders"] = orderDataBase.dbToJson().array();
+    QJsonDocument doc(allData);
+    QByteArray jsonData = doc.toJson(QJsonDocument::Compact);
+    socket->write(jsonData);
+    socket->flush();
 }
 void MyServer::onReadyRead()
 {

@@ -5,6 +5,10 @@
 #include <QSqlQuery>
 #include <QSqlError>
 #include <QDebug>
+#include <QSqlRecord>
+#include <QJsonObject>
+#include <QJsonArray>
+#include <QJsonDocument>
 
 class menudb : public QObject
 {
@@ -14,6 +18,7 @@ public:
     // Q_INVOKABLE bool usernameExist(QString username);
     Q_INVOKABLE bool addMenu(int restaurant_id , QString name ,QString ingredients , QString type ,  int capacity , double price);
     // Q_INVOKABLE bool deleteUser(QString username);
+    QJsonDocument dbToJson();
 };
 
 #endif // MENUDB_H

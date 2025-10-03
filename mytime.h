@@ -16,6 +16,7 @@ public:
     MyTime(const MyTime &copyTime);
     QString getTime();
     void setTime(QString newTime);
+    MyTime& operator=(const MyTime& other)=default;
 };
 
 #endif // MYTIME_H

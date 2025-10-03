@@ -84,3 +84,32 @@ bool orderdb::addOrder(int client_id , int restaurant_id , int delivery_id ,QStr
 //     query.addBindValue(username);
 //     return query.exec();
 // }
+QJsonDocument orderdb::dbToJson()
+{
+    QJsonArray array;
+    QSqlDatabase db = QSqlDatabase::database("main_connection");
+    QSqlQuery query(db);
+
+    if(query.exec("SELECT * FROM orders"))
+    {
+        while(query.next())
+        {
+            QJsonObject obj;
+            obj["id"] = query.value("id").toInt();
+            obj["client_id"] = query.value("client_id").toInt();
+            obj["restaurant_id"] = query.value("restaurant_id").toInt();
+            obj["delivery_id"] = query.value("delivery_id").toInt();
+            obj["order_time"] = query.value("order_time").toString();
+            obj["reached_time"] = query.value("reached_time").toString();
+            obj["status"] = query.value("status").toString();
+
+            array.append(obj);
+        }
+    }
+    else
+    {
+        qDebug() << "Failed to fetch orders data:" << query.lastError().text();
+    }
+
+    return QJsonDocument(array);
+}

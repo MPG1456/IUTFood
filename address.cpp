@@ -2,7 +2,7 @@
 
 Address::Address(QString newCountry, QString newCity,
                  QString newHomeAddress, QString newHomePhone,
-                 long long int newPostalCode) : country(newCountry), city(newCity),
+                 int newPostalCode) : country(newCountry), city(newCity),
     homeAddress(newHomeAddress), homePhone(newHomePhone),
     postalCode(newPostalCode)
 {}
