@@ -2,7 +2,7 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 6.5
 // import restdb
-
+import Network 1.0
 Window{
     id: win
     width:400
@@ -11,14 +11,10 @@ Window{
     minimumHeight: 600
     title:"restaurant sign up"
     visible: true
-    // Restaurantbatabse {
-    //     id: db
-    // }
     Rectangle
     {
 
         id:mainrect
-
         anchors.fill: parent
         color:"#333"
         Image {
@@ -122,36 +118,36 @@ Window{
                 font.pixelSize: 12
                 anchors.margins: 2
                 }
-                TextField
-                {
-                    id:namefield
-                    placeholderText: "name"
-                    width: insiderect.width-30
-                    font.pixelSize: 14
-                    property int validname: 0
-                    onTextChanged:
-                    {
-                        if(namefield.length<3)
-                        {
-                            nameErr.visible = true
-                            nameErr.text = "at least 3 character"
-                            namefield.validname = 0
-                        }
-                        else
-                        {
-                            nameErr.visible = false
-                            namefield.validname = 1
-                        }
-                    }
-                }
-                Text
-                {
-                id: nameErr
-                color:"red"
-                visible: false
-                font.pixelSize: 12
-                anchors.margins: 2
-                }
+                // TextField
+                // {
+                //     id:namefield
+                //     placeholderText: "name"
+                //     width: insiderect.width-30
+                //     font.pixelSize: 14
+                //     property int validname: 0
+                //     onTextChanged:
+                //     {
+                //         if(namefield.length<3)
+                //         {
+                //             nameErr.visible = true
+                //             nameErr.text = "at least 3 character"
+                //             namefield.validname = 0
+                //         }
+                //         else
+                //         {
+                //             nameErr.visible = false
+                //             namefield.validname = 1
+                //         }
+                //     }
+                // }
+                // Text
+                // {
+                // id: nameErr
+                // color:"red"
+                // visible: false
+                // font.pixelSize: 12
+                // anchors.margins: 2
+                // }
                 TextField
                 {
                     id:resta
@@ -290,6 +286,21 @@ Window{
                 font.pixelSize: 12
                 anchors.margins: 2
                 }
+                Dialog
+                {
+                id:message
+                title: "signup was successful ✔"
+                standardButtons: Dialog.Ok
+                height: mainrect.height/4
+                width:mainrect.width/4
+                anchors.centerIn: parent
+                visible: false
+                contentItem: Label
+                {
+                horizontalAlignment: Text.AlignHCenter
+                verticalAlignment: Text.AlignVCenter
+                }
+                }
                 TextField
                 {
                     id:homeadr
@@ -363,6 +374,49 @@ Window{
                 font.pixelSize: 12
                 anchors.margins: 2
                 }
+                TextField
+                {
+                    id:phone
+                    placeholderText: "phone number"
+                    width: insiderect.width-30
+                    font.pixelSize: 14
+                    property int validPhone: 0
+                    onTextChanged: {
+                        if (phone.text.length !== 11) {
+                            phoneErr.visible = true
+                            phoneErr.text = "must be 11 character and should be number"
+                            phone.validPhone = 0
+                        } else {
+                            var flag = 0
+                            for (var i = 0; i < 11; i++) {
+                                var code = phone.text.charCodeAt(i)
+                                if (code < 48 || code > 57) {
+                                    flag = 1
+                                    break
+                                }
+                            }
+
+                            if (flag === 1) {
+                                phoneErr.visible = true
+                                phoneErr.text = "must be 11 character and should be number"
+                                phone.validPhone = 0
+                            } else
+                            {
+                                phoneErr.visible = false
+                                phone.validPhone = 1
+                            }
+                        }
+                    }
+
+                }
+                Text
+                {
+                id: phoneErr
+                color:"red"
+                visible: false
+                font.pixelSize: 12
+                anchors.margins: 2
+                }
                 TextArea
                 {
                     id:bio
@@ -425,23 +479,28 @@ Window{
                         width: col.width/3
                         onClicked:
                         {
-                            var flag =0
-                            if(!(usernamefield.validusername && pass.validpassword && namefield.validname && resta.validrestname && country.validcountry && city.validcity && postalcode.validpost && homeadr.validhome && homephone.validHomePhone && bio.validbio))
-                            {
-                                flag=1
-                            }
-                            if(db.usernameexist(usernamefield.text) || flag)
-                            {
-
-
-                            }
-                            else
-                            {
-                                // db.printAllUsers();
-                            db.adduser(usernamefield.text , pass.text , namefield.text , resta.text , country.text , city.text , postalcode.text , homeadr.text ,homephone.text , bio.text);
-                            console.log("this username already exist")
-                            }
-                        }
+                            if (usernamefield.validusername && pass.validpassword && phone.validPhone &&
+                                        resta.validrestname && country.validcountry && city.validcity &&
+                                        postalcode.validpost && homeadr.validhome && homephone.validHomePhone && bio.validbio)
+                                {
+                                message.open()
+                                var obj = {
+                                           "type": "signup",
+                                           "username": usernamefield.text,
+                                           "password": pass.text,
+                                           "restaurantName": resta.text,
+                                           "country": country.text,
+                                           "city": city.text,
+                                           "postalcode": postalcode.text,
+                                           "address": homeadr.text,
+                                           "homePhone": homephone.text,
+                                           "phoneNumber": phone.text,
+                                           "bio": bio.text,
+                                           "role":"Restaurant"
+                                       }
+                                    var jsonStr = JSON.stringify(obj)
+                                    Network.sendData(jsonStr)
+                                    }
 
                     }
 
@@ -459,4 +518,5 @@ Window{
     }
 
 
+}
 }

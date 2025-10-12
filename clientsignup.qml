@@ -1,7 +1,7 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 6.5
-// import clidb
+import Network 1.0
 Window{
     id: win
     width:400
@@ -472,6 +472,24 @@ Window{
                     if(firstnamefield.validfirstname && lastnamefield.validlastname && phone.validPhone && country.validcountry && city.validcity && postalcode.validpost && homephone.validHomePhone && homeadr.validhome)
                     {
                         message.open()
+                        var jsonObj = {
+                            "type": "signup",
+                            "username": usernamefield.text,
+                            "password": pass.text,
+                            "firstname": firstnamefield.text,
+                            "lastname": lastnamefield.text,
+                            "age": age.value,
+                            "country": country.text,
+                            "city": city.text,
+                            "postalcode": postalcode.text,
+                            "homeAddress": homeadr.text,
+                            "homePhone": homephone.text,
+                            "phoneNumber": phone.text,
+                            "role":"Client"
+                        }
+
+                        var jsonStr = JSON.stringify(jsonObj)
+                        Network.sendData(jsonStr)
                     }
                     else
                     {

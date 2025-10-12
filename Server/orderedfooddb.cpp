@@ -1,4 +1,4 @@
-#include "ordered_foods.h"
+#include "orderedfooddb.h"
 
 #include "menudb.h"
 #include "qcoreapplication.h"
@@ -55,4 +55,29 @@ bool ordered_foods::addOrderedFood(int order_id , int menu_id ,int quantity)
     query.addBindValue(quantity);
     return query.exec();
 }
+QJsonDocument ordered_foods::dbToJson()
+{
+    QJsonArray array;
+    QSqlDatabase db = QSqlDatabase::database("main_connection");
+    QSqlQuery query(db);
 
+    if(query.exec("SELECT * FROM ordered_foods"))
+    {
+        while(query.next())
+        {
+            QJsonObject obj;
+            obj["id"] = query.value("id").toInt();
+            obj["order_id"] = query.value("order_id").toInt();
+            obj["menu_id"] = query.value("menu_id").toInt();
+            obj["quantity"] = query.value("quantity").toInt();
+
+            array.append(obj);
+        }
+    }
+    else
+    {
+        qDebug() << "Failed to fetch ordered_foods data:" << query.lastError().text();
+    }
+
+    return QJsonDocument(array);
+}

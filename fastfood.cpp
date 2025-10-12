@@ -1,6 +1,6 @@
 #include "fastfood.h"
 
-FastFood::FastFood(QString name, QString ingredients, int capacity, double price ,int id) : MainDish(name, ingredients, capacity, price ,id)
+FastFood::FastFood(QString name, QString ingredients, int capacity, double price ,int id , int restaurant_id) : MainDish(name, ingredients, capacity, price ,id , restaurant_id)
 {
     this->setDishType();
 }

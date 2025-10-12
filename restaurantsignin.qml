@@ -1,6 +1,7 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 6.5
+import DataStore 1.0
 import "."
 Window{
     id: win
@@ -58,16 +59,33 @@ Window{
                 }
                 TextField
                 {
+                    id: usernamefield
                     placeholderText: "username"
                     width: insiderect.width-30
                     font.pixelSize: 14
                 }
                 TextField
                 {
+                    id:passwordfield
                     placeholderText: "password"
                     width: insiderect.width-30
                     font.pixelSize: 14
                     echoMode: TextInput.Password
+                }
+                Dialog
+                {
+                    id:message
+                    title: "incorrect  user or pass ✕"
+                    standardButtons: Dialog.Ok
+                    height: mainrect.height/4
+                    width:mainrect.width/4
+                    anchors.centerIn: parent
+                    visible: false
+                    contentItem: Label
+                    {
+                        horizontalAlignment: Text.AlignHCenter
+                        verticalAlignment: Text.AlignVCenter
+                    }
                 }
                 Row{
                     spacing:7
@@ -101,6 +119,29 @@ Window{
                         width: col.width/3
                         onClicked:
                         {
+                            if(usernamefield.text==="Admin")
+                            {
+                                if(passwordfield.text==="12345")
+                                {
+                                    var component =Qt.createComponent("adminpanel.qml")
+                                    if(component.status===Component.Ready)
+                                    {
+                                        var newWin = component.createObject(null ,{
+                                        width =win.width,
+                                        height =win.height,
+                                        x:win.x,
+                                        y:win.y,
+                                        visibility:win.visibility
+                                                                            })
+                                        newWin.show();
+                                        win.close();
+                                    }
+                                }
+                            }
+                            else
+                            {
+                            if(DataStore.checkRestaurantUserPass(usernamefield.text , passwordfield.text))
+                            {
                             var component =Qt.createComponent("restaurantpanel.qml")
                             if(component.status===Component.Ready)
                             {
@@ -110,10 +151,16 @@ Window{
                                 x:win.x,
                                 y:win.y,
                                 visibility:win.visibility
-                                                                    })
+                                })
                                 newWin.show();
                                 win.close();
                             }
+                            }
+                            else
+                            {
+                                message.open()
+                            }
+                        }
                         }
                     }
 

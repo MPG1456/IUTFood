@@ -9,7 +9,7 @@ class Drinks : public Food
     friend QDataStream &operator>> (QDataStream &in, Drinks &drinks);
 public:
     Drinks() = default;
-    Drinks(QString name, QString ingredients, int capacity, double price , int id);
-    void setType(QString newType = "NULL") override;
+    Drinks(QString name, QString ingredients, int capacity, double price , int id , int restaurant_id);
+    void setType(QString newType = "NULL");
 };
 #endif // DRINKS_H

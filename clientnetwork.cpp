@@ -1,22 +1,21 @@
 #include "clientnetwork.h"
+#include "datastore.h"
 
 clientNetwork::clientNetwork(QObject *parent):QObject(parent)
 {
     socket.connectToHost("127.0.0.1" , 1234);
     connect(&socket , &QTcpSocket::connected , [](){qDebug()<<"connected!"; });
-    connect(&socket , &QTcpSocket::readyRead , [&](){
-        QByteArray receivedData = socket.readAll();
-        qDebug()<<"received data:"<<receivedData;
-    });
+    connect(&socket, &QTcpSocket::readyRead, this, &clientNetwork::onReadyRead);
+
 }
-void clientNetwork::sendData(const QString& message)
+Q_INVOKABLE void clientNetwork::sendData(const QString& message)
 {
         if (socket.state()== QTcpSocket::ConnectedState)
         {
         socket.write(message.toUtf8());
         }
 }
-void clientNetwork::onReadyRead()
+void  clientNetwork::onReadyRead()
 {
     QByteArray allData = socket.readAll();
     QJsonDocument jsDoc = QJsonDocument::fromJson(allData);
@@ -28,6 +27,7 @@ void clientNetwork::onReadyRead()
         loadMenuFromDb(jsDoc);
         loadRestaurantFromDb(jsDoc);
         loadOrderFromDb(jsDoc);
+        loadOrderedFoodsFromDb(jsDoc);
     }
 }
 void clientNetwork::loadClientFromDb(QJsonDocument doc)
@@ -44,6 +44,7 @@ void clientNetwork::loadClientFromDb(QJsonDocument doc)
         addr.setPostalCode(addrObj["postalCode"].toInt());
         addr.setHomeAddress(addrObj["homeAddress"].toString());
         addr.setHomePhone(addrObj["homePhone"].toString());
+
         PersonIdentity identity;
         identity.setUsername(obj["username"].toString());
         identity.setPassword(obj["password"].toString());
@@ -53,10 +54,12 @@ void clientNetwork::loadClientFromDb(QJsonDocument doc)
         identity.setAge(obj["age"].toInt());
         identity.setAddress(addr);
         identity.setId(obj["id"].toInt());
-        Customer C(identity);
-        //add to vector clients
+
+        auto Cptr = QSharedPointer<Customer>::create(identity);
+        DataStore::instance().addClient(Cptr);
     }
 }
+
 void clientNetwork::loadRestaurantFromDb(QJsonDocument doc)
 {
     QJsonObject root = doc.object();
@@ -71,6 +74,7 @@ void clientNetwork::loadRestaurantFromDb(QJsonDocument doc)
         addr.setPostalCode(addrObj["postalCode"].toInt());
         addr.setHomeAddress(addrObj["homeAddress"].toString());
         addr.setHomePhone(addrObj["homePhone"].toString());
+
         RestaurantIdentity identity;
         identity.setUsername(obj["username"].toString());
         identity.setPassword(obj["password"].toString());
@@ -79,19 +83,22 @@ void clientNetwork::loadRestaurantFromDb(QJsonDocument doc)
         identity.setPhonenumber(obj["phoneNumber"].toString());
         identity.setAddress(addr);
         identity.setId(obj["id"].toInt());
+
         Score score;
         score.addScore(obj["score"].toDouble());
         score.setCounter(obj["score_counter"].toInt());
         identity.setScore(score);
+
         MyTime time;
         time.setTime(obj["time"].toString());
         identity.setTime(time);
-        Restaurant R;
-        R.setIdentity(identity);
 
-        //add to vector restaurants
+        auto Rptr = QSharedPointer<Restaurant>::create();
+        Rptr->setIdentity(identity);
+        DataStore::instance().addRestaurant(Rptr);
     }
 }
+
 void clientNetwork::loadMenuFromDb(QJsonDocument doc)
 {
     QJsonObject root = doc.object();
@@ -99,57 +106,48 @@ void clientNetwork::loadMenuFromDb(QJsonDocument doc)
     for (auto val : menuArray)
     {
         QJsonObject obj = val.toObject();
-        Food *f = nullptr;
-        if (obj["type"].toString()=="salad")
-        {
-            f = new Salad(obj["name"].toString() , obj["ingredients"].toString(), obj["capacity"].toInt() ,obj["price"].toDouble() , obj["id"].toInt());
-        }
-        else if (obj["type"].toString()=="drinks")
-        {
-            f = new Drinks(obj["name"].toString() , obj["ingredients"].toString(), obj["capacity"].toInt() ,obj["price"].toDouble() ,obj["id"].toInt());
-        }
-        else if (obj["type"].toString()=="dessert")
-        {
-            f = new Dessert(obj["name"].toString() , obj["ingredients"].toString(), obj["capacity"].toInt() ,obj["price"].toDouble() ,obj["id"].toInt());
-        }
-        else if (obj["type"].toString()=="iranifood")
-        {
-            f = new IraniFood(obj["name"].toString() , obj["ingredients"].toString(), obj["capacity"].toInt() ,obj["price"].toDouble() ,obj["id"].toInt());
-        }
-        else if (obj["type"].toString()=="fastfood")
-        {
-            f = new FastFood(obj["name"].toString() , obj["ingredients"].toString(), obj["capacity"].toInt() ,obj["price"].toDouble() ,obj["id"].toInt());
-        }
-        if (f)
-        {
-            //add to vector menus
+        QSharedPointer<Food> f = nullptr;
 
-        }
+        if (obj["type"].toString() == "salad")
+            f = QSharedPointer<Food>::create(obj["name"].toString(), obj["ingredients"].toString(), obj["capacity"].toInt(), obj["price"].toDouble(), obj["id"].toInt() , obj["restaurant_id"].toInt());
+        else if (obj["type"].toString() == "drinks")
+            f = QSharedPointer<Food>::create(obj["name"].toString(), obj["ingredients"].toString(), obj["capacity"].toInt(), obj["price"].toDouble(), obj["id"].toInt() , obj["restaurant_id"].toInt());
+        else if (obj["type"].toString() == "dessert")
+            f = QSharedPointer<Food>::create(obj["name"].toString(), obj["ingredients"].toString(), obj["capacity"].toInt(), obj["price"].toDouble(), obj["id"].toInt() , obj["restaurant_id"].toInt());
+        else if (obj["type"].toString() == "iranifood")
+            f = QSharedPointer<Food>::create(obj["name"].toString(), obj["ingredients"].toString(), obj["capacity"].toInt(), obj["price"].toDouble(), obj["id"].toInt() , obj["restaurant_id"].toInt());
+        else if (obj["type"].toString() == "fastfood")
+            f = QSharedPointer<Food>::create(obj["name"].toString(), obj["ingredients"].toString(), obj["capacity"].toInt(), obj["price"].toDouble(), obj["id"].toInt() , obj["restaurant_id"].toInt());
+
+        if (f)
+            DataStore::instance().addFood(f);
     }
 }
+
 void clientNetwork::loadOrderFromDb(QJsonDocument doc)
 {
     QJsonObject root = doc.object();
-    QJsonArray deliveiesArray = root["orders"].toArray();
-    for (auto val : deliveiesArray)
+    QJsonArray ordersArray = root["orders"].toArray();
+    for (auto val : ordersArray)
     {
         QJsonObject obj = val.toObject();
-        order ord;
-        ord.setId(obj["id"].toInt());
-        ord.setClientId(obj["client_id"].toInt());
-        ord.setRestaurantId(obj["restaurant_id"].toInt());
-        ord.setDeliveryId(obj["delivery_id"].toInt());
-        ord.setOrderTime(obj["order_time"].toString());
-        ord.setReachedTime(obj["reached_time"].toString());
-        ord.setStatus(obj["status"].toString());
-        //add to vector clients
+        auto Optr = QSharedPointer<order>::create();
+        Optr->setId(obj["id"].toInt());
+        Optr->setClientId(obj["client_id"].toInt());
+        Optr->setRestaurantId(obj["restaurant_id"].toInt());
+        Optr->setDeliveryId(obj["delivery_id"].toInt());
+        Optr->setOrderTime(obj["order_time"].toString());
+        Optr->setReachedTime(obj["reached_time"].toString());
+        Optr->setStatus(obj["status"].toString());
+        DataStore::instance().addOrder(Optr);
     }
 }
+
 void clientNetwork::loadDeliveryFromDb(QJsonDocument doc)
 {
     QJsonObject root = doc.object();
-    QJsonArray deliveiesArray = root["delivery"].toArray();
-    for (auto val : deliveiesArray)
+    QJsonArray deliveryArray = root["delivery"].toArray();
+    for (auto val : deliveryArray)
     {
         QJsonObject obj = val.toObject();
         Address addr;
@@ -168,7 +166,23 @@ void clientNetwork::loadDeliveryFromDb(QJsonDocument doc)
         identity.setAge(obj["age"].toInt());
         identity.setAddress(addr);
         identity.setId(obj["id"].toInt());
-        delivery D(identity);
-        //add to vector clients
+
+        auto Dptr = QSharedPointer<delivery>::create(identity);
+        DataStore::instance().addDelivery(Dptr);
+    }
+}
+void clientNetwork::loadOrderedFoodsFromDb(QJsonDocument doc)
+{
+    QJsonObject root = doc.object();
+    QJsonArray orderedArray = root["ordered_foods"].toArray();
+    for (auto val : orderedArray)
+    {
+        QJsonObject obj = val.toObject();
+        auto Optr = QSharedPointer<orderedFood>::create();
+        Optr->setId(obj["id"].toInt());
+        Optr->setOrderId(obj["order_id"].toInt());
+        Optr->setMenuId(obj["menu_id"].toInt());
+        Optr->setQuantity(obj["quantity"].toInt());
+        DataStore::instance().addOrderedFood(Optr);
     }
 }

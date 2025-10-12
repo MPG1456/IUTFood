@@ -2,11 +2,12 @@
 #define PERSON_H
 
 #include "personidentity.h"
-
-class Person
+#include <QObject>
+class Person :public QObject
 {
-    friend QDataStream &operator<<(QDataStream &out, const Person &person);
-    friend QDataStream &operator>>(QDataStream &in, Person &person);
+    Q_OBJECT
+    // friend QDataStream &operator<<(QDataStream &out, const Person &person);
+    // friend QDataStream &operator>>(QDataStream &in, Person &person);
 private:
     PersonIdentity myIdentity;
 

@@ -1,6 +1,6 @@
 #include "salad.h"
 
-Salad::Salad(QString name, QString ingredients, int capacity, double price ,int id) : Food(name, ingredients, capacity, price ,id)
+Salad::Salad(QString name, QString ingredients, int capacity, double price ,int id , int restaurant_id) : Food(name, ingredients, capacity, price ,id , restaurant_id)
 {
     this->setType();
 }

@@ -6,6 +6,14 @@
 class order :public QObject
 {
     Q_OBJECT
+private:
+    int id;
+    int client_id;
+    int restaurant_id;
+    int delivery_id;
+    QString status;
+    QString reached_time;
+    QString order_time;
 public:
     order()=default;
     void setId(int id);
@@ -15,15 +23,6 @@ public:
     void setStatus(QString status);
     void setReachedTime(QString reached_time);
     void setOrderTime(QString order_time);
-private:
-    int id;
-    int client_id;
-    int restaurant_id;
-    int delivery_id;
-    QString status;
-    QString reached_time;
-    QString order_time;
-
 };
 
 #endif // ORDER_H

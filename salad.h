@@ -10,8 +10,8 @@ class Salad : public Food
 
 public:
     Salad() = default;
-    Salad(QString name, QString ingredients, int capacity, double price ,int id);
-    void setType(QString newType = "NULL") override;
+    Salad(QString name, QString ingredients, int capacity, double price ,int id , int restaurant_id);
+    void setType(QString newType = "NULL");
 };
 
 #endif // SALAD_H

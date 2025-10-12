@@ -3,6 +3,8 @@ import QtQuick.Controls 2.15
 import QtQuick.Layouts 6.5
 import "."
 import QtQuick.Window
+import DataStore 1.0
+import Network 1.0
 Window{
     id: win
     width:400
@@ -71,6 +73,27 @@ Window{
                     font.pixelSize: 14
                     echoMode: TextInput.Password
                 }
+                Dialog
+                {
+                    id:message
+                    title: "incorrect  user or pass ✕"
+                    standardButtons: Dialog.Ok
+                    // background:Rectangle
+                    // {
+                    //     color:"#c5e1a5"
+                    //     anchors.fill:message
+                    //     radius:10
+                    // }
+                    height: mainrect.height/4
+                    width:mainrect.width/4
+                    anchors.centerIn: parent
+                    visible: false
+                    contentItem: Label
+                    {
+                        horizontalAlignment: Text.AlignHCenter
+                        verticalAlignment: Text.AlignVCenter
+                    }
+                }
                 // adress{}
                 Row{
                     spacing:7
@@ -104,7 +127,8 @@ Window{
                         }
                         else
                         {
-
+                        if(DataStore.checkClientUserPass(usernamefield.text , passwordfield.text))
+                        {
                         var component =Qt.createComponent("clientpanel.qml")
                         if(component.status===Component.Ready)
                         {
@@ -117,6 +141,13 @@ Window{
                                                                 })
                             newWin.show();
                             win.close();
+                        }
+                        console.log("111111!");
+                        }
+                        else
+                        {
+                            console.log("2222222");
+                            message.open()
                         }
                         }
                         }
@@ -147,19 +178,18 @@ Window{
                             onClicked:
                             {
                                 var component =Qt.createComponent("clientsignup.qml")
-                                                        if(component.status===Component.Ready)
-                                                        {
-                                                            var newWin = component.createObject(null ,{
-                                                            width =win.width,
-                                                            height =win.height,
-                                                            x:win.x,
-                                                            y:win.y,
-                                                            visibility:win.visibility
-                                                                                                })
-                                                            newWin.show();
-                                                            win.close();
-                                                        }
-
+                                if(component.status===Component.Ready)
+                                {
+                                var newWin = component.createObject(null ,{
+                                width =win.width,
+                                height =win.height,
+                                x:win.x,
+                                y:win.y,
+                                visibility:win.visibility
+                                })
+                                newWin.show();
+                                win.close();
+                            }
                             }
                         }
                     }

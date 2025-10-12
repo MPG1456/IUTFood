@@ -9,3 +9,7 @@ void Restaurant::setIdentity(RestaurantIdentity newIdentity)
 {
     this->myIdentity = newIdentity;
 }
+RestaurantIdentity Restaurant::getIdentity()
+{
+    return myIdentity;
+}

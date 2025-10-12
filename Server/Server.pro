@@ -13,7 +13,7 @@ SOURCES += \
         clientdb.cpp \
         deliverydb.cpp \
         menudb.cpp \
-        ordered_foods.cpp \
+        orderedfooddb.cpp \
         restaurantdb.cpp \
         main.cpp \
         myserver.cpp \
@@ -49,7 +49,7 @@ HEADERS += \
     deliverydb.h \
     menudb.h \
     myserver.h \
-    ordered_foods.h \
+    orderedfooddb.h \
     restaurantdb.h \
     orderdb.h
 

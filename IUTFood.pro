@@ -22,6 +22,7 @@ SOURCES += \
         menufunctions.cpp \
         mytime.cpp \
         order.cpp \
+        orderedfood.cpp \
         person.cpp \
         personidentity.cpp \
         protocol.cpp \
@@ -78,6 +79,7 @@ HEADERS += \
     menufunctions.h \
     mytime.h \
     order.h \
+    orderedfood.h \
     person.h \
     personidentity.h \
     protocol.h \

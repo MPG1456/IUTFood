@@ -2,6 +2,7 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 6.5
 // import delivdb
+import Network 1.0
 Window{
     id: win
     width:400
@@ -472,20 +473,27 @@ Window{
                     width: col.width/3
                     onClicked:
                     {
-                    var flag = 0
-                    if (!(usernamefield.validusername && pass.validpassword && firstnamefield.validfirstname && lastnamefield.validlastname && country.validcountry && city.validcity && postalcode.validpost && homeadr.validhome &&homephone.validHomePhone &&phone.validPhone))
-                    {
-                        flag = 1
-                    }
-                    if(db.usernameexist(username.text) || flag)
-                    {
-                        message.open()
-                    }
-                    else
-                    {
-                    db.adduser(usernamefield.text , pass.text , firstnamefield.text , lastnamefield.text ,age.value, country.text , city.text , postalcode.text , homeadr.text ,homephone.text , phone.text);                        
-                    console.log("this username already exist")
-                    }
+                        if(firstnamefield.validfirstname && lastnamefield.validlastname && phone.validPhone && country.validcountry && city.validcity && postalcode.validpost && homephone.validHomePhone && homeadr.validhome)
+                        {
+                            message.open()
+                            var jsonObj = {
+                                "type": "signup",
+                                "username": usernamefield.text,
+                                "password": pass.text,
+                                "firstname": firstnamefield.text,
+                                "lastname": lastnamefield.text,
+                                "age": age.value,
+                                "country": country.text,
+                                "city": city.text,
+                                "postalcode": postalcode.text,
+                                "homeAddress": homeadr.text,
+                                "homePhone": homephone.text,
+                                "phoneNumber": phone.text,
+                                "role":"Delivery"
+                            }
+                            var jsonStr = JSON.stringify(jsonObj)
+                            Network.sendData(jsonStr)
+                        }
                     }
                     }
                   }

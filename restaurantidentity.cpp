@@ -77,3 +77,7 @@ void RestaurantIdentity::setScore(Score newScore)
 {
     this->score = newScore;
 }
+void RestaurantIdentity::setId(int id)
+{
+    this->id = id;
+}

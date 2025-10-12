@@ -18,22 +18,24 @@
 #include "iranifood.h"
 #include "maindish.h"
 #include "menu.h"
-#include "menufunctions.h"
+// #include "menufunctions.h"
 #include "restaurant.h"
 #include "salad.h"
 #include "score.h"
 #include "order.h"
+#include "orderedfood.h"
 class clientNetwork: public QObject
 {
     Q_OBJECT
 public:
     clientNetwork(QObject *parent = nullptr);
-    void sendData(const QString& message);
+    Q_INVOKABLE void sendData(const QString& message);
     void loadClientFromDb(QJsonDocument doc);
     void loadRestaurantFromDb(QJsonDocument doc);
     void loadMenuFromDb(QJsonDocument doc);
     void loadOrderFromDb(QJsonDocument doc);
     void loadDeliveryFromDb(QJsonDocument doc);
+    void loadOrderedFoodsFromDb(QJsonDocument doc);
 private:
     QTcpSocket socket;
 private slots:

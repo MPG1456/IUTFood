@@ -97,7 +97,7 @@ QJsonDocument ClientDB::dbToJson()
 
     if (!query.exec("SELECT * FROM client")) {
         qDebug() << "Failed to select clients:" << query.lastError().text();
-        return QJsonDocument(clientsArray); // خالی برمی‌گرده
+        return QJsonDocument(clientsArray);
     }
 
     while (query.next()) {

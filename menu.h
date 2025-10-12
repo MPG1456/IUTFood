@@ -3,20 +3,19 @@
 
 #include "food.h"
 #include <QSet>
-#include <QVariant>
-
-class MenuFunctions;
+#include <QVector>
+#include <QSharedPointer>
+// class MenuFunctions;
 
 class Menu
 {
-    friend class MenuFunctions;
+    // friend class MenuFunctions;
 
     friend QDataStream &operator<< (QDataStream &out, const Menu &menu);
     friend QDataStream &operator>> (QDataStream &in, Menu &menu);
 
 private:
-    QList<QVariant> menu;
-
+    QVector<QSharedPointer<Food>> menu;
 public:
     Menu() = default;
     Menu(const Menu &other);

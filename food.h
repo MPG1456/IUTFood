@@ -9,7 +9,7 @@ class Drinks;
 class Salad;
 class MainDish;
 
-class MenuFunctions;
+// class MenuFunctions;
 #include <QObject>
 class Food : public QObject
 {
@@ -26,6 +26,7 @@ class Food : public QObject
 
 private:
     int id;
+    int restaurant_id;
     QString name;
     QString type;
     QString ingredients;
@@ -34,11 +35,11 @@ private:
 
 public:
     Food(QObject *parent = nullptr);
-    Food(QString newName, QString newIngredients, int newCapacity, double newPrice , int id);
+    Food(QString newName, QString newIngredients, int newCapacity, double newPrice , int id ,int restaurant_id);
     QString getName();
     void setName(QString newName);
     QString getType();
-    virtual void setType(QString newType = "NULL") = 0;
+    void setType(QString newType = "NULL");
     QString getIngredients();
     void setIngredients(QString newIngredients);
     int getCapacity();

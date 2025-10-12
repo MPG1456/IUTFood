@@ -18,12 +18,15 @@
 #include "orderdb.h"
 #include "restaurantdb.h"
 #include "menudb.h"
-
+#include "orderedfooddb.h"
 class MyServer: public QTcpServer
 {
     Q_OBJECT
 public:
     MyServer(QObject *parent = nullptr);
+    QJsonDocument handleClientSignUp(QJsonObject obj);
+    QJsonDocument handleDeliverySignUp(QJsonObject obj);
+    QJsonDocument handleRestaurantSignUp(QJsonObject obj);
 
 private:
     void incomingConnection(qintptr socketDescriptor);
@@ -33,6 +36,7 @@ private:
     menudb menuDataBase;
     orderdb orderDataBase;
     DeliveryDB deliveryDataBase;
+    ordered_foods orderedDataBase;
 private slots:
     void onReadyRead();
     void onDisconnected();

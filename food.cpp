@@ -1,11 +1,12 @@
 #include "food.h"
 
 Food::Food(QString newName, QString newIngredients,
-           int newCapacity, double newPrice ,int id) : name(newName), type("NULL"),
+           int newCapacity, double newPrice ,int id ,int restaurant_id) : name(newName), type("NULL"),
                                                ingredients(newIngredients), capacity(newCapacity),
                                                price(newPrice)
 {
     this->id =id;
+    this->restaurant_id =restaurant_id;
 }
 
 QString Food::getName()
@@ -59,4 +60,8 @@ void Food::setId(int id)
 }
 Food::Food(QObject *parent)
 {
+}
+void Food::setType(QString newType )
+{
+    type = newType;
 }

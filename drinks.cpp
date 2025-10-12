@@ -1,6 +1,6 @@
 #include "drinks.h"
 
-Drinks::Drinks(QString name, QString ingredients, int capacity, double price ,int id) : Food(name, ingredients, capacity, price ,id)
+Drinks::Drinks(QString name, QString ingredients, int capacity, double price ,int id , int restaurant_id) : Food(name, ingredients, capacity, price ,id ,restaurant_id)
 {
     this->setType();
 }

@@ -3,46 +3,48 @@
 #include "QDir"
 DeliveryDB::DeliveryDB()
 {
+    QSqlDatabase db;
     if (!QSqlDatabase::contains("main_connection"))
     {
-        QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE", "main_connection");
+        db = QSqlDatabase::addDatabase("QSQLITE", "main_connection");
         QString path = QCoreApplication::applicationDirPath();
         QString dbPath = path + "/appdb.db";
-        QDir pathtemp;
-        if (!pathtemp.exists(path))
-        {
-            qDebug() << "moshkel masir!" << path;
-        }
-        qDebug()<<path;
         db.setDatabaseName(dbPath);
-        if (!db.open())
-        {
-            qDebug() << "db didn't open!" << db.lastError().text();
-            return;
-        }
-        QSqlQuery q(db);
-        bool ok = q.exec(R"(
-            CREATE TABLE IF NOT EXISTS delivery (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                username   TEXT NOT NULL COLLATE NOCASE,
-                password   TEXT NOT NULL COLLATE NOCASE,
-                firstname   TEXT NOT NULL COLLATE NOCASE,
-                lastname    TEXT NOT NULL COLLATE NOCASE,
-                country     TEXT NOT NULL COLLATE NOCASE,
-                city        TEXT NOT NULL COLLATE NOCASE,
-                postalcode  INTEGER NOT NULL COLLATE NOCASE,
-                homeAddress        TEXT NOT NULL COLLATE NOCASE,
-                homePhone       TEXT NOT NULL COLLATE NOCASE,
-                phoneNumber       TEXT NOT NULL COLLATE NOCASE,
-                age         INTEGER NOT NULL COLLATE NOCASE
-            )
-        )");
-        if (!ok)
-        {
-            qDebug() << "Failed to (re)create table:" << q.lastError().text();
-        }
+    }
+    else
+    {
+        db = QSqlDatabase::database("main_connection");
+    }
+
+    if (!db.open())
+    {
+        qDebug() << "db didn't open!" << db.lastError().text();
+        return;
+    }
+
+    QSqlQuery q(db);
+    bool ok = q.exec(R"(
+        CREATE TABLE IF NOT EXISTS delivery (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            username   TEXT NOT NULL COLLATE NOCASE,
+            password   TEXT NOT NULL COLLATE NOCASE,
+            firstname   TEXT NOT NULL COLLATE NOCASE,
+            lastname    TEXT NOT NULL COLLATE NOCASE,
+            country     TEXT NOT NULL COLLATE NOCASE,
+            city        TEXT NOT NULL COLLATE NOCASE,
+            postalcode  INTEGER NOT NULL COLLATE NOCASE,
+            homeAddress        TEXT NOT NULL COLLATE NOCASE,
+            homePhone       TEXT NOT NULL COLLATE NOCASE,
+            phoneNumber       TEXT NOT NULL COLLATE NOCASE,
+            age         INTEGER NOT NULL COLLATE NOCASE
+        )
+    )");
+    if (!ok)
+    {
+        qDebug() << "Failed to (re)create table:" << q.lastError().text();
     }
 }
+
 
 bool DeliveryDB::usernameExist(QString username)
 {

@@ -102,34 +102,7 @@ PersonIdentity &PersonIdentity::operator= (const PersonIdentity &other)
     this->address = other.address;
     return *this;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+void PersonIdentity::setId(int id)
+{
+    this->id = id;
+}
