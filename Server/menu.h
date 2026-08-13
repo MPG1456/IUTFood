@@ -11,8 +11,6 @@ class Menu
 {
     // friend class MenuFunctions;
 
-    friend QDataStream &operator<< (QDataStream &out, const Menu &menu);
-    friend QDataStream &operator>> (QDataStream &in, Menu &menu);
 
 private:
     QVector<QSharedPointer<Food>> menu;

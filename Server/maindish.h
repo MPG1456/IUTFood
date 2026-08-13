@@ -11,8 +11,6 @@ class MainDish : public Food
     friend IraniFood;
     friend FastFood;
 
-    friend void serializeMainDish(QDataStream &out, const MainDish &dish);
-    friend void deserializeMainDish(QDataStream &in, MainDish &dish);
 
 private:
     QString dishType;

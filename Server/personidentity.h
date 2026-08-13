@@ -7,8 +7,6 @@
 
 class PersonIdentity
 {
-    friend QDataStream &operator<<(QDataStream &out, const PersonIdentity &person);
-    friend QDataStream &operator>>(QDataStream &in, PersonIdentity &person);
 
 private:
     int id;

@@ -6,24 +6,6 @@
 #include <QJsonObject>
 #include <QJsonArray>
 #include <QJsonDocument>
-#include "customer.h"
-#include "personidentity.h"
-#include "person.h"
-#include "address.h"
-#include "delivery.h"
-#include "dessert.h"
-#include "drinks.h"
-#include "fastfood.h"
-#include "food.h"
-#include "iranifood.h"
-#include "maindish.h"
-#include "menu.h"
-// #include "menufunctions.h"
-#include "restaurant.h"
-#include "salad.h"
-#include "score.h"
-#include "order.h"
-#include "orderedfood.h"
 class clientNetwork: public QObject
 {
     Q_OBJECT

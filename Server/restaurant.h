@@ -7,8 +7,6 @@
 
 class Restaurant
 {
-    friend QDataStream &operator<<(QDataStream &out, const Restaurant &restaurant);
-    friend QDataStream &operator>>(QDataStream &in, Restaurant &restaurant);
 
 private:
     Menu myMenu;

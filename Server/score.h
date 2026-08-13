@@ -5,8 +5,6 @@
 
 class Score
 {
-    friend QDataStream &operator<<(QDataStream &out, const Score &score);
-    friend QDataStream &operator>>(QDataStream &in, Score &score);
 
 private:
     int counter;

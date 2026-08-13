@@ -5,8 +5,6 @@
 
 class IraniFood : public MainDish
 {
-    friend QDataStream &operator<< (QDataStream &out, const IraniFood &iranifood);
-    friend QDataStream &operator>> (QDataStream &in, FastFood &iranifood);
 public:
     IraniFood() = default;
     IraniFood(QString name, QString ingredients, int capacity, double price ,int id , int restaurant_id);

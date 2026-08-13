@@ -6,8 +6,6 @@
 class Person :public QObject
 {
     Q_OBJECT
-    // friend QDataStream &operator<<(QDataStream &out, const Person &person);
-    // friend QDataStream &operator>>(QDataStream &in, Person &person);
 private:
     PersonIdentity myIdentity;
 

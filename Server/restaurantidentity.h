@@ -8,8 +8,6 @@
 
 class RestaurantIdentity
 {
-    friend QDataStream &operator<<(QDataStream &out, const RestaurantIdentity &restaurant);
-    friend QDataStream &operator>>(QDataStream &in, RestaurantIdentity &restaurant);
 private:
     int id;
     QString username;

@@ -21,8 +21,6 @@ class Food : public QObject
 
     friend class MenuFunctions;
 
-    friend void serializeFood(QDataStream &out, const Food &food);
-    friend void deserializeFood(QDataStream &in, Food &food);
 
 private:
     int id;

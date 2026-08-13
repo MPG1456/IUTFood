@@ -17,25 +17,28 @@ SOURCES += \
         restaurantdb.cpp \
         main.cpp \
         myserver.cpp \
-        orderdb.cpp
-        # ../protocol.cpp \
-        # ../address.cpp \
-        # ../mytime.cpp \
-        # ../score.cpp \
-        # ../menu.cpp \
-        # ../person.cpp \
-        # ../personidentity.cpp \
-        # ../restaurant.cpp \
-        # ../restaurantidentity.cpp \
-        # ../customer.cpp \
-        # ../dessert.cpp \
-        # ../drinks.cpp \
-        # ../salad.cpp \
-        # ../fastfood.cpp \
-        # ../iranifood.cpp \
-        # ../food.cpp \
-        # ../maindish.cpp \
-        # ../menufunctions.cpp
+        orderdb.cpp \
+        address.cpp \
+        customer.cpp \
+        datastore.cpp \
+        delivery.cpp \
+        dessert.cpp \
+        drinks.cpp \
+        fastfood.cpp \
+        food.cpp \
+        iranifood.cpp \
+        maindish.cpp \
+        menu.cpp \
+        mytime.cpp \
+        order.cpp \
+        orderedfood.cpp \
+        person.cpp \
+        personidentity.cpp \
+        restaurant.cpp \
+        restaurantidentity.cpp \
+        salad.cpp \
+        score.cpp
+
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -51,7 +54,28 @@ HEADERS += \
     myserver.h \
     orderedfooddb.h \
     restaurantdb.h \
-    orderdb.h
+    orderdb.h \
+    address.h \
+    clientnetwork.h \
+    customer.h \
+    datastore.h \
+    delivery.h \
+    dessert.h \
+    drinks.h \
+    fastfood.h \
+    food.h \
+    iranifood.h \
+    maindish.h \
+    menu.h \
+    mytime.h \
+    order.h \
+    orderedfood.h \
+    person.h \
+    personidentity.h \
+    restaurant.h \
+    restaurantidentity.h \
+    salad.h \
+    score.h
 
 RESOURCES += \
     database.qrc

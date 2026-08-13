@@ -6,8 +6,6 @@
 
 class Address
 {
-    friend QDataStream &operator<<(QDataStream &out, const Address &address);
-    friend QDataStream &operator>>(QDataStream &in, Address &address);
 
 private:
     QString country;

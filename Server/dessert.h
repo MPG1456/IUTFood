@@ -5,8 +5,6 @@
 
 class Dessert : public Food
 {
-    friend QDataStream &operator<<(QDataStream &out, const Dessert &dessert);
-    friend QDataStream &operator>> (QDataStream &in, Dessert &dessert);
 
 public:
     Dessert() = default;
